@@ -25,6 +25,8 @@ class Departamento : public ICollectible{
         string getNombre();
         void setNombre(string);
 
+        ICollection * getZonas();
+
         set<dtZonas> SeleccionarDepartamento(char Letradpto);
 
         Propiedad SeleccionarPropiedad(string codigo);

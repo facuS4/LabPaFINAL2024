@@ -2,10 +2,11 @@
 #define SISTEMA_H
 
 #include "ISistema.h"
-
+#include "clases/h/Departamento.h"
+#include "clases/h/Usuario.h"
 using namespace std;
 
-class Sistema : public  ISistema{
+class Sistema : public ISistema{
     private:
         Sistema();
         static Sistema * instancia;
@@ -24,7 +25,7 @@ class Sistema : public  ISistema{
 
         void ingreasrcontraseniaNueva(string contrasenia);
 
-        set<dtDepartamentos> listarDepartamentos();
+        void listarDepartamentos();
 
         set<dtZona> seleccionarDepartamento(string letraDpto);
 
@@ -36,7 +37,7 @@ class Sistema : public  ISistema{
 
         void CrearMensaje(string mensaje);
 
-        set<dtZona> SelecionarZona(string codigo);
+        void SelecionarZona(string codigo);
 
         bool boolSeleccionarZona(string codigo);
 

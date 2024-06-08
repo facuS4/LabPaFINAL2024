@@ -19,6 +19,8 @@
 #include "ICollection/Integer.h"
 #include "ICollection/String.h"
 
+#include ""
+
 using namespace std;
 
 class ISistema {
@@ -33,7 +35,7 @@ class ISistema {
 
         virtual void ingreasrcontraseniaNueva(string contrasenia) = 0;
 
-        virtual set<dtDepartamentos> listarDepartamentos() = 0;
+        virtual void listarDepartamentos() = 0;
 
         virtual set<dtZona> seleccionarDepartamento(string letraDpto) = 0;
 
@@ -45,7 +47,7 @@ class ISistema {
 
         virtual void CrearMensaje(string mensaje) = 0;
 
-        virtual set<dtZona> SelecionarZona(string codigo) = 0;
+        virtual void SelecionarZona(string codigo) = 0;
 
         virtual bool boolSeleccionarZona(string codigo) = 0;
 
