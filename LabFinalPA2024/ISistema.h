@@ -65,6 +65,8 @@ class ISistema {
         virtual void seleccionarAlquiler(int precio) = 0;
 
         virtual void seleccionarVenta(int valor, Propiedad *p) = 0;
+
+        virtual void AltaDepartamento(char, string) = 0;
 };
 
 

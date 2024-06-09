@@ -69,6 +69,8 @@ class Sistema : public ISistema{
         void seleccionarAlquiler(int precio);
 
         void seleccionarVenta(int valor, Propiedad *p);
+
+        void AltaDepartamento(char, string);
 };
 
 

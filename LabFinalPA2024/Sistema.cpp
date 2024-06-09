@@ -117,3 +117,17 @@ void Sistema::seleccionarAlquiler(int precio) {
 void Sistema::seleccionarVenta(int valor, Propiedad * p) {
 }
 
+void Sistema::AltaDepartamento(char _letraDpt, string _codigo) {
+    IIterator * it;
+
+    for (it = Departamentos->getIterator(); it->hasCurrent(); it->next()){
+        Departamento * d = (Departamento *) it->getCurrent();
+        if (d->getLetradpto() == _letraDpt){
+            cout << "Ya existe un departamento con la letra: " << _letraDpt << endl;
+            return;
+        }
+    }
+
+    Departamento * d = new Departamento(_letraDpt, _codigo);
+    Departamentos->add(d);
+}
