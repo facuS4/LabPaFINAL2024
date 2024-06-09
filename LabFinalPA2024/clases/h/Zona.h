@@ -5,7 +5,8 @@
 #include <string>
 #include <set>
 #include "clases/datatypes/h/dtDireccion.h"
-#include "Propiedad.h"
+#include "./Propiedad.h"
+#include "Departamento.h"
 #include "../ICollection/Collections/List.h"
 
 using namespace std;
@@ -15,6 +16,7 @@ class Zona : public ICollectible{
         string codigo;
         string nombre;
         ICollection * Propiedades;
+        Departamento * departamento;
     public:
         Zona();
         Zona(string, string);
