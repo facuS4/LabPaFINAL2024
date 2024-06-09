@@ -19,7 +19,8 @@
 #include "ICollection/Integer.h"
 #include "ICollection/String.h"
 
-#include ""
+#include "dtDireccion.h"
+#include "Propiedad.h"
 
 using namespace std;
 
@@ -59,11 +60,11 @@ class ISistema {
 
         virtual int altaCasa(int, int, int, bool, dtDireccion, int, int) = 0;
 
-        virtual void vincularconInmobiliaria(Propiedad p) = 0;
+        virtual void vincularconInmobiliaria(Propiedad* p) = 0;
 
         virtual void seleccionarAlquiler(int precio) = 0;
 
-        virtual void seleccionarVenta(int valor, Propiedad p) = 0;
+        virtual void seleccionarVenta(int valor, Propiedad *p) = 0;
 };
 
 
