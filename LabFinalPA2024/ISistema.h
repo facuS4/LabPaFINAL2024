@@ -18,9 +18,11 @@
 #include "ICollection/interfaces/OrderedKey.h"
 #include "ICollection/Integer.h"
 #include "ICollection/String.h"
+#include "clases/h/Usuario.h"
 
 #include "./clases/h/Propiedad.h"
 #include "./clases/h/Departamento.h"
+
 
 using namespace std;
 
@@ -28,7 +30,7 @@ class ISistema {
     public:
         virtual ~ISistema(); // destructor
 
-        virtual Usuario * getUsuarioActual();
+        virtual Usuario * getUsuarioActual()=0;
 
         virtual bool AltaInmobiliaria(string email, string nombre, dtDireccion dir) = 0;
 
