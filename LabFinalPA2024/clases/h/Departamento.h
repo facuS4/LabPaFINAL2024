@@ -29,7 +29,7 @@ class Departamento : public ICollectible{
 
         set<dtZonas> SeleccionarDepartamento(char Letradpto);
 
-        Propiedad * SeleccionarPropiedad(string codigo);
+        Propiedad SeleccionarPropiedad(string codigo);
         set<dtPropiedad> SeleccionarZona(string codigo);
 
         dtZona BuscarZona(string codigo);

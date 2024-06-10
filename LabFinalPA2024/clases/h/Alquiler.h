@@ -11,7 +11,7 @@ class Alquiler : public ICollectible{
         float precioAlquiler;
     public:
         Alquiler();
-        Alquiler(string, string);
+        Alquiler(float);
         ~Alquiler();
 
         float getPrecioAlquiler();

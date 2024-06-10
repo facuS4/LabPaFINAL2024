@@ -2,25 +2,22 @@
 #define VENTA_H
 
 #include <iostream>
-#include "../ICollection/Collections/List.h"
+#include "../ICollection/Collections/List.h" 
 
 using namespace std;
 
-class Venta : public ICollectible{
-    private:
-        float precioVenta;
-    public:
-        Venta();
-        Venta(string, string);
-        ~Venta();
+class Venta : public ICollectible {
+private:
+  float precioVenta;
+public:
+  Venta();
+  Venta(float); 
+  ~Venta();
 
-        float getPrecioAlquiler();
-        void setPrecioAlquiler(float);
+  float getPrecioVenta();
+  void setPrecioVenta(float);
 
-
-        void desvincualarVenta(string codigo);
-       
+  void desvincularVenta(string codigoPropiedad);
 };
-
 
 #endif

@@ -28,11 +28,9 @@ class Zona : public ICollectible{
         string getNombre();
         void setNombre(string);
 
-        ICollection * getPropiedades();
-
         void EliminarPropiedad(string codigo);
         set<dtPropiedad> SeleccionarZona(string codigo);
-        Propiedad * SeleccionarPropiedad(string codigo, string nombreus);
+        Propiedad SeleccionarPropiedad(string codigo, string nombreus);
 
         set<dtEdificio> ListarEdificios();
 
