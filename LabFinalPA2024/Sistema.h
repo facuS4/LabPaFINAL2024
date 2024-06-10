@@ -4,6 +4,10 @@
 #include "ISistema.h"
 #include "clases/h/Departamento.h"
 #include "clases/h/Usuario.h"
+#include "clases/h/Administrador.h"
+#include "clases/h/Inmobiliaria.h"
+#include "clases/h/Interesado.h"
+
 using namespace std;
 
 class Sistema : public ISistema{
@@ -12,9 +16,14 @@ class Sistema : public ISistema{
         static Sistema * instancia;
         ICollection * Departamentos;
         ICollection * Usuarios;
+        Usuario * usuarioSesion;
+
 
     public:
         ~Sistema(); // destructor // ✅
+
+        Usuario * getUsuarioActual();
+
         static Sistema * getInstancia(); // devuelve el controlador Sistema (Singleton) // ✅
 
         bool AltaInmobiliaria(string email, string nombre, dtDireccion dir);

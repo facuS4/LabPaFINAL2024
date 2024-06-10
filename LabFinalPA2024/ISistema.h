@@ -28,6 +28,8 @@ class ISistema {
     public:
         virtual ~ISistema(); // destructor
 
+        virtual Usuario * getUsuarioActual();
+
         virtual bool AltaInmobiliaria(string email, string nombre, dtDireccion dir) = 0;
 
         virtual void EliminarPropiedad(string codigo) = 0;

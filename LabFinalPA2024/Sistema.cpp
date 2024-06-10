@@ -3,6 +3,7 @@
 Sistema::Sistema() {
     Departamentos = new List();
     Usuarios = new List();
+    usuarioSesion = nullptr;
 }
 
 Sistema::~Sistema() {
@@ -15,6 +16,12 @@ Sistema * Sistema::getInstancia() {
         instancia = new Sistema();
     }
     return instancia;
+}
+
+Usuario * Sistema::getUsuarioActual(){
+
+    return this->usuarioSesion;
+
 }
 
 bool Sistema::AltaInmobiliaria(string email, string nombre, dtDireccion dir) {
