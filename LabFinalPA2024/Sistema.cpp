@@ -9,6 +9,28 @@ Sistema::Sistema() {
 Sistema::~Sistema() {
 }
 
+ICollection * Sistema::getUsuarios(){
+
+    return this->Usuarios;
+
+}
+
+void Sistema::setUsuarioActual(Usuario * u){
+
+    this->usuarioSesion=u;
+
+}
+
+ void Sistema::altaUsuario (Usuario * u) {
+
+    if (this->Usuarios->member(u))
+    {   cout << "Este usuario ya existe" << endl;
+        return;
+    }
+    Usuarios->add(u);
+    return;
+ }
+
 Sistema * Sistema::instancia = NULL;
 
 Sistema * Sistema::getInstancia() {
@@ -158,13 +180,20 @@ void Sistema::AltaDepartamento(char _letraDpt, string _codigo) {
     Departamentos->add(d);
 }
 
- /*void Sistema::altaUsuario (Usuario * u){
-    IIterator * It;
-    
-    Usuarios = new List();
-
- }
-*/
 
 
 
+
+
+    /*void Sistema::altaEstudiante(string _ci, string _nombre, string _apellido, date _fnac, string _telefono, int _creditos){
+    IKey * k = new String(_ci.c_str());
+
+    if(this->miEstudiante->member(k)){
+        cout << color_red << "El Estudiante " << _nombre << " ya existe." << color_reset << endl;
+        return;
+    };
+    estudiante * e = new estudiante(_ci, _nombre, _apellido, _fnac, _telefono, _creditos);
+    miEstudiante->add(k,e);
+    cout << color_green << "El Estudiante " << _nombre << " fue agregado correctamente" << color_reset << endl;
+};  
+    */

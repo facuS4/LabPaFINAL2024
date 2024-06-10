@@ -30,7 +30,13 @@ class ISistema {
     public:
         virtual ~ISistema(); // destructor
 
+        virtual void setUsuarioActual(Usuario *)=0;
+
+        virtual ICollection * getUsuarios()=0;
+
         virtual Usuario * getUsuarioActual()=0;
+
+        virtual void altaUsuario(Usuario *)=0;
 
         virtual bool AltaInmobiliaria(string email, string nombre, dtDireccion dir) = 0;
 

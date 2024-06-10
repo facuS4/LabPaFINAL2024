@@ -22,7 +22,13 @@ class Sistema : public ISistema{
     public:
         ~Sistema(); // destructor // ✅
 
+        void altaUsuario(Usuario *);
+
         Usuario * getUsuarioActual();
+
+        void setUsuarioActual(Usuario *);
+
+        ICollection * getUsuarios();
 
         static Sistema * getInstancia(); // devuelve el controlador Sistema (Singleton) // ✅
 
@@ -66,7 +72,6 @@ class Sistema : public ISistema{
 
         void AltaDepartamento(char, string);
 
-        void altaUsuario (Usuario*);
 };
 
 

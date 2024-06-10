@@ -16,23 +16,49 @@ int main(){
   CorreoElectronico = email;
   Contrasenia = password;
 }*/
-    
+      //USUARIOS HARDCODEDEADOS//
     Administrador * admin= new Administrador("root@r.com","123");
     Inmobiliaria * imn1= new Inmobiliaria("sss.com","123", "los pepes");
     Interesado * int1= new Interesado("goof.com","123","pepe",20,"pepoide");
-    Inmobiliaria * inm2= new Inmobiliaria("peps.com",nullptr, "oepes");
-    Interesado * int2= new Interesado("rs.com",nullptr,"pepe2",21,"pepoide3");
+    Inmobiliaria * inm2= new Inmobiliaria("peps.com","", "oepes");
+    Interesado * int2= new Interesado("rs.com","","pepe2",21,"pepoide3");
+    sis->altaUsuario(admin);
+    sis->altaUsuario(imn1);
+    sis->altaUsuario(int1);
+    sis->altaUsuario(inm2);
+    sis->altaUsuario(int2);
 
-    
 
-    for(int i=0;i<5;i++){
-
+    while (sis->getUsuarioActual()==nullptr){
+      cout << "Inicie sesion con su usuario" << endl << "Recuerde que no se puede crear usuarios"<< endl << endl << "Email: ";
+      string ingresar;
+      getline(cin,ingresar);
+      IIterator * it = sis->getUsuarios()->getIterator();
+      Usuario * utemp;
+      while (it->hasCurrent()) {  
+        utemp = (Usuario *) it->getCurrent();
+        if (utemp->getCorreoElectronico()==ingresar){
+          sis->setUsuarioActual(utemp);
+          break;
+        }
+        it->next();
+      }
+      delete it;
+      system("clear");
     }
+    cout << sis->getUsuarioActual()->getCorreoElectronico() << " Logeado " << endl << endl;
 
-
-    if (sis->getUsuarioActual()==nullptr){
-        
+    /*void Persona::listarMascotas() {
+    IIterator * it = this->mascotas->getIterator();
+    Animal * a;
+    cout << "## Listado de Mascotas ##" << endl;
+    while (it->hasCurrent()) {  
+        a = (Animal *) it->getCurrent();
+        cout << "Mascota: " << a->getNombre() << endl;
+        it->next();
     }
+    delete it;
+}*/
     
     cout << "Hello, World!" << endl;
     return 0;
