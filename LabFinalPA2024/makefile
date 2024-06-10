@@ -1,3 +1,10 @@
+executable = Main
+compiler = g++
+compiler-options = -g -Wall -Wextra -Werror
 
+ifdef OS
+	executable := $(executable).exe
+endif
 
-all ISistema.o Sistema.o SistemaFactory.o Integer.o
+build:
+	$(compiler) $(compiler-options) -o $(executable) ICollection/*.cpp ICollection/collections/*.cpp ICollection/interfaces/*.cpp clases/cpp/*.cpp ISistema.cpp SistemaFactory.cpp Sistema.cpp

@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Propiedad.h"
 #include "Edificio.h"
+#include "Usuario.h"
 #include "clases/datatypes/h/dtDireccion.h"
 #include "../ICollection/Collections/List.h"
 
@@ -23,10 +24,10 @@ class Apartamento : public Propiedad{
 
         void eliminarVinculosPropiedad();
         void AgregarMensaje(string);
+        
+        void CrearMensaje(string, Usuario * u);
 
-        void CrearMensaje(string, Usuario u);
-
-        set<dtEdificio> ListarPropiedades();
+        void ListarPropiedadesEdificio();
         void Vincular(Venta v);
         void Vincular(Alquiler a);
 

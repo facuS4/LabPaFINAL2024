@@ -19,7 +19,7 @@
 #include "ICollection/Integer.h"
 #include "ICollection/String.h"
 
-#include ""
+#include "Propiedad.h"
 
 using namespace std;
 
@@ -37,7 +37,7 @@ class ISistema {
 
         virtual void listarDepartamentos() = 0;
 
-        virtual set<dtZona> seleccionarDepartamento(string letraDpto) = 0;
+        // virtual set<dtZona> seleccionarDepartamento(string letraDpto) = 0;
 
         virtual set<string> Ultimo5Mensajes() = 0;
 
@@ -51,19 +51,21 @@ class ISistema {
 
         virtual bool boolSeleccionarZona(string codigo) = 0;
 
-        virtual set<dtEdificio> ListarEdificio() = 0;
+        // virtual set<dtEdificio> ListarEdificio() = 0;
 
-        virtual set<dtEdificio> altaApartamento(int ambientes) = 0;
+        // virtual set<dtEdificio> altaApartamento(int ambientes) = 0;
 
         virtual int altaApartamento(int, int, int, bool, dtDireccion, int) = 0;
 
         virtual int altaCasa(int, int, int, bool, dtDireccion, int, int) = 0;
 
-        virtual void vincularconInmobiliaria(Propiedad p) = 0;
+        virtual void vincularconInmobiliaria(Propiedad *p) = 0;
 
         virtual void seleccionarAlquiler(int precio) = 0;
 
-        virtual void seleccionarVenta(int valor, Propiedad p) = 0;
+        virtual void seleccionarVenta(int valor, Propiedad *p) = 0;
+
+        virtual void AltaDepartamento(char, string) = 0;
 };
 
 

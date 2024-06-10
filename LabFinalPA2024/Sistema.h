@@ -27,7 +27,7 @@ class Sistema : public ISistema{
 
         void listarDepartamentos();
 
-        set<dtZona> seleccionarDepartamento(string letraDpto);
+        // set<dtZona> seleccionarDepartamento(string letraDpto);
 
         set<string> Ultimo5Mensajes();
 
@@ -41,19 +41,21 @@ class Sistema : public ISistema{
 
         bool boolSeleccionarZona(string codigo);
 
-        set<dtEdificio> ListarEdificio();
+        // set<dtEdificio> ListarEdificio();
 
-        set<dtEdificio> altaApartamento(int ambientes);
+        // set<dtEdificio> altaApartamento(int ambientes);
 
         int altaApartamento(int, int, int, bool, dtDireccion, int);
 
         int altaCasa(int, int, int, bool, dtDireccion, int, int);
 
-        void vincularconInmobiliaria(Propiedad p);
+        void vincularconInmobiliaria(Propiedad *p);
 
         void seleccionarAlquiler(int precio);
 
-        void seleccionarVenta(int valor, Propiedad p);
+        void seleccionarVenta(int valor, Propiedad *p);
+
+        void AltaDepartamento(char, string);
 };
 
 

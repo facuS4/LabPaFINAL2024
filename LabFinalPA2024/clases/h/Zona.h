@@ -28,11 +28,13 @@ class Zona : public ICollectible{
         string getNombre();
         void setNombre(string);
 
-        void EliminarPropiedad(string codigo);
-        set<dtPropiedad> SeleccionarZona(string codigo);
-        Propiedad SeleccionarPropiedad(string codigo, string nombreus);
+        ICollection * getPropiedades();
 
-        set<dtEdificio> ListarEdificios();
+        void EliminarPropiedad(string codigo);
+        void SeleccionarZona(string codigo);
+        Propiedad * SeleccionarPropiedad(string codigo, string nombreus);
+
+        void ListarEdificios();
 
         bool altaApartamento(int, int, int, bool, dtDireccion, int);
         bool altaCasa(int, int, int, bool, dtDireccion, int, int);

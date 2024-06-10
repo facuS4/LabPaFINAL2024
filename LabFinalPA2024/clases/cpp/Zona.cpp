@@ -5,7 +5,7 @@ Zona::Zona() : codigo(""), nombre(""), Propiedades(nullptr), departamento(nullpt
 
 // Constructor with parameters
 Zona::Zona(string codigoZona, string nombreZona) :
-    codigo(codigoZona), nombre(nombreZona), Propiedades(new List<Propiedad>()) {}
+    codigo(codigoZona), nombre(nombreZona), Propiedades(new List()) {}
 
 // Destructor
 Zona::~Zona() {

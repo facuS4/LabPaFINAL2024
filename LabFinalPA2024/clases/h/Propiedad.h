@@ -54,7 +54,7 @@ class Propiedad : public ICollectible{
 
         virtual void CrearMensaje(string, Usuario u)= 0;
 
-        virtual set<dtEdificio> ListarPropiedades()= 0;
+        virtual void ListarPropiedadesEdifico()= 0;
         virtual void Vincular(Venta v)= 0;
         virtual void Vincular(Alquiler a)= 0;
 

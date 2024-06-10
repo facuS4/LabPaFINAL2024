@@ -8,7 +8,7 @@ Alquiler::Alquiler() : precioAlquiler(0.0f) {}
 Alquiler::Alquiler(float precio) : precioAlquiler(precio) {}
 
 // Destructor (assuming no custom logic needed)
-Alquiler::~Alquiler() = default;
+Alquiler::~Alquiler() {};
 
 // Getter and Setter methods for precioAlquiler
 float Alquiler::getPrecioAlquiler() {
@@ -19,8 +19,9 @@ void Alquiler::setPrecioAlquiler(float nuevoPrecio) {
   precioAlquiler = nuevoPrecio;
 }
 
-// Method to desvincular the alquiler (replace with your logic)
-void Alquiler::desvincularAlquiler(string codigoPropiedad) {
-  // Implement logic to potentially remove association with a Propiedad identified by 'codigoPropiedad'
-  // This might involve updating the related Propiedad or other entities
+void Alquiler::desvincualarAlquiler(string codigo) {
+  // Implement logic to disassociate Alquiler from a property
+  // This might involve removing the Alquiler from the property's list of Alquiler objects
+  // Or it might involve setting the property's Alquiler reference to null
+  // The specific implementation will depend on the design of the system
 }
