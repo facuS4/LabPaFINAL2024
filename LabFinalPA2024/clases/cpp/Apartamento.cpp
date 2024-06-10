@@ -4,8 +4,9 @@
 Apartamento::Apartamento() : Propiedad(), disponible(true), edificio(Edificio()) {}
 
 // Constructor with parameters
-Apartamento::Apartamento(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion direccion, float medif, float metrosPropiedad, bool disp) : Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosPropiedad){
-  
+Apartamento::Apartamento(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion * direccion, float medif, float metrosTotales, bool disponible) : Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales){
+  this->disponible = disponible;
+  this->edificio = Edificio();
 }
 
 // Destructor (assuming no custom logic needed)

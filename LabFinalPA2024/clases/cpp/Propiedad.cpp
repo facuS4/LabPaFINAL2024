@@ -4,11 +4,19 @@
 Propiedad::Propiedad() : codigo(""), dormitorios(0), ambientes(0), banios(0), garage(false), direccion(dtDireccion()), medif(0.0f), MetrosTotales(0.0f) {}
 
 // Constructor with parameters
-Propiedad::Propiedad(string codigoPropiedad, int cantDormitorios, int cantAmbientes, int cantBanios, bool tieneGarage, dtDireccion dirPropiedad, float precioMedif, float metrosPropiedad) :
-    codigo(codigoPropiedad), dormitorios(cantDormitorios), ambientes(cantAmbientes), banios(cantBanios), garage(tieneGarage), direccion(dirPropiedad), medif(precioMedif), MetrosTotales(metrosPropiedad) {}
+Propiedad::Propiedad(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion * direccion, float medif, float metrosTotales){
+  this->codigo = codigo;
+  this->dormitorios = dormitorios;
+  this->ambientes = ambientes;
+  this->banios = banios;
+  this->garage = garage;
+  this->direccion = *direccion;
+  this->medif = medif;
+  this->MetrosTotales = metrosTotales;
+}
 
 // Destructor (assuming no custom logic needed)
-Propiedad::~Propiedad() = default;
+Propiedad::~Propiedad(){};
 
 // Getter and Setter methods
 string Propiedad::getCodigo() {
@@ -76,9 +84,3 @@ void Propiedad::setMetrosTotales(float metrosPropiedad) {
 }
 
 // Implementations for pure virtual methods are left empty as they require specific logic in derived classes
-void Propiedad::eliminarVinculosPropiedad() override {}
-void Propiedad::AgregarMensaje(string mensaje) override {}
-void Propiedad::CrearMensaje(string mensaje, Usuario u) override {}
-set<dtEdificio> Propiedad::ListarPropiedades() override { return set<dtEdificio>(); }
-void Propiedad::Vincular(Venta v) override {}
-void Propiedad::Vincular(Alquiler a) override {}

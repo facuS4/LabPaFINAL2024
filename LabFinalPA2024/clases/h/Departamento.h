@@ -29,12 +29,12 @@ class Departamento : public ICollectible{
 
         ICollection * getZonas();
 
-        set<dtZonas> SeleccionarDepartamento(char Letradpto);
+        void SeleccionarDepartamento(char Letradpto);
 
-        Propiedad SeleccionarPropiedad(string codigo);
-        set<dtPropiedad> SeleccionarZona(string codigo);
+        Propiedad * SeleccionarPropiedad(string codigo);
+        void SeleccionarZona(string codigo);
 
-        dtZona BuscarZona(string codigo);
+        void BuscarZona(string codigo);
        
 };
 

@@ -1,7 +1,7 @@
 #include "../h/Conversacion.h"
 
 // Default constructor
-Conversacion::Conversacion() : mensajes(new List<string>()), inmobiliarias(new List<Inmobiliaria>()) {}
+Conversacion::Conversacion() : mensajes(new List()), inmobiliarias(new List()) {}
 
 // Destructor (deallocating dynamic memory)
 Conversacion::~Conversacion() {
@@ -17,11 +17,8 @@ void Conversacion::eliminarVinculosConversacion() {
 
 // Adds a message to the conversation
 void Conversacion::AgregarMensaje(string mensaje) {
-  mensajes->add(mensaje);
 }
 
 // Creates a message with an author
-void Conversacion::CrearMensaje(string mensaje, Usuario u) {
-  string mensajeAutorizado = u.getNombre() + ": " + mensaje;
-  AgregarMensaje(mensajeAutorizado);
+void Conversacion::CrearMensaje(string mensaje, Usuario *u) {
 }

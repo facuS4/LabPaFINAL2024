@@ -27,9 +27,9 @@ class Sistema : public ISistema{
 
         void listarDepartamentos();
 
-        // set<dtZona> seleccionarDepartamento(string letraDpto);
+        Departamento * seleccionarDepartamento(char letraDpto);
 
-        set<string> Ultimo5Mensajes();
+        void Ultimo5Mensajes();
 
         void EnviarMensaje(string mensaje);
 
@@ -41,9 +41,9 @@ class Sistema : public ISistema{
 
         bool boolSeleccionarZona(string codigo);
 
-        // set<dtEdificio> ListarEdificio();
+        void ListarEdificio();
 
-        // set<dtEdificio> altaApartamento(int ambientes);
+        void altaApartamento(int ambientes);
 
         int altaApartamento(int, int, int, bool, dtDireccion, int);
 

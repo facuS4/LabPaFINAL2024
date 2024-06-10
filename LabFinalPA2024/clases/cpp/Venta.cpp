@@ -4,7 +4,9 @@
 Venta::Venta() : precioVenta(0.0f) {}
 
 // Constructor with parameter
-Venta::Venta(float precio) : precioVenta(precio) {}
+Venta::Venta(float precio){
+  precioVenta = precio;
+}
 
 // Destructor (assuming no custom logic needed)
 Venta::~Venta() = default;

@@ -7,16 +7,16 @@
 
 using namespace std;
 
-#include "Conversacion.h"
+// #include "Conversacion.h"
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/interfaces/ICollectible.h"
 
+class Conversacion;
 
 class Usuario : public ICollectible {
     private:
         string CorreoElectronico;
         string Contrasenia;
-
     public:
         Usuario();
         Usuario(string, string);

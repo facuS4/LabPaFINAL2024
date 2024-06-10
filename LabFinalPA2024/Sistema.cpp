@@ -42,14 +42,21 @@ void Sistema::listarDepartamentos() {
     
 }
 
-// set<dtZona> Sistema::seleccionarDepartamento(string letraDpto) {
-//     set<dtZona> zonas;
-//     return zonas;
-// }
+Departamento * Sistema::seleccionarDepartamento(char letraDpto) {
+    IIterator * it;
+    for (it = Departamentos->getIterator(); it->hasCurrent(); it->next()){
+        Departamento * d = (Departamento *) it->getCurrent();
+        if (d->getLetradpto() == letraDpto){
+            cout << "Nombre: " << d->getNombre() << endl;
+            cout << "Letra: " << d->getLetradpto() << endl;
+            return d;
+        }
+    }
+    cout << "No se encontro el departamento" << endl;
+    return nullptr;
+}
 
-set<string> Sistema::Ultimo5Mensajes() {
-    set<string> mensajes;
-    return mensajes;
+void Sistema::Ultimo5Mensajes() {
 }
 
 void Sistema::EnviarMensaje(string mensaje) {
@@ -90,15 +97,11 @@ bool Sistema::boolSeleccionarZona(string codigo) {
     return false;
 }
 
-// set<dtEdificio> Sistema::ListarEdificio() {
-//     set<dtEdificio> edificios;
-//     return edificios;
-// }
+void Sistema::ListarEdificio() {
+}
 
-// set<dtEdificio> Sistema::altaApartamento(int ambientes) {
-//     set<dtEdificio> edificios;
-//     return edificios;
-// }
+void Sistema::altaApartamento(int ambientes) {
+}
 
 int Sistema::altaApartamento(int, int, int, bool, dtDireccion, int) {
     return 0;

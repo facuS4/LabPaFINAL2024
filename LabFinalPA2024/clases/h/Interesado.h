@@ -17,7 +17,9 @@ class Interesado : public Usuario{
         ICollection * conversaciones;
     public:
         Interesado();
-        Interesado(string, string, int, string);
+
+        Interesado(string, string, string, int, string);
+
         ~Interesado();
 
         string getNombre();
@@ -28,8 +30,8 @@ class Interesado : public Usuario{
         void setApellido(string);
         void setEdad(int);
 
-        void Asociar(Conversacion c);
-        void Desvincular(Conversacion c);
+        void Asociar(Conversacion *c);
+        void Desvincular(Conversacion* c);
 };
 
 
