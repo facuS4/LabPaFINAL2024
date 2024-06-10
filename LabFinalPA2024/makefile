@@ -7,4 +7,4 @@ ifdef OS
 endif
 
 build:
-	$(compiler) $(compiler-options) -o $(executable) ICollection/*.cpp ICollection/collections/*.cpp ICollection/interfaces/*.cpp clases/datatypes/cpp/*.cpp clases/cpp/*.cpp ISistema.cpp SistemaFactory.cpp Sistema.cpp 
+	$(compiler) $(compiler-options) -o $(executable) ICollection/*.cpp ICollection/collections/*.cpp ICollection/interfaces/*.cpp clases/datatypes/cpp/*.cpp clases/cpp/*.cpp ISistema.cpp SistemaFactory.cpp Sistema.cpp main.cpp

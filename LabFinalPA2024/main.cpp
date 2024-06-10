@@ -8,7 +8,9 @@
 
 using namespace std;
 
-int main(){
+ISistema * sis = SistemaFactory::crearSistema();
 
+int main(){
+    cout << "Hello, World!" << endl;
     return 0;
 }

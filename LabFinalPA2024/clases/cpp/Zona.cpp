@@ -32,6 +32,14 @@ void Zona::setCodigo(string codigoZona) {
   codigo = codigoZona;
 }
 
+void Zona::setPropiedades(ICollection * propiedades) {
+  Propiedades = propiedades;
+}
+
+ICollection * Zona::getPropiedades() {
+  return Propiedades;
+}
+
 // Getters and Setters for nombre
 string Zona::getNombre() {
   return nombre;
