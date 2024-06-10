@@ -2,7 +2,9 @@
 #define VENTA_H
 
 #include <iostream>
-#include "../ICollection/Collections/List.h" 
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/interfaces/ICollectible.h"
+
 
 using namespace std;
 

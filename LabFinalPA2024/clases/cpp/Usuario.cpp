@@ -1,4 +1,4 @@
-#include "Usuario.h"
+#include "../h/Usuario.h"
 
 // Default constructor
 Usuario::Usuario() : CorreoElectronico(""), Contrasenia("") {}
@@ -26,9 +26,3 @@ void Usuario::setContrasenia(string password) {
   Contrasenia = password;
 }
 
-// Implementation for the pure virtual method (assuming a collection is maintained)
-void Usuario::Asociar(Conversacion c) override {
-  // Implement logic to add the Conversacion 'c' to the user's collection
-  // This might involve using a List or other collection to store associated Conversacion objects
-  // You'll likely need to include Conversacion.h for access
-}

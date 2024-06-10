@@ -1,4 +1,4 @@
-#include "Conversacion.h"
+#include "../h/Conversacion.h"
 
 // Default constructor
 Conversacion::Conversacion() : mensajes(new List<string>()), inmobiliarias(new List<Inmobiliaria>()) {}

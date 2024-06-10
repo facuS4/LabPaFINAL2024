@@ -1,4 +1,4 @@
-#include "Zona.h"
+#include "../h/Zona.h"
 
 // Default constructor
 Zona::Zona() : codigo(""), nombre(""), Propiedades(nullptr), departamento(nullptr) {}

@@ -1,4 +1,4 @@
-#include "Mensaje.h"
+#include "../h/Mensaje.h"
 
 // Default constructor
 Mensaje::Mensaje() : fecha(dtFecha()), texto("") {}

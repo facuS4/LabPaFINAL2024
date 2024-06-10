@@ -1,4 +1,4 @@
-#include "Interesado.h"
+#include "../h/Interesado.h"
 
 // Default constructor
 Interesado::Interesado() : Usuario(), nombre(""), edad(0), apellido(""), conversaciones(new List<Conversacion>()) {}

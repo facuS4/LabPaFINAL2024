@@ -4,7 +4,9 @@
 #include <iostream>
 #include "Usuario.h"
 #include "Conversacion.h"
-#include "../ICollection/Collections/List.h"
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/interfaces/ICollectible.h"
+
 
 using namespace std;
 
@@ -16,7 +18,7 @@ class Administrador : public Usuario{
         ~Administrador();
 
 
-        void Asociar(Conversacion c);
+        void Asociar(Conversacion * c);
        
 };
 

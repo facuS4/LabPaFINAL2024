@@ -1,5 +1,5 @@
 
-#include "Alquiler.h"
+#include "../h/Alquiler.h"
 
 // Default constructor
 Alquiler::Alquiler() : precioAlquiler(0.0f) {}

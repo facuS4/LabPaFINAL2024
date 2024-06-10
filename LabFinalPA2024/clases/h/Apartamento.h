@@ -5,8 +5,10 @@
 #include "Propiedad.h"
 #include "Edificio.h"
 #include "Usuario.h"
-#include "clases/datatypes/h/dtDireccion.h"
-#include "../ICollection/Collections/List.h"
+#include "../datatypes/h/dtDireccion.h"
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/interfaces/ICollectible.h"
+
 
 using namespace std;
 

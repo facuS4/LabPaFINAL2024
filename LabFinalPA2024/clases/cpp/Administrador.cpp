@@ -1,4 +1,4 @@
-#include "Administrador.h"
+#include "../h/Administrador.h"
 
 // Default constructor
 Administrador::Administrador() : Usuario() {}

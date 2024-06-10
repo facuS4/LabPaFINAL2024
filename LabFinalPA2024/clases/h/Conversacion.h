@@ -3,7 +3,10 @@
 
 #include <iostream>
 #include "Usuario.h"
-#include "../ICollection/Collections/List.h"
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/interfaces/ICollectible.h"
+
+class Usuario;
 
 using namespace std;
 
@@ -16,7 +19,7 @@ class Conversacion{
         ~Conversacion();
         void eliminarVinculosConversacion();
         void AgregarMensaje(string);
-        void CrearMensaje(string, Usuario u);
+        void CrearMensaje(string, Usuario * u);
 };
 
 

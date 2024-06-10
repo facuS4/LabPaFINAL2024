@@ -1,4 +1,4 @@
-#include "Departamento.h"
+#include "../h/Departamento.h"
 
 Departamento::Departamento() : Letradpto(' '), nombre(""), Zonas(nullptr) {}
 

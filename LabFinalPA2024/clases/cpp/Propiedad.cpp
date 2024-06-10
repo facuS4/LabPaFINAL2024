@@ -1,4 +1,4 @@
-#include "Propiedad.h"
+#include "../h/Propiedad.h"
 
 // Default constructor
 Propiedad::Propiedad() : codigo(""), dormitorios(0), ambientes(0), banios(0), garage(false), direccion(dtDireccion()), medif(0.0f), MetrosTotales(0.0f) {}

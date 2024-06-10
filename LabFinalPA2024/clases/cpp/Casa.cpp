@@ -1,4 +1,4 @@
-#include "Casa.h"
+#include "../h/Casa.h"
 
 // Default constructor
 Casa::Casa() : Propiedad(), metrosTotales(0.0f) {}

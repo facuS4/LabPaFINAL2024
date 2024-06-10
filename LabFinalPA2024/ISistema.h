@@ -19,7 +19,7 @@
 #include "ICollection/Integer.h"
 #include "ICollection/String.h"
 
-#include "Propiedad.h"
+#include "./clases/h/Propiedad.h"
 
 using namespace std;
 

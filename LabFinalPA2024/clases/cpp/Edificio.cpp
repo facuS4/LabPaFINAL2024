@@ -1,4 +1,4 @@
-#include "Edificio.h"
+#include "../h/Edificio.h"
 
 // Default constructor
 Edificio::Edificio() : nombre(""), cantPisos(0), gastosComunes(0.0f) {}

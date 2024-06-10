@@ -1,4 +1,4 @@
-#include "Inmobiliaria.h"
+#include "../h/Inmobiliaria.h"
 
 // Default constructor
 Inmobiliaria::Inmobiliaria() : Usuario(), nombre(""), ubicacion(nullptr), ventas(new List<Venta>()), alquileres(new List<Alquiler>()) {}

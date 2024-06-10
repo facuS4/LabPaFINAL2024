@@ -2,8 +2,11 @@
 #define MENSAJE_H
 
 #include <iostream>
-#include "clases/datatypes/h/dtFecha.h"
-#include "../ICollection/Collections/List.h"
+#include "../datatypes/h/dtFecha.h"
+//#include "../datatypes/h/dtDireccion.h"
+
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/interfaces/ICollectible.h"
 
 using namespace std;
 

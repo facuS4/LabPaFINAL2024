@@ -5,7 +5,9 @@
 #include <string>
 #include <set>
 #include "Zona.h"
-#include "../ICollection/Collections/List.h"
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/interfaces/ICollectible.h"
+
 
 using namespace std;
 

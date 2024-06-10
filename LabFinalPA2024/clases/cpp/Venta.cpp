@@ -1,4 +1,4 @@
-#include "Venta.h"
+#include "../h/Venta.h"
 
 // Default constructor
 Venta::Venta() : precioVenta(0.0f) {}

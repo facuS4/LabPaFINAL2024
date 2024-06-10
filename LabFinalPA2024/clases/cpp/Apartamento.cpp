@@ -1,4 +1,4 @@
-#include "Apartamento.h"
+#include "../h/Apartamento.h"
 
 // Default constructor
 Apartamento::Apartamento() : Propiedad(), disponible(true), edificio(Edificio()) {}

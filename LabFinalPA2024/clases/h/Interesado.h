@@ -4,7 +4,8 @@
 #include <iostream>
 #include "Usuario.h"
 #include "Conversacion.h"
-#include "../ICollection/Collections/List.h"
+#include "../../ICollection/collections/List.h"
+
 
 using namespace std;
 

@@ -7,8 +7,9 @@
 #include "Venta.h"
 #include "Alquiler.h"
 #include "Propiedad.h"
-#include "clases/datatypes/h/dtDireccion.h"
-#include "../ICollection/Collections/List.h"
+#include "../datatypes/h/dtDireccion.h"
+#include "../../ICollection/collections/List.h"
+
 
 using namespace std;
 

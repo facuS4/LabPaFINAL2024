@@ -8,7 +8,9 @@
 using namespace std;
 
 #include "Conversacion.h"
-#include "./ICollection/Collections/List.h"
+#include "../../ICollection/collections/List.h"
+#include "../../ICollection/interfaces/ICollectible.h"
+
 
 class Usuario : public ICollectible {
     private:
@@ -25,7 +27,7 @@ class Usuario : public ICollectible {
         void setCorreoElectronico(string);
         void setContrasenia(string);
 
-        virtual void Asociar (Conversacion c) = 0;
+        virtual void Asociar (Conversacion * c) = 0;
 };
 
 #endif
