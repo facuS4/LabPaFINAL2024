@@ -4,7 +4,7 @@
 Casa::Casa() : Propiedad(), metrosVerdes(0.0f) {}
 
 // Constructor with parameters
-Casa::Casa(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion * direccion, float medif, float metrosTotales, float metrosVerdes) : Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales){
+Casa::Casa(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion direccion, float medif, float metrosTotales, float metrosVerdes) : Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales){
   this->metrosVerdes = metrosVerdes;
 }
 
@@ -30,18 +30,23 @@ void Casa::eliminarVinculosPropiedad(){
 }
 
 void Casa::AgregarMensaje(string mensaje){
+  cout << mensaje;
   // Implement logic to add a message specific to Casa (optional)
 }
 
 void Casa::CrearMensaje(string mensaje, Usuario *u){
+    cout << mensaje;
+    u->~Usuario();
   // Implement logic to create a message with user association (optional)
 }
 
 // Implementations for linking with Venta and Alquiler (optional depending on your logic)
 void Casa::Vincular(Venta *v){
+  v->~Venta();
   // Implement logic to link this Casa with a Venta object (optional)
 }
 
 void Casa::Vincular(Alquiler *a){
+  a->~Alquiler();
   // Implement logic to link this Casa with an Alquiler object (optional)
 }

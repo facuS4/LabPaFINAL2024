@@ -22,6 +22,7 @@ void Venta::setPrecioVenta(float nuevoPrecio) {
 
 // Method to desvincular a Venta (replace with your logic)
 void Venta::desvincularVenta(string codigoPropiedad) {
+  cout << codigoPropiedad;
   // Implement logic to potentially remove association with a Propiedad identified by 'codigoPropiedad'
   // This might involve:
   //  - Updating the related Propiedad to indicate it's no longer en venta

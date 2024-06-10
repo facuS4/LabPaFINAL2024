@@ -45,7 +45,10 @@ void Interesado::setEdad(int edadUsuario) {
 
 // Implementations for pure virtual methods inherited from Usuario
 void Interesado::Asociar(Conversacion *c){
+  c->~Conversacion();
 }
 
 void Interesado::Desvincular(Conversacion *c){
+    c->~Conversacion();
+
 }

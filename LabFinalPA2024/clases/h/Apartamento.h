@@ -18,7 +18,7 @@ class Apartamento : public Propiedad{
         Edificio edificio;
     public:
         Apartamento();
-        Apartamento(string, int, int, int, bool, dtDireccion *, float, float, bool);
+        Apartamento(string, int, int, int, bool, dtDireccion , float, float, bool);
         ~Apartamento();
 
         float getMetrosTotales();
@@ -30,8 +30,8 @@ class Apartamento : public Propiedad{
         void CrearMensaje(string, Usuario * u);
 
         void ListarPropiedadesEdificio();
-        void Vincular(Venta v);
-        void Vincular(Alquiler a);
+        void Vincular(Venta *v);
+        void Vincular(Alquiler *a);
 
 };
 

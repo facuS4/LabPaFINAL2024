@@ -21,12 +21,12 @@ class Propiedad : public ICollectible{
         int ambientes;
         int banios;
         bool garage;
-        dtDireccion * direccion;
+        dtDireccion direccion;
         float medif;
         float MetrosTotales;
     public:
         Propiedad();
-        Propiedad(string, int, int, int, bool, dtDireccion * , float, float);
+        Propiedad(string, int, int, int, bool, dtDireccion, float, float);
         virtual ~Propiedad();
 
         string getCodigo();

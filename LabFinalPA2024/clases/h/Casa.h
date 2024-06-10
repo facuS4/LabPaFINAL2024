@@ -15,7 +15,7 @@ class Casa : public Propiedad{
         float metrosVerdes;
     public:
         Casa();
-        Casa(string, int, int, int, bool, dtDireccion *, float, float, float);
+        Casa(string, int, int, int, bool, dtDireccion , float, float, float);
         ~Casa();
 
         float getMetrosVerdes();

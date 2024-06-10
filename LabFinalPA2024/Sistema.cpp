@@ -18,16 +18,21 @@ Sistema * Sistema::getInstancia() {
 }
 
 bool Sistema::AltaInmobiliaria(string email, string nombre, dtDireccion dir) {
+    cout <<nombre<<email;
+    dir.getCalle();
     return false;
 }
 
 void Sistema::EliminarPropiedad(string codigo) {
+    cout << codigo;
 }
 
 void Sistema::IngresarEmail(string email) {
+    cout << email;
 }
 
 void Sistema::ingreasrcontraseniaNueva(string contrasenia) {
+    cout << contrasenia;
 }
 
 void Sistema::listarDepartamentos() {
@@ -60,13 +65,17 @@ void Sistema::Ultimo5Mensajes() {
 }
 
 void Sistema::EnviarMensaje(string mensaje) {
+    cout << mensaje;
 }
 
 void Sistema::AgregarMensaje(string mensaje) {
+    cout << mensaje;
 }
 
 void Sistema::CrearMensaje(string mensaje) {
+    cout << mensaje;
 }
+
 
 void Sistema::SelecionarZona(string codigo) {
     IIterator * it;
@@ -94,6 +103,7 @@ void Sistema::SelecionarZona(string codigo) {
 }
 
 bool Sistema::boolSeleccionarZona(string codigo) {
+    cout << codigo;
     return false;
 }
 
@@ -101,6 +111,7 @@ void Sistema::ListarEdificio() {
 }
 
 void Sistema::altaApartamento(int ambientes) {
+    cout << ambientes;
 }
 
 int Sistema::altaApartamento(int, int, int, bool, dtDireccion, int) {
@@ -112,12 +123,16 @@ int Sistema::altaCasa(int, int, int, bool, dtDireccion, int, int) {
 }
 
 void Sistema::vincularconInmobiliaria(Propiedad *p) {
+    p->~Propiedad();
 }
 
 void Sistema::seleccionarAlquiler(int precio) {
+    cout << precio;
 }
 
 void Sistema::seleccionarVenta(int valor, Propiedad *p) {
+    cout <<valor;
+    p->~Propiedad();
 
 }
 

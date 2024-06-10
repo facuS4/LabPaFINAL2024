@@ -37,6 +37,7 @@ void Edificio::setGastosComunes(float costoGastosComunes) {
 
 // Method to desvincular a Propiedad (assuming a collection is maintained)
 void Edificio::desvincularPropiedad(string codigoPropiedad) {
+  cout << codigoPropiedad;
   // Implement logic to remove the propiedad identified by codigoPropiedad from the Edificio's collection
   // This might involve iterating through a List or other collection and removing the matching propiedad
   // You'll likely need to include Propiedad.h for propiedad access

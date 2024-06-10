@@ -17,8 +17,12 @@ void Conversacion::eliminarVinculosConversacion() {
 
 // Adds a message to the conversation
 void Conversacion::AgregarMensaje(string mensaje) {
+    cout << mensaje;
+
 }
 
 // Creates a message with an author
 void Conversacion::CrearMensaje(string mensaje, Usuario *u) {
+    cout << mensaje;
+    u->~Usuario();
 }

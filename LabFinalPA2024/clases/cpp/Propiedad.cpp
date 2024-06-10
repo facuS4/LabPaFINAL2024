@@ -4,13 +4,13 @@
 Propiedad::Propiedad() : codigo(""), dormitorios(0), ambientes(0), banios(0), garage(false), direccion(dtDireccion()), medif(0.0f), MetrosTotales(0.0f) {}
 
 // Constructor with parameters
-Propiedad::Propiedad(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion * direccion, float medif, float metrosTotales){
+Propiedad::Propiedad(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion direccion, float medif, float metrosTotales){
   this->codigo = codigo;
   this->dormitorios = dormitorios;
   this->ambientes = ambientes;
   this->banios = banios;
   this->garage = garage;
-  this->direccion = *direccion;
+  this->direccion = direccion;
   this->medif = medif;
   this->MetrosTotales = metrosTotales;
 }

@@ -40,8 +40,8 @@ class Zona : public ICollectible{
 
         void ListarEdificios();
 
-        bool altaApartamento(int, int, int, bool, dtDireccion, int);
-        bool altaCasa(int, int, int, bool, dtDireccion, int, int);
+        bool altaApartamento(int, int, int, bool, dtDireccion , int);
+        bool altaCasa(int, int, int, bool, dtDireccion , int, int);
 
        
 };

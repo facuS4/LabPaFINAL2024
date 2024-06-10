@@ -1,0 +1,14 @@
+executable = Main
+compiler = g++
+compiler-options = -g -Wall -Wextra  # Suppressed -Werror for unused parameters
+
+ifdef OS
+    executable := $(executable).exe
+endif
+
+build:
+	$(compiler) $(compiler-options) -Wno-unused-parameter \  # Add a space after compiler-options
+		-o $(executable) \
+		ICollection/*.cpp \
+		ICollection/collections/*.cpp \
+		ISistema.cpp SistemaFactory.cpp Sistema.cpp

@@ -55,34 +55,43 @@ ICollection* Inmobiliaria::getAlquileres() {
 
 // Implementations for pure virtual methods inherited from Usuario
 void Inmobiliaria::Asociar(Conversacion * c) {
+  c->~Conversacion();
 }
 
 void Inmobiliaria::DesvincularInmobiliaria(Conversacion *c) {
+    c->~Conversacion();
+
 }
 
 // Methods for managing ventas and alquileres (replace with your logic)
 void Inmobiliaria::desvincularAlquiler(int idAlquiler) {
+  cout << idAlquiler;
   // Implement logic to remove the alquiler with the given id from the 'alquileres' collection
   // This might involve iterating through the collection and removing the matching alquiler
 }
 
 void Inmobiliaria::desvincularVenta(int idVenta) {
+    cout << idVenta;
+
   // Implement logic to remove the venta with the given id from the 'ventas' collection
   // This might involve iterating through the collection and removing the matching venta
 }
 
 void Inmobiliaria::vincularInmobiliaria(Propiedad * p) {
+  p->~Propiedad();
   // Implement logic to link the Inmobiliaria to the provided Propiedad (p)
   // This might involve adding a reference to the Propiedad in the Inmobiliaria's data
   // Or it might involve adding the Inmobiliaria to the Propiedad's associated inmobiliarias
 }
 
 void Inmobiliaria::SeleccionarAlquiler(int idAlquiler) {
+  cout << idAlquiler;
   // Implement logic to select the alquiler with the given id (optional)
   // This might involve storing a reference to the selected alquiler for further actions
 }
 
 void Inmobiliaria::SeleccionarVenta(int idVenta) {
+  cout << idVenta;
   // Implement logic to select the venta with the given id (optional)
   // This might involve storing a reference to the selected venta for further actions
 }
