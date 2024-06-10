@@ -158,5 +158,13 @@ void Sistema::AltaDepartamento(char _letraDpt, string _codigo) {
     Departamentos->add(d);
 }
 
+ /*void Sistema::altaUsuario (Usuario * u){
+    IIterator * It;
+    
+    Usuarios = new List();
+
+ }
+*/
+
 
 

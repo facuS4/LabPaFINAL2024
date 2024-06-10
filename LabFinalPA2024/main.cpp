@@ -23,6 +23,8 @@ int main(){
     Inmobiliaria * inm2= new Inmobiliaria("peps.com",nullptr, "oepes");
     Interesado * int2= new Interesado("rs.com",nullptr,"pepe2",21,"pepoide3");
 
+    
+
     for(int i=0;i<5;i++){
 
     }

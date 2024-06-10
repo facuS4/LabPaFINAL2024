@@ -65,6 +65,8 @@ class Sistema : public ISistema{
         void seleccionarVenta(int valor, Propiedad *p);
 
         void AltaDepartamento(char, string);
+
+        void altaUsuario (Usuario*);
 };
 
 
