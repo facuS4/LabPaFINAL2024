@@ -1,4 +1,4 @@
-#include "dtDireccion.h"
+#include "../h/dtDireccion.h"
 
 dtDireccion::dtDireccion(){
     this->pais = nullptr;

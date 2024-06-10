@@ -1,4 +1,4 @@
-#include "dtFecha.h"
+#include "../h/dtFecha.h"
 
 dtFecha::dtFecha(){
     time_t t;
@@ -9,6 +9,7 @@ dtFecha::dtFecha(){
     this->mes = tm->tm_mon + 1;
     this->anio = tm->tm_year + 1900; // Corrección aquí
 }
+
 
 dtFecha::dtFecha(int _dia, int _mes, int _anio){
     this->dia = _dia;

@@ -5,6 +5,8 @@
 #include "../datatypes/h/dtFecha.h"
 //#include "../datatypes/h/dtDireccion.h"
 
+class dtFecha;
+
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/interfaces/ICollectible.h"
 

@@ -1,4 +1,4 @@
-#include "dtHora.h"
+#include "../h/dtHora.h"
 
 dtHora::dtHora(){
     time_t t;
@@ -8,6 +8,7 @@ dtHora::dtHora(){
     this->horas = tm->tm_hour;
     this->minutos = tm->tm_min;
 }
+
 
 dtHora::dtHora(int _horas, int _minuto){
     this->horas = _horas;

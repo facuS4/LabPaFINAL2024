@@ -1,7 +1,8 @@
-#include "dtDepartamento.h"
+#include "../h/dtDepartamento.h"
 
 dtDepartamento::dtDepartamento() {
 }
+
 
 dtDepartamento::dtDepartamento(string nombre, char letraDpto) {
     this->nombre = nombre;
@@ -14,7 +15,4 @@ string dtDepartamento::getNombre() {
 
 char dtDepartamento::getLetraDpto() {
     return this->letraDpto;
-}
-
-dtDepartamento::~dtDepartamento() {
 }
