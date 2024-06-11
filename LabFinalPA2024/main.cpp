@@ -43,7 +43,7 @@ Contrasenia = password;
       cout << "Puede salir si ingresa" << endl
            << endl;
       cout << "Inicie sesion con su usuario" << endl
-           << "Recuerde que no se puede crear usuarios" << endl
+           << "Recuerde que no se puede crear usuarios en esta pantalla" << endl
            << endl
            << "Email: ";
       string ingresar;
@@ -197,19 +197,19 @@ Contrasenia = password;
 
               getline(cin, nombre);
               cout << "pais:" << endl;
+              //getline(cin, pais);
+              //cout << "ciudad:" << endl;
 
-              getline(cin, pais);
-              cout << "ciudad:" << endl;
+              //getline(cin, ciudad);
+              //cout << "numero:" << endl;
 
-              getline(cin, ciudad);
-              cout << "numero:" << endl;
+              //getline(cin, numero);
+              //cout << "calle:" << endl;
 
-              getline(cin, numero);
-              cout << "calle:" << endl;
-
-              getline(cin, calle);
-              dir = new dtDireccion(pais, ciudad, numero, calle);
-              sis->AltaInmobiliaria(email, nombre, dir);
+              //getline(cin, calle);
+              //dir = new dtDireccion(pais, ciudad, numero, calle);
+              sis->AltaInmobiliaria(email, nombre, nullptr);
+              break;
             }
             break;
           case 2:
@@ -229,17 +229,21 @@ Contrasenia = password;
               cout << "apellido" << endl;
 
               getline(cin, apellido);
-              cout << "edad:" << endl;
 
-              while(edad!="" && edad[0]){
-              getline(cin, edad);
-              cout << "numero:" << endl;
-              }
-              
-              int edadin = stoi(edad);
+              while (edad.empty() || !isdigit(edad[0])) {
+                      cout << "Ingrese la edad: ";
+                      getline(cin, edad);
+                      if (edad.empty() || !isdigit(edad[0])) {
+                          cout << "No valido." << endl;
+                      }
+                  }
 
-              sis->AltaInteresado(nombre, apellido, edadin, email);
+                  int edadin = stoi(edad);
+                  cout << edadin;
+
+              //sis->AltaInteresado(nombre, apellido, edadin, email);
               //        void AltaInteresado(string nombre, string apellido, int edad, string email);
+              break;
             }
             break;
           case 3:

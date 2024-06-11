@@ -30,7 +30,7 @@ class ISistema {
     public:
         virtual ~ISistema(); // destructor
 
-        virtual void AltaInteresado(string nombre, string apellido, int edad, string email);
+        virtual void AltaInteresado(string, string , int , string)=0;
 
         virtual void setUsuarioActual(Usuario *)=0;
 
