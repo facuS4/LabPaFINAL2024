@@ -42,6 +42,19 @@ int main()
 CorreoElectronico = email;
 Contrasenia = password;
 }*/
+  // ZONAS HARDCODEADAS //
+  Zona *ZonaSurSanJose = new Zona("sur1","SanJoseSur");
+  Zona *ZonaNorteSanJose = new Zona("Norte1","SanJoseNorte");
+  Zona *ZonaSurColonia = new Zona("sur2","ColoniaSur");
+  Zona *ZonaNorteColonia = new Zona("Norte2","ColoniaNorte");
+  Zona *ZonaSurMontevideo = new Zona("Sur3","MontevideoSur");
+  Zona *ZonaNorteMontevideo = new Zona("Norte3","MontevideoNorte");
+
+  // DEPARTAMENTOS HARDCODEADOS //
+  Departamento *SanJose = new Departamento('A', "San Jose");
+  Departamento *Colonia = new Departamento('B', "Colonia");
+  Departamento *Montevideo = new Departamento('C', "Montevideo");
+
   // USUARIOS HARDCODEDEADOS//
   dtDireccion *ladir;
   ladir = new dtDireccion("Bosnia", "Mintx", "0032", "Boris Salvatore");
@@ -330,6 +343,15 @@ Contrasenia = password;
   int1->~Interesado();
   inm2->~Inmobiliaria();
   int2->~Interesado();
+  SanJose->~Departamento();
+  Colonia->~Departamento();
+  Montevideo->~Departamento();
+  ZonaSurSanJose->~Zona();
+  ZonaNorteSanJose->~Zona();
+  ZonaSurColonia->~Zona();
+  ZonaNorteColonia->~Zona();
+  ZonaNorteMontevideo->~Zona();
+  ZonaSurMontevideo->~Zona();
 
   return 0;
 }
