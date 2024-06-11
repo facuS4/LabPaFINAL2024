@@ -32,7 +32,7 @@ Contrasenia = password;
   sis->altaUsuario(int1);
   sis->altaUsuario(inm2);
   sis->altaUsuario(int2);
-  //ENTRAR AL SISTEMA
+  // ENTRAR AL SISTEMA
   while (in)
   {
 
@@ -64,37 +64,40 @@ Contrasenia = password;
               system("clear");
               cout << "Su usuario no tiene contrasenia" << endl
                    << "Contrasenia: ";
-              
-              getline(cin, contra);
-            } else {
-              contra=utemp->getContrasenia();
-            }
-              do
-              {
-                cout << "Verifique su contraseña o ingrese vacio para salir" << endl << "Contrasenia: ";
-                //cout
-                //cout << utemp->getContrasenia() << endl;
-                //cout << contra << endl;
-                getline(cin,contraver);
-                if(contraver=="")
-                  break;
-                if(contraver==contra){
-                  utemp->setContrasenia(contra);
-                  sis->setUsuarioActual(utemp);
-                  break;
-                }
-                //cout << contraver <<endl;
-              } while (true);
-            
-             /* if(contraver===contra){
 
+              getline(cin, contra);
+            }
+            else
+            {
+              contra = utemp->getContrasenia();
+            }
+            do
+            {
+              cout << "Verifique su contraseña o ingrese vacio para salir" << endl
+                   << "Contrasenia: ";
+              // cout
+              // cout << utemp->getContrasenia() << endl;
+              // cout << contra << endl;
+              getline(cin, contraver);
+              if (contraver == "")
+                break;
+              if (contraver == contra)
+              {
                 utemp->setContrasenia(contra);
                 sis->setUsuarioActual(utemp);
-
-              }else{
                 break;
-              }*/
+              }
+              // cout << contraver <<endl;
+            } while (true);
 
+            /* if(contraver===contra){
+
+               utemp->setContrasenia(contra);
+               sis->setUsuarioActual(utemp);
+
+             }else{
+               break;
+             }*/
           }
           it->next();
         }
@@ -110,9 +113,7 @@ Contrasenia = password;
          << endl;
     cout << "Bienvenido al sistema" << endl;
 
-
-    //FIN DEL INICIO DE LA SESION
-
+    // FIN DEL INICIO DE LA SESION
 
     Usuario *checker = dynamic_cast<Administrador *>(sis->getUsuarioActual());
     if (checker == nullptr)
@@ -127,7 +128,7 @@ Contrasenia = password;
     {
       tipoDeUsuario = 0;
     }
-    //MENU
+    // MENU
     while (tipoDeUsuario > -1)
     {
 
@@ -180,10 +181,66 @@ Contrasenia = password;
             cout << "placeholder" << endl;
             break;
           case 1:
-            cout << "placeholder" << endl;
+            cout << "Alta inmobiliaria" << endl;
+            while (true)
+            {
+              string email;
+              string nombre;
+              string pais;
+              string ciudad;
+              string numero;
+              string calle;
+              dtDireccion *dir = nullptr;
+              cout << "email:" << endl;
+              getline(cin, email);
+              cout << "nombre:" << endl;
+
+              getline(cin, nombre);
+              cout << "pais:" << endl;
+
+              getline(cin, pais);
+              cout << "ciudad:" << endl;
+
+              getline(cin, ciudad);
+              cout << "numero:" << endl;
+
+              getline(cin, numero);
+              cout << "calle:" << endl;
+
+              getline(cin, calle);
+              dir = new dtDireccion(pais, ciudad, numero, calle);
+              sis->AltaInmobiliaria(email, nombre, dir);
+            }
             break;
           case 2:
-            cout << "placeholder" << endl;
+            cout << "Alta interesado" << endl;
+            while (true)
+            {
+              string email;
+              string nombre;
+              string apellido;
+              string edad="a";
+
+              cout << "email:" << endl;
+              getline(cin, email);
+              cout << "nombre:" << endl;
+
+              getline(cin, nombre);
+              cout << "apellido" << endl;
+
+              getline(cin, apellido);
+              cout << "edad:" << endl;
+
+              while(edad!="" && edad[0]){
+              getline(cin, edad);
+              cout << "numero:" << endl;
+              }
+              
+              int edadin = stoi(edad);
+
+              sis->AltaInteresado(nombre, apellido, edadin, email);
+              //        void AltaInteresado(string nombre, string apellido, int edad, string email);
+            }
             break;
           case 3:
             cout << "placeholder" << endl;
@@ -192,7 +249,6 @@ Contrasenia = password;
             cout << "placeholder" << endl;
             break;
           case 5:
-            cout << "placeholder" << endl;
             break;
           case 6:
             cout << "placeholder" << endl;
@@ -224,7 +280,7 @@ Contrasenia = password;
 
           return 0;
         }
-      } //FINAL DEL MENU
+      } // FINAL DEL MENU
     }
   } // FINAL DEL WHILE IN
 
