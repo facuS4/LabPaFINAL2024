@@ -26,6 +26,6 @@ string Usuario::getContrasenia() {
 }
 
 void Usuario::setContrasenia(string password) {
-  Contrasenia = password;
+  this->Contrasenia = password;
 }
 
