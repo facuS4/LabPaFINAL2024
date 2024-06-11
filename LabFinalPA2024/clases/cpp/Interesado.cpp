@@ -8,8 +8,6 @@ Interesado::Interesado() : Usuario() {
 }
 
 Interesado::Interesado(string email, string password, string nombreUsuario, int edadUsuario, string apellidoUsuario) : Usuario(email, password) {
-  email = email;
-  password = password;
   nombre = nombreUsuario;
   edad = edadUsuario;
   apellido = apellidoUsuario;

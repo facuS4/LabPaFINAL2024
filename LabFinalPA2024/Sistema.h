@@ -36,7 +36,7 @@ class Sistema : public ISistema{
 
         static Sistema * getInstancia(); // devuelve el controlador Sistema (Singleton) // ✅
 
-        void AltaInmobiliaria(string email, string nombre, dtDireccion *dir);
+        void AltaInmobiliaria(string email, string nombre);
 
         void EliminarPropiedad(string codigo);
 

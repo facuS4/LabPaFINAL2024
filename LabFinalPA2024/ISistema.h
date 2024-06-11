@@ -42,7 +42,7 @@ class ISistema {
 
         virtual void altaUsuario(Usuario *)=0;
 
-        virtual void AltaInmobiliaria(string email, string nombre, dtDireccion* dir) = 0;
+        virtual void AltaInmobiliaria(string email, string nombre) = 0;
 
         virtual void EliminarPropiedad(string codigo) = 0;
 

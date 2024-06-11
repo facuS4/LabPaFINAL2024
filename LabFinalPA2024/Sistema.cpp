@@ -51,7 +51,7 @@ Usuario * Sistema::getUsuarioActual(){
 
 }
 
-void Sistema::AltaInmobiliaria(string email, string nombre, dtDireccion *dir) {
+void Sistema::AltaInmobiliaria(string email, string nombre) {
     // Verificar si el usuario actual tiene permisos de Administrador
     if (dynamic_cast<Administrador*>(this->usuarioSesion) == nullptr) {
         cout << "Error: Se requieren permisos de Administrador para dar de alta una inmobiliaria." << endl;
@@ -69,18 +69,18 @@ void Sistema::AltaInmobiliaria(string email, string nombre, dtDireccion *dir) {
     }
 
     string pais, ciudad, numero, calle;
-    cout << "Ingrese la dirección de la inmobiliaria:" << endl;
-    cout << "País: ";
+    cout << "Ingrese la direccion de la inmobiliaria:" << endl;
+    cout << "Pais: ";
     cin >> pais;
     cout << "Ciudad: ";
     cin >> ciudad;
-    cout << "Número: ";
+    cout << "Numero: ";
     cin >> numero;
     cout << "Calle: ";
     cin >> calle;
 
     // Crear la dirección
-    dir = new dtDireccion(pais, ciudad, numero, calle);
+    dtDireccion * dir = new dtDireccion(pais, ciudad, numero, calle);
     // Dar de alta la inmobiliaria
     Usuario *inm = new Inmobiliaria(email, "", nombre, dir);
     misUsuarios->add(inm);
@@ -229,7 +229,7 @@ void Sistema::AltaInteresado(string nombre, string apellido, int edad, string em
 
     // Verificar si ya existe un usuario con el mismo email
     for (it = misUsuarios->getIterator(); it->hasCurrent(); it->next()) {
-        Usuario* usuario = dynamic_cast<Interesado*>(it->getCurrent());
+        Usuario* usuario = dynamic_cast<Usuario*>(it->getCurrent());
         if (usuario->getCorreoElectronico() == email) {
             cout << "Error: Ya existe un usuario con el mismo email." << endl;
             delete it; // Liberar memoria del iterador
@@ -237,8 +237,7 @@ void Sistema::AltaInteresado(string nombre, string apellido, int edad, string em
         }
     }
 
-    // Dar de alta al interesado
-    Usuario* nuevoInteresado = new Interesado(nombre, "" , apellido, edad, email);
+    Usuario* nuevoInteresado = new Interesado(nombre, "" , apellido, edad, email); 
     misUsuarios->add(nuevoInteresado);
     cout << "Interesado '" << nombre << " " << apellido << "' dado de alta exitosamente." << endl;
 }

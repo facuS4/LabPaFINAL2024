@@ -73,7 +73,7 @@ Contrasenia = password;
             }
             do
             {
-              cout << "Verifique su contraseña o ingrese vacio para salir" << endl
+              cout << "Verifique su contrasenia o ingrese vacio para salir" << endl
                    << "Contrasenia: ";
               // cout
               // cout << utemp->getContrasenia() << endl;
@@ -190,13 +190,9 @@ Contrasenia = password;
               string ciudad;
               string numero;
               string calle;
-              dtDireccion *dir = nullptr;
               cout << "email:" << endl;
               getline(cin, email);
               cout << "nombre:" << endl;
-
-              getline(cin, nombre);
-              cout << "pais:" << endl;
               //getline(cin, pais);
               //cout << "ciudad:" << endl;
 
@@ -208,7 +204,7 @@ Contrasenia = password;
 
               //getline(cin, calle);
               //dir = new dtDireccion(pais, ciudad, numero, calle);
-              sis->AltaInmobiliaria(email, nombre, nullptr);
+              sis->AltaInmobiliaria(email, nombre);
               break;
             }
             break;
@@ -219,7 +215,7 @@ Contrasenia = password;
               string email;
               string nombre;
               string apellido;
-              string edad="a";
+              int edad;
 
               cout << "email:" << endl;
               getline(cin, email);
@@ -230,18 +226,22 @@ Contrasenia = password;
 
               getline(cin, apellido);
 
-              while (edad.empty() || !isdigit(edad[0])) {
-                      cout << "Ingrese la edad: ";
-                      getline(cin, edad);
-                      if (edad.empty() || !isdigit(edad[0])) {
-                          cout << "No valido." << endl;
-                      }
-                  }
+              cout << "edad" << endl;
+              cin >> edad;
 
-                  int edadin = stoi(edad);
-                  cout << edadin;
+              // while (edad.empty() || !isdigit(edad[0])) {
+              //         cout << "Ingrese la edad: ";
+              //         getline(cin, edad);
+              //         if (edad.empty() || !isdigit(edad[0])) {
+              //             cout << "No valido." << endl;
+              //         }
+              //     }
 
-              //sis->AltaInteresado(nombre, apellido, edadin, email);
+              //     int edadin = stoi(edad);
+              cout << edad << endl;
+
+              sis->AltaInteresado(nombre, apellido, edad, email);
+              sis->Listarusuarios();
               //        void AltaInteresado(string nombre, string apellido, int edad, string email);
               break;
             }
