@@ -5,7 +5,7 @@
 #include "SistemaFactory.h"
 #include "Sistema.h"
 #include "ISistema.h"
-
+class Inmobiliaria;
 using namespace std;
 
 ISistema * sis = SistemaFactory::crearSistema();
@@ -17,10 +17,12 @@ int main(){
   Contrasenia = password;
 }*/
       //USUARIOS HARDCODEDEADOS//
+    dtDireccion * ladir;
+    ladir = new dtDireccion("Bosnia","Mintx","0032","Boris Salvatore");
     Usuario * admin= new Administrador("root@r.com","123");
-    Inmobiliaria * imn1= new Inmobiliaria("sss.com","123", "los pepes");
+    Inmobiliaria * imn1= new Inmobiliaria("sss.com","123", "los pepes", ladir);
     Interesado * int1= new Interesado("goof.com","123","pepe",20,"pepoide");
-    Inmobiliaria * inm2= new Inmobiliaria("peps.com","", "oepes");
+    Inmobiliaria * inm2= new Inmobiliaria("peps.com","", "oepes",ladir);
     Interesado * int2= new Interesado("rs.com","","pepe2",21,"pepoide3");
     sis->altaUsuario(admin);
     sis->altaUsuario(imn1);
