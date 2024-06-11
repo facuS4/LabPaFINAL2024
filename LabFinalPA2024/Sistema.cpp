@@ -219,7 +219,7 @@ void Sistema::AltaDepartamento(char _letraDpt, string _codigo) {
     Departamentos->add(d);
 }
 
-void Sistema::AltaInteresado(string nombre, string apellido, int edad, string email) {
+void Sistema::AltaInteresado(string email,string nombre, string apellido, int edad) {
     IIterator * it;
     // Verificar si el usuario actual tiene permisos de Administrador
     if (dynamic_cast<Administrador*>(this->usuarioSesion) == nullptr) {
@@ -237,9 +237,9 @@ void Sistema::AltaInteresado(string nombre, string apellido, int edad, string em
         }
     }
 
-    Usuario* nuevoInteresado = new Interesado(nombre, "" , apellido, edad, email); 
+    Usuario* nuevoInteresado = new Interesado(email, "" , nombre, edad, apellido); 
     misUsuarios->add(nuevoInteresado);
-    cout << "Interesado '" << nombre << " " << apellido << "' dado de alta exitosamente." << endl;
+    cout << "Interesado '" << nombre << " " << apellido << "' dado de alta exitosamente. Con email" << email << endl;
 }
 
 

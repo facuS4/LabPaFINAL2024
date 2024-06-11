@@ -22,7 +22,7 @@ class Sistema : public ISistema{
     public:
         ~Sistema(); // destructor // ✅
 
-        void AltaInteresado(string nombre, string apellido, int edad, string email);
+        void AltaInteresado(string email,string nombre, string apellido, int edad) ;
 
         void Listarusuarios(); // ✅
 

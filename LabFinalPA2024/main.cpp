@@ -10,6 +10,29 @@ using namespace std;
 
 ISistema *sis = SistemaFactory::crearSistema();
 
+bool emailcheck(std::string email) {
+
+  if (email.length() < 3) {
+    return false;
+  }
+
+  bool at = false;
+
+  for (size_t i = 0; i < email.length(); i++) {
+
+    if (email[i] == '@') {
+      at = true;
+
+      if (i == 0 || i == email.length() - 1) {
+        return false;
+      }
+    }
+  }
+
+  return at;
+}
+
+
 int main()
 {
 
@@ -22,11 +45,11 @@ Contrasenia = password;
   // USUARIOS HARDCODEDEADOS//
   dtDireccion *ladir;
   ladir = new dtDireccion("Bosnia", "Mintx", "0032", "Boris Salvatore");
-  Usuario *admin = new Administrador("root@r.com", "123");
-  Inmobiliaria *imn1 = new Inmobiliaria("sss.com", "123", "los pepes", ladir);
-  Interesado *int1 = new Interesado("goof.com", "123", "pepe", 20, "pepoide");
-  Inmobiliaria *inm2 = new Inmobiliaria("peps.com", "", "oepes", ladir);
-  Interesado *int2 = new Interesado("rs.com", "", "pepe2", 21, "pepoide3");
+  Usuario *admin = new Administrador("a@a", "123");
+  Inmobiliaria *imn1 = new Inmobiliaria("go@go", "123", "los pepes", ladir);
+  Interesado *int1 = new Interesado("pedro@pedro", "123", "pepe", 20, "pepoide");
+  Inmobiliaria *inm2 = new Inmobiliaria("mo@mo", "", "oepes", ladir);
+  Interesado *int2 = new Interesado("ta@ta", "", "pepe2", 21, "pepoide3");
   sis->altaUsuario(admin);
   sis->altaUsuario(imn1);
   sis->altaUsuario(int1);
@@ -192,7 +215,15 @@ Contrasenia = password;
               string calle;
               cout << "email:" << endl;
               getline(cin, email);
+
+              while(!emailcheck(email)){
+              cout << "No" << endl;
+
+              getline(cin, email);
+              }
               cout << "nombre:" << endl;
+              getline(cin, nombre);
+
               //getline(cin, pais);
               //cout << "ciudad:" << endl;
 
@@ -215,10 +246,15 @@ Contrasenia = password;
               string email;
               string nombre;
               string apellido;
-              int edad;
+              string edad;
 
               cout << "email:" << endl;
               getline(cin, email);
+              while(!emailcheck(email)){
+              cout << "No" << endl;
+
+              getline(cin, email);
+              }
               cout << "nombre:" << endl;
 
               getline(cin, nombre);
@@ -227,22 +263,20 @@ Contrasenia = password;
               getline(cin, apellido);
 
               cout << "edad" << endl;
-              cin >> edad;
+              
 
-              // while (edad.empty() || !isdigit(edad[0])) {
-              //         cout << "Ingrese la edad: ";
-              //         getline(cin, edad);
-              //         if (edad.empty() || !isdigit(edad[0])) {
-              //             cout << "No valido." << endl;
-              //         }
-              //     }
+              while (edad.empty() || !isdigit(edad[0])) {
+                      cout << "Ingrese la edad: ";
+                      getline(cin, edad);
+                      if (edad.empty() || !isdigit(edad[0])) {
+                          cout << "No valido." << endl;
+                      }
+                  }
 
-              //     int edadin = stoi(edad);
+              int edadin = stoi(edad);
               cout << edad << endl;
 
-              sis->AltaInteresado(nombre, apellido, edad, email);
-              sis->Listarusuarios();
-              //        void AltaInteresado(string nombre, string apellido, int edad, string email);
+              sis->AltaInteresado(email,nombre, apellido, edadin);
               break;
             }
             break;
