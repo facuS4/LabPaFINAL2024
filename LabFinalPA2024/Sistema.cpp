@@ -2,32 +2,37 @@
 
 Sistema::Sistema() {
     Departamentos = new List();
-    Usuarios = new List();
+    misUsuarios = new List();
     usuarioSesion = nullptr;
 }
 
 Sistema::~Sistema() {
 }
 
-ICollection * Sistema::getUsuarios(){
-
-    return this->Usuarios;
-
+ICollection * Sistema::getUsuarios() {
+    return this->misUsuarios;
 }
 
 void Sistema::setUsuarioActual(Usuario * u){
-
     this->usuarioSesion=u;
-
 }
 
- void Sistema::altaUsuario (Usuario * u) {
+void Sistema::Listarusuarios() {
+    IIterator * it;
+    for (it = misUsuarios->getIterator(); it->hasCurrent(); it->next()) {
+        Usuario * u = (Usuario *) it->getCurrent();
+        cout << "Correo: " << u->getCorreoElectronico() << endl;
+    }
+}
 
-    if (this->Usuarios->member(u))
+
+void Sistema::altaUsuario (Usuario * u) {
+
+    if (this->misUsuarios->member(u))
     {   cout << "Este usuario ya existe" << endl;
         return;
     }
-    Usuarios->add(u);
+    misUsuarios->add(u);
     return;
  }
 
@@ -46,11 +51,42 @@ Usuario * Sistema::getUsuarioActual(){
 
 }
 
-bool Sistema::AltaInmobiliaria(string email, string nombre, dtDireccion dir) {
-    cout <<nombre<<email;
-    dir.getCalle();
-    return false;
+void Sistema::AltaInmobiliaria(string email, string nombre, dtDireccion *dir) {
+    // Verificar si el usuario actual tiene permisos de Administrador
+    if (dynamic_cast<Administrador*>(this->usuarioSesion) == nullptr) {
+        cout << "Error: Se requieren permisos de Administrador para dar de alta una inmobiliaria." << endl;
+        return;
+    }
+
+    // Verificar si ya existe un usuario con el mismo email
+    for (IIterator* it = misUsuarios->getIterator(); it->hasCurrent(); it->next()) {
+        Usuario *u = dynamic_cast<Usuario *>(it->getCurrent());
+        if (u->getCorreoElectronico() == email) {
+            cout << "Error: Ya existe un usuario con el email: " << email << endl;
+            delete it; // Liberar memoria del iterador
+            return;
+        }
+    }
+
+    string pais, ciudad, numero, calle;
+    cout << "Ingrese la dirección de la inmobiliaria:" << endl;
+    cout << "País: ";
+    cin >> pais;
+    cout << "Ciudad: ";
+    cin >> ciudad;
+    cout << "Número: ";
+    cin >> numero;
+    cout << "Calle: ";
+    cin >> calle;
+
+    // Crear la dirección
+    dir = new dtDireccion(pais, ciudad, numero, calle);
+    // Dar de alta la inmobiliaria
+    Usuario *inm = new Inmobiliaria(email, "", nombre, dir);
+    misUsuarios->add(inm);
+    cout << "Inmobiliaria '" << nombre << "' dada de alta exitosamente." << endl;
 }
+
 
 void Sistema::EliminarPropiedad(string codigo) {
     cout << codigo;
@@ -173,6 +209,9 @@ void Sistema::AltaDepartamento(char _letraDpt, string _codigo) {
         if (d->getLetradpto() == _letraDpt){
             cout << "Ya existe un departamento con la letra: " << _letraDpt << endl;
             return;
+        }else{
+            Departamento * nuevo = new Departamento(_letraDpt, _codigo);
+            Departamentos->add(nuevo);
         }
     }
 
@@ -180,8 +219,29 @@ void Sistema::AltaDepartamento(char _letraDpt, string _codigo) {
     Departamentos->add(d);
 }
 
+void Sistema::AltaInteresado(string nombre, string apellido, int edad, string email) {
+    IIterator * it;
+    // Verificar si el usuario actual tiene permisos de Administrador
+    if (dynamic_cast<Administrador*>(this->usuarioSesion) == nullptr) {
+        cout << "Error: Se requieren permisos de Administrador para dar de alta a un interesado." << endl;
+        return;
+    }
 
+    // Verificar si ya existe un usuario con el mismo email
+    for (it = misUsuarios->getIterator(); it->hasCurrent(); it->next()) {
+        Usuario* usuario = dynamic_cast<Interesado*>(it->getCurrent());
+        if (usuario->getCorreoElectronico() == email) {
+            cout << "Error: Ya existe un usuario con el mismo email." << endl;
+            delete it; // Liberar memoria del iterador
+            return;
+        }
+    }
 
+    // Dar de alta al interesado
+    Usuario* nuevoInteresado = new Interesado(nombre, "" , apellido, edad, email);
+    misUsuarios->add(nuevoInteresado);
+    cout << "Interesado '" << nombre << " " << apellido << "' dado de alta exitosamente." << endl;
+}
 
 
 
@@ -197,3 +257,5 @@ void Sistema::AltaDepartamento(char _letraDpt, string _codigo) {
     cout << color_green << "El Estudiante " << _nombre << " fue agregado correctamente" << color_reset << endl;
 };  
     */
+
+

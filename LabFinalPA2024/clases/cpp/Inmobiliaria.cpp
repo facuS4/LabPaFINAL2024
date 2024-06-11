@@ -8,9 +8,11 @@ Inmobiliaria::Inmobiliaria(){
   alquileres = new List();
 }
 // Constructor with parameters
-Inmobiliaria::Inmobiliaria(string _CorreoElectronico, string _Contrasenia, string _nombre) : Usuario(_CorreoElectronico, _Contrasenia) {
+Inmobiliaria::Inmobiliaria(string _CorreoElectronico, string _Contrasenia, string _nombre, dtDireccion * ubicacion) : Usuario(_CorreoElectronico, _Contrasenia) {
+  _CorreoElectronico = _CorreoElectronico;
+  _Contrasenia = "";
   nombre = _nombre;
-  ubicacion = nullptr;
+  ubicacion = ubicacion;
   ventas = new List();
   alquileres = new List();
 }

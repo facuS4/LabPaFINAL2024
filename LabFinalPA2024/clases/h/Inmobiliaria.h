@@ -21,7 +21,7 @@ class Inmobiliaria : public Usuario{
         ICollection * alquileres;
     public:
         Inmobiliaria();
-        Inmobiliaria(string, string, string);
+        Inmobiliaria(string, string, string, dtDireccion *);
         ~Inmobiliaria();
 
         string getNombre();

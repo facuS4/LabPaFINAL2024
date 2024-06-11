@@ -5,6 +5,8 @@ Administrador::Administrador() : Usuario() {}
 
 // Constructor with parameters (can inherit from Usuario's constructor)
 Administrador::Administrador(string email, string password) : Usuario(email, password){
+  email = email;
+  password = password;
 }
 
 // Destructor (assuming no custom logic needed)

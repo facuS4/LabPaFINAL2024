@@ -15,12 +15,16 @@ class Sistema : public ISistema{
         Sistema();
         static Sistema * instancia;
         ICollection * Departamentos;
-        ICollection * Usuarios;
+        ICollection * misUsuarios;
         Usuario * usuarioSesion;
 
 
     public:
         ~Sistema(); // destructor // ✅
+
+        void AltaInteresado(string nombre, string apellido, int edad, string email);
+
+        void Listarusuarios(); // ✅
 
         void altaUsuario(Usuario *);
 
@@ -32,7 +36,7 @@ class Sistema : public ISistema{
 
         static Sistema * getInstancia(); // devuelve el controlador Sistema (Singleton) // ✅
 
-        bool AltaInmobiliaria(string email, string nombre, dtDireccion dir);
+        void AltaInmobiliaria(string email, string nombre, dtDireccion *dir);
 
         void EliminarPropiedad(string codigo);
 

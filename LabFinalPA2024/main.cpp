@@ -17,7 +17,7 @@ int main(){
   Contrasenia = password;
 }*/
       //USUARIOS HARDCODEDEADOS//
-    Administrador * admin= new Administrador("root@r.com","123");
+    Usuario * admin= new Administrador("root@r.com","123");
     Inmobiliaria * imn1= new Inmobiliaria("sss.com","123", "los pepes");
     Interesado * int1= new Interesado("goof.com","123","pepe",20,"pepoide");
     Inmobiliaria * inm2= new Inmobiliaria("peps.com","", "oepes");
@@ -28,6 +28,7 @@ int main(){
     sis->altaUsuario(inm2);
     sis->altaUsuario(int2);
 
+    sis->Listarusuarios();
 
     while (sis->getUsuarioActual()==nullptr){
       cout << "Inicie sesion con su usuario" << endl << "Recuerde que no se puede crear usuarios"<< endl << endl << "Email: ";
@@ -47,26 +48,12 @@ int main(){
       system("clear");
     }
     cout << sis->getUsuarioActual()->getCorreoElectronico() << " Logeado " << endl << endl;
-
-    /*void Persona::listarMascotas() {
-    IIterator * it = this->mascotas->getIterator();
-    Animal * a;
-    cout << "## Listado de Mascotas ##" << endl;
-    while (it->hasCurrent()) {  
-        a = (Animal *) it->getCurrent();
-        cout << "Mascota: " << a->getNombre() << endl;
-        it->next();
-    }
-    delete it;
-}*/
     
-    cout << "Hello, World!" << endl;
-    return 0;
-
-    admin->~Administrador();
+    admin->~Usuario();
     imn1->~Inmobiliaria();
     int1->~Interesado();
     inm2->~Inmobiliaria();
     int2->~Interesado();
-
+    
+    return 0;
 }
