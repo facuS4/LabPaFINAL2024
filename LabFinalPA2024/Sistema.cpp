@@ -3,11 +3,31 @@
 Sistema::Sistema() {
     Departamentos = new List();
     misUsuarios = new List();
+    Edificios = new List();
     usuarioSesion = nullptr;
 }
 
 Sistema::~Sistema() {
 }
+
+void Sistema::AltaEdificio(string nombre, int pisos, int gastosComunes){
+
+    IIterator * it = Edificios->getIterator();
+    while(it->hasCurrent()){
+        Edificio * e = (Edificio *) it->getCurrent();
+        if(e->getNombre()==nombre){
+            cout << "El edificio ya existe"<<endl;
+            return;
+        }
+        it->next();
+    }
+    delete it;
+    Edificio * nuevo = new Edificio(nombre,pisos,gastosComunes);
+    Edificios->add(nuevo);
+    cout << "Edificio '" << nombre << "' dado de alta exitosamente." << endl;
+    return;
+}
+
 
 ICollection * Sistema::getUsuarios() {
     return this->misUsuarios;

@@ -7,6 +7,8 @@
 #include "clases/h/Administrador.h"
 #include "clases/h/Inmobiliaria.h"
 #include "clases/h/Interesado.h"
+#include "clases/h/Edificio.h"
+
 
 using namespace std;
 
@@ -16,13 +18,16 @@ class Sistema : public ISistema{
         static Sistema * instancia;
         ICollection * Departamentos;
         ICollection * misUsuarios;
+        ICollection * Edificios;
         Usuario * usuarioSesion;
 
 
     public:
         ~Sistema(); // destructor // ✅
 
-        void AltaInteresado(string email,string nombre, string apellido, int edad) ;
+        void AltaEdificio(string nombre, int pisos, int gastosComunes);
+
+        void AltaInteresado(string email,string nombre, string apellido, int edad);
 
         void Listarusuarios(); // ✅
 

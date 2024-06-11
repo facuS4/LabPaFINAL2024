@@ -32,6 +32,9 @@ class ISistema {
 
         virtual void AltaInteresado(string ,string , string , int ) =0;
 
+        virtual void AltaEdificio(string nombre, int pisos, int gastosComunes)=0;
+
+
         virtual void setUsuarioActual(Usuario *)=0;
 
         virtual void Listarusuarios()=0;

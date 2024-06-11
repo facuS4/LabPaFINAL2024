@@ -151,6 +151,25 @@ Contrasenia = password;
 
     // FIN DEL INICIO DE LA SESION
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// MENU PRINCIPAL
+
     Usuario *checker = dynamic_cast<Administrador *>(sis->getUsuarioActual());
     if (checker == nullptr)
     {
@@ -237,17 +256,6 @@ Contrasenia = password;
               cout << "nombre:" << endl;
               getline(cin, nombre);
 
-              //getline(cin, pais);
-              //cout << "ciudad:" << endl;
-
-              //getline(cin, ciudad);
-              //cout << "numero:" << endl;
-
-              //getline(cin, numero);
-              //cout << "calle:" << endl;
-
-              //getline(cin, calle);
-              //dir = new dtDireccion(pais, ciudad, numero, calle);
               sis->AltaInmobiliaria(email, nombre);
               break;
             }
@@ -297,7 +305,49 @@ Contrasenia = password;
             cout << "placeholder" << endl;
             break;
           case 4:
-            cout << "placeholder" << endl;
+            
+            while(true){
+
+
+              string nombre;
+              string pisos;
+              string gastosComunes;
+              cout << "nombre" << endl;
+
+              getline(cin, nombre);
+
+              cout << "pisos" << endl;
+
+
+              while (pisos.empty() || !isdigit(pisos[0])) {
+                      cout << "Ingrese la cantidad de pisos: ";
+                      getline(cin, pisos);
+                      if (pisos.empty() || !isdigit(pisos[0])) {
+                          cout << "No valido." << endl;
+                      }
+                  }
+
+              int pisosin = stoi(pisos);
+              cout << "gastos comunes" << endl;
+
+
+              while (gastosComunes.empty() || !isdigit(gastosComunes[0])) {
+                      cout << "Ingrese el valor: ";
+                      getline(cin, gastosComunes);
+                      if (gastosComunes.empty() || !isdigit(gastosComunes[0])) {
+                          cout << "No valido." << endl;
+                      }
+                  }
+
+              int gastosin = stoi(gastosComunes);
+
+              sis->AltaEdificio(nombre, pisosin, gastosin);
+
+              cout << nombre << " " << pisosin << " " << gastosin<<endl;
+
+              break;
+            }
+
             break;
           case 5:
             break;

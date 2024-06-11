@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class Edificio{
+class Edificio : public ICollectible{ 
     private:
         string nombre;
         int cantPisos;
