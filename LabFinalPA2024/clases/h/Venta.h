@@ -22,6 +22,7 @@ public:
   Venta(float); 
   ~Venta();
   void setPropiedad(Propiedad * pp);
+  Propiedad * getPropiedad();
 
   float getPrecioVenta();
   void setPrecioVenta(float);

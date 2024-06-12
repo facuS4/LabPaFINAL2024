@@ -11,6 +11,13 @@ Venta::Venta(float precio){
 // Destructor (assuming no custom logic needed)
 Venta::~Venta() = default;
 
+
+  //Propiedad * getPropiedad();
+
+Propiedad * Venta::getPropiedad(){
+  return this->p;
+}
+
 // Getter and Setter methods for precioVenta
 float Venta::getPrecioVenta() {
   return precioVenta;

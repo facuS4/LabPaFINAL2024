@@ -15,6 +15,17 @@ ISistema *sis = SistemaFactory::crearSistema();
 
 //FUNCIOOOOOOOOOOOOOOOOOOOOOONESSSSSSSSSSSSSSSSSSS
 
+void menudeprueba(){
+while(true){
+    string input="non";
+    cout<< endl<<"ingrese EXIT para salir" <<endl;
+    getline(cin,input);
+    if (input=="EXIT")
+      break;
+  }
+
+}
+
 bool emailcheck(std::string email) {
 
   if (email.length() < 3) {
@@ -35,6 +46,63 @@ bool emailcheck(std::string email) {
   }
 
   return at;
+}
+
+void obtenerReporteInmobiliaria(){
+
+  int cantcasas=0;
+  int cantaparta=0;
+  ICollection * duplicateChecker=new List();
+  menudeprueba();//1
+  for(IIterator * it=sis->getUsuarios()->getIterator();it->hasCurrent();it->next()){
+    Inmobiliaria * temporal = dynamic_cast<Inmobiliaria*>(it->getCurrent());
+    cantcasas=0;
+    cantaparta=0;
+    //menudeprueba();
+    if(temporal!=nullptr)
+    {
+      for (IIterator * ventas = temporal->getVentas()->getIterator(); it->hasCurrent() ; it->next())
+      {
+        Venta * v = (Venta *)ventas->getCurrent();
+        Propiedad * prop= v->getPropiedad();
+        duplicateChecker->add(prop);
+        Casa * c = (Casa *) prop;
+        if (c==nullptr){
+          cantaparta++;
+        }
+        else{
+          cantcasas++;
+        }
+      //menudeprueba();//2
+      }
+      for (IIterator * alquiler = temporal->getAlquileres()->getIterator(); it->hasCurrent(); it->next())
+      {
+        Alquiler * a = (Alquiler *)alquiler->getCurrent();
+        Propiedad * prop= a->getPropiedad();
+        if(!duplicateChecker->member(prop)){
+          Casa * c = (Casa *) prop;
+          if (c==nullptr){
+            cantaparta++;
+          }
+          else{
+            cantcasas++;
+          }
+        }
+        
+      }
+      //menudeprueba();//3
+      cout << "Nombre: "<< temporal->getNombre()<< endl << "Correo: "
+       << temporal->getCorreoElectronico() << endl<<"Ubicacion:" << temporal->getUbicacion()->getPais()
+       << " " << temporal->getUbicacion()->getCiudad() << temporal->getUbicacion()->getCalle() 
+       << temporal->getUbicacion()->getNumero() <<endl;
+      cout << "Casas: " << cantcasas << endl;
+      cout << "Apartamentos: " << cantaparta << endl;
+
+    }
+  }
+  delete duplicateChecker;
+  
+
 }
 
 //FIN DE LAS FUNCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOONES
@@ -403,7 +471,7 @@ int main()
             }
             break;
           case 3:
-            cout << "placeholder" << endl;
+            obtenerReporteInmobiliaria();
             break;
           case 4:
             
@@ -451,6 +519,20 @@ int main()
 
             break;
           case 5:
+            {
+              sis->listarDepartamentos();
+              string seldep;
+              cout << "Ingresar letra de dpto: "<<endl;
+              getline(cin,seldep);
+              Departamento * temp= sis->seleccionarDepartamento(seldep[0]);
+              if (temp==nullptr)
+                break;
+              cout << "Ingresar codigo de Zona: "<<endl;
+              getline(cin,seldep);
+              Zona * tempzona = sis->SelecionarZona(seldep,temp);
+              if (tempzona==nullptr)
+                break;
+            }
             break;
           case 6:
             cout << "placeholder" << endl;
@@ -462,7 +544,6 @@ int main()
             cout << "placeholder" << endl;
             break;
           case 9:
-            cout << "WORK IN PROGRESS" << endl;
             {
             sis->listarDepartamentos();
             string seldep;

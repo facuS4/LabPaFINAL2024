@@ -22,7 +22,7 @@ Inmobiliaria::~Inmobiliaria() {
 
 // Getter and Setter methods for nombre, apellido, edad, ubicacion, ventas
 string Inmobiliaria::getNombre() {
-  return nombre;
+  return this->nombre;
 }
 
 void Inmobiliaria::setNombre(string nombreUsuario) {

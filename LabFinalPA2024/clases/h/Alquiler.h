@@ -23,6 +23,8 @@ class Alquiler : public ICollectible{
         float getPrecioAlquiler();
         void setPrecioAlquiler(float);
         void setPropiedad(Propiedad * pp);
+        Propiedad * getPropiedad();
+
 
         void desvincualarAlquiler(string codigo);
        

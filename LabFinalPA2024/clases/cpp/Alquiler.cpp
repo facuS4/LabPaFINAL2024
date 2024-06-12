@@ -24,7 +24,12 @@ void Alquiler::setPropiedad(Propiedad * pp){
   this->p=pp;
 
 }
+  //Propiedad * getPropiedad();
 
+Propiedad * Alquiler::getPropiedad(){
+
+  return this->p;
+}
 
 
 //ESTO ES UN DUMMY
