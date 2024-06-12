@@ -94,7 +94,7 @@ int main()
   Casa * casita3 = new Casa("itscodigocasa322", 2, 2, 2, true, ladir, x, x*2, x);
   Apartamento * ap1 = new Apartamento("itscodapartamento",2,2,2,true,ladir,2,2,true,ed1);
   Apartamento * ap2 = new Apartamento("codloco",2,2,2,true,ladir,2,2,true,ed2);
-  Apartamento * ap3 = new Apartamento("codigoouyes",2,2,2,true,ladir,2,2,true,ed3);
+  Apartamento * ap3 = new Apartamento("codigoouyes",2,2,2,true,ladir,2,2,false,ed3);
   Conversacion * convo=new Conversacion();
   Mensaje * mensaje=new Mensaje(lafecha,"hola como andas");
   convo->AgregarMensaje(mensaje);
@@ -462,7 +462,25 @@ int main()
             cout << "placeholder" << endl;
             break;
           case 9:
-            cout << "placeholder" << endl;
+            cout << "WORK IN PROGRESS" << endl;
+            {
+            sis->listarDepartamentos();
+            string seldep;
+            cout << "Ingresar letra de dpto: "<<endl;
+            getline(cin,seldep);
+            Departamento * temp= sis->seleccionarDepartamento(seldep[0]);
+            if (temp==nullptr)
+              break;
+            cout << "Ingresar codigo de Zona: "<<endl;
+            getline(cin,seldep);
+            Zona * tempzona = sis->SelecionarZona(seldep,temp);
+            if (tempzona==nullptr)
+              break;
+            cout << "Ingresar codigo de propiedad: "<<endl;
+            getline(cin,seldep);
+            sis->mostrarPropiedades(seldep,tempzona);
+            }
+
             break;
           default:
             cout << "placeholder" << endl;

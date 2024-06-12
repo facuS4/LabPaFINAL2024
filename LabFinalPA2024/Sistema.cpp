@@ -10,6 +10,26 @@ Sistema::Sistema() {
 Sistema::~Sistema() {
 }
 
+void Sistema::mostrarPropiedades(string codigo, Zona * zona){
+
+    IIterator * it;
+    for(it = zona->getPropiedades()->getIterator();it->hasCurrent();it->next()){
+        Propiedad * p = (Propiedad *) it->getCurrent();
+        if (p!=nullptr && p->getCodigo()==codigo){
+            cout << "Codigo: " << p->getCodigo() << endl;
+            cout << "Direccion: " << p->getDireccion()->getCalle() << " " <<p->getDireccion()->getCiudad()<< " " <<p->getDireccion()->getNumero() << " " <<p->getDireccion()->getPais() << endl;
+            cout << "Dormitorios: " << p->getDormitorios() << endl;
+            cout << "Ambientes: " << p->getAmbientes() << endl;
+            cout << "Banios: " << p->getBanios() << endl;
+            cout << "Garage: " << (p->getGarage() ? "Si" : "No") << endl;
+            cout << "Superficie Edificada: " << p->getMedif() << " m2" << endl;
+            cout << "Superficie Total: " << p->getMetrosTotales() << " m2" << endl;
+        }
+
+    }
+
+}
+
 void Sistema::AltaEdificio(string nombre, int pisos, int gastosComunes){
 
     IIterator * it = Edificios->getIterator();
@@ -145,9 +165,11 @@ Departamento * Sistema::seleccionarDepartamento(char letraDpto) {
     IIterator * it;
     for (it = Departamentos->getIterator(); it->hasCurrent(); it->next()){
         Departamento * d = (Departamento *) it->getCurrent();
-        if (d->getLetradpto() == letraDpto){
-            cout << "Nombre: " << d->getNombre() << endl;
-            cout << "Letra: " << d->getLetradpto() << endl;
+        if (d!=nullptr && d->getLetradpto() == letraDpto){
+            for(IIterator * it3 = d->getZonas()->getIterator(); it3->hasCurrent(); it3->next()){
+            Zona * z = (Zona *) it3->getCurrent();
+            cout << "Codigo: " << z->getCodigo() << endl;
+            }
             return d;
         }
     }
@@ -171,7 +193,27 @@ void Sistema::CrearMensaje(string mensaje) {
 }
 
 
-void Sistema::SelecionarZona(string codigo) {
+Zona * Sistema::SelecionarZona(string codigo, Departamento * depto) {
+
+    IIterator * it;
+    IIterator * it3;
+    for(it = depto->getZonas()->getIterator();it->hasCurrent();it->next())
+    {
+        Zona * z = (Zona *) it->getCurrent();
+        if(z!=nullptr && z->getCodigo()==codigo){
+            for(it3 = z->getPropiedades()->getIterator(); it3->hasCurrent(); it3->next()){
+            Propiedad * p = (Propiedad *) it3->getCurrent();
+            cout << "Codigo: " << p->getCodigo() << endl;
+            
+            }
+            delete it;
+            delete it3;
+            return z;
+        }
+    }
+    return nullptr;
+}
+/*void Sistema::SelecionarZona(string codigo) {
     IIterator * it;
     IIterator * it2;
     IIterator * it3;
@@ -194,7 +236,7 @@ void Sistema::SelecionarZona(string codigo) {
         }
             
     }
-}
+}*/
 
 bool Sistema::boolSeleccionarZona(string codigo) {
     cout << codigo;
@@ -285,5 +327,25 @@ void Sistema::AltaInteresado(string email,string nombre, string apellido, int ed
     cout << color_green << "El Estudiante " << _nombre << " fue agregado correctamente" << color_reset << endl;
 };  
     */
+
+
+
+   /*Zona * Sistema::SelecionarZona(string codigo, Departamento * depto) {
+
+    IIterator * it;
+    IIterator * it3;
+    it = depto->getZonas()->getIterator();
+    for(it;it->hasCurrent();it->next())
+    {
+        Zona * z = (Zona *) it->getCurrent();
+        if(z!=nullptr && z->getCodigo()==codigo){
+            for(it3 = z->getPropiedades()->getIterator(); it3->hasCurrent(); it3->next()){
+            Propiedad * p = (Propiedad *) it3->getCurrent();
+            cout << "Codigo: " << p->getCodigo() << endl;
+            return z;
+            }
+        }
+    }
+}*/
 
 

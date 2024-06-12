@@ -20,6 +20,7 @@
 
 
 
+
 using namespace std;
 
 class Sistema : public ISistema{
@@ -38,6 +39,8 @@ class Sistema : public ISistema{
         void setDepartamento(Departamento * u);
 
         ICollection * getDepartamento();
+        
+        void mostrarPropiedades(string, Zona *);
 
         void AltaEdificio(string nombre, int pisos, int gastosComunes);
 
@@ -75,7 +78,7 @@ class Sistema : public ISistema{
 
         void CrearMensaje(string mensaje);
 
-        void SelecionarZona(string codigo);
+        Zona * SelecionarZona(string codigo,Departamento * depto);
 
         bool boolSeleccionarZona(string codigo);
 

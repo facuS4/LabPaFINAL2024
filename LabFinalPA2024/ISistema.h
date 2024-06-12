@@ -19,6 +19,7 @@
 #include "ICollection/Integer.h"
 #include "ICollection/String.h"
 #include "clases/h/Usuario.h"
+#include "clases/h/Zona.h"
 
 #include "./clases/h/Propiedad.h"
 #include "./clases/h/Departamento.h"
@@ -31,6 +32,8 @@ class ISistema {
         virtual ~ISistema(); // destructor
 
         virtual void AltaInteresado(string ,string , string , int ) =0;
+
+        virtual void mostrarPropiedades(string, Zona *)=0;
 
         virtual void AltaEdificio(string nombre, int pisos, int gastosComunes)=0;
 
@@ -68,13 +71,13 @@ class ISistema {
 
         virtual void CrearMensaje(string mensaje) = 0;
 
-        virtual void SelecionarZona(string codigo) = 0;
+        virtual Zona * SelecionarZona(string codigo,Departamento * depto)=0;
 
         virtual bool boolSeleccionarZona(string codigo) = 0;
 
-         virtual void ListarEdificio() = 0;
+        virtual void ListarEdificio() = 0;
 
-         virtual void altaApartamento(int ambientes) = 0;
+        virtual void altaApartamento(int ambientes) = 0;
 
         virtual int altaApartamento(int, int, int, bool, dtDireccion, int) = 0;
 
