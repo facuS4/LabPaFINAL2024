@@ -31,8 +31,8 @@ class Inmobiliaria : public Usuario{
         ICollection * getAlquileres();
 
         void setUbicacion(dtDireccion *);
-        void setVentas(ICollection *);
-        void setAlquileres(ICollection *);
+        void setVentas(ICollectible *);
+        void setAlquileres(ICollectible *);
 
         void setNombre(string);
 

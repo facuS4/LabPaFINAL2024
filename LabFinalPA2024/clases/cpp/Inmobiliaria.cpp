@@ -37,12 +37,12 @@ void Inmobiliaria::setUbicacion(dtDireccion* nuevaUbicacion) {
   ubicacion = nuevaUbicacion; // Set the new ubicacion
 }
 
-void Inmobiliaria::setVentas(ICollection* nuevasVentas) {
-  ventas = nuevasVentas; // Set the new ventas
+void Inmobiliaria::setVentas(ICollectible* nuevasVentas) {
+  ventas->add(nuevasVentas); // Set the new ventas
 }
 
-void Inmobiliaria::setAlquileres(ICollection* nuevosAlquileres) {
-  alquileres = nuevosAlquileres; // Set the new alquileres
+void Inmobiliaria::setAlquileres(ICollectible* nuevosAlquileres) {
+  alquileres->add(nuevosAlquileres); // Set the new alquileres
 }
 
 ICollection* Inmobiliaria::getVentas() {

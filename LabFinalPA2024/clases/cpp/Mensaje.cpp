@@ -1,16 +1,16 @@
 #include "../h/Mensaje.h"
 
 // Default constructor
-Mensaje::Mensaje() : fecha(dtFecha()), texto("") {}
+Mensaje::Mensaje() : fecha(nullptr), texto("") {}
 
 // Constructor with parameters
-Mensaje::Mensaje(dtFecha fecha, string texto) : fecha(fecha), texto(texto) {}
+Mensaje::Mensaje(dtFecha * fecha, string texto) : fecha(fecha), texto(texto) {}
 
 // Destructor (assuming no custom logic needed)
 Mensaje::~Mensaje() = default;
 
 // Getter methods
-dtFecha Mensaje::getFecha() {
+dtFecha * Mensaje::getFecha() {
   return fecha;
 }
 
@@ -19,7 +19,7 @@ string Mensaje::getTexto() {
 }
 
 // Setter methods
-void Mensaje::setFecha(dtFecha nuevaFecha) {
+void Mensaje::setFecha(dtFecha * nuevaFecha) {
   fecha = nuevaFecha;
 }
 

@@ -9,16 +9,15 @@
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/interfaces/ICollectible.h"
 
-
 using namespace std;
 
 class Apartamento : public Propiedad{
     private:
         bool disponible;
-        Edificio edificio;
+        Edificio * edificio;
     public:
         Apartamento();
-        Apartamento(string, int, int, int, bool, dtDireccion* , float, float, bool);
+        Apartamento(string, int, int, int, bool, dtDireccion* , float, float, bool, Edificio *);
         ~Apartamento();
 
         float getMetrosTotales();

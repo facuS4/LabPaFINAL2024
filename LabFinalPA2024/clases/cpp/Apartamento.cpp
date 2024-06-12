@@ -1,12 +1,12 @@
 #include "../h/Apartamento.h"
 
 // Default constructor
-Apartamento::Apartamento() : Propiedad(), disponible(true), edificio(Edificio()) {}
+Apartamento::Apartamento() : Propiedad(), disponible(true), edificio(nullptr) {}
 
 // Constructor with parameters
-Apartamento::Apartamento(string codigo, int dormitorios, int ambientes, int banios, bool garage,dtDireccion * direccion, float medif, float metrosTotales, bool disponible): Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales){
+Apartamento::Apartamento(string codigo, int dormitorios, int ambientes, int banios, bool garage,dtDireccion * direccion, float medif, float metrosTotales, bool disponible, Edificio * edificio): Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales){
   this->disponible = disponible;
-  this->edificio = Edificio();
+  this->edificio = edificio;
 }
 
 // Destructor (assuming no custom logic needed)

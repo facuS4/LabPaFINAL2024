@@ -2,7 +2,7 @@
 #include "../h/Alquiler.h"
 
 // Default constructor
-Alquiler::Alquiler() : precioAlquiler(0.0f) {}
+Alquiler::Alquiler() : precioAlquiler(0.0f), p(nullptr) {}
 
 // Constructor with parameter (assuming price is passed)
 Alquiler::Alquiler(float precio) : precioAlquiler(precio) {}
@@ -18,6 +18,13 @@ float Alquiler::getPrecioAlquiler() {
 void Alquiler::setPrecioAlquiler(float nuevoPrecio) {
   precioAlquiler = nuevoPrecio;
 }
+
+void Alquiler::setPropiedad(Propiedad * pp){
+
+  this->p=pp;
+
+}
+
 
 
 //ESTO ES UN DUMMY

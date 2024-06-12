@@ -10,6 +10,14 @@
 #include "clases/h/Edificio.h"
 #include "clases/h/Casa.h"
 #include "clases/h/Apartamento.h"
+#include "clases/h/Propiedad.h"
+#include "clases/h/Mensaje.h"
+#include "clases/h/Conversacion.h"
+#include "clases/h/Alquiler.h"
+#include "clases/h/Venta.h"
+
+
+
 
 
 using namespace std;

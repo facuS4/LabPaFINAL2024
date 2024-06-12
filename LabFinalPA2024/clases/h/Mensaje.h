@@ -12,17 +12,17 @@ class dtFecha;
 
 using namespace std;
 
-class Mensaje{
+class Mensaje: public ICollectible{
     private:
-        dtFecha fecha;
+        dtFecha * fecha;
         string texto;
     public:
         Mensaje();
-        Mensaje(dtFecha, string);
+        Mensaje(dtFecha *, string);
         ~Mensaje();
-        dtFecha getFecha();
+        dtFecha* getFecha();
         string getTexto();
-        void setFecha(dtFecha);
+        void setFecha(dtFecha *);
         void setTexto(string);
 };
 

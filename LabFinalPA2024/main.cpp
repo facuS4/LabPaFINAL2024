@@ -5,10 +5,15 @@
 #include "SistemaFactory.h"
 #include "Sistema.h"
 #include "ISistema.h"
+
+// FIN DE LOS INCLUUUUUUUUUUUUUDES
+
 class Inmobiliaria;
 using namespace std;
 
 ISistema *sis = SistemaFactory::crearSistema();
+
+//FUNCIOOOOOOOOOOOOOOOOOOOOOONESSSSSSSSSSSSSSSSSSS
 
 bool emailcheck(std::string email) {
 
@@ -32,30 +37,70 @@ bool emailcheck(std::string email) {
   return at;
 }
 
+//FIN DE LAS FUNCIOOOOOOOOOOOOOOOOOOOOOOOOOOOOONES
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIN
 int main()
 {
+
+
 
   bool in = true;
   int tipoDeUsuario = -1;
 
 
-  dtDireccion *ladir;
-  float x= 10;
 
+
+// PARTE DE HARCODEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADO
+  dtDireccion *ladir;
+
+  float x= 10;
+  //LA FECHA//
+  dtFecha * lafecha = new dtFecha(1,2,3);
   //LA DIRRRR///
   ladir = new dtDireccion("Bosnia", "Mintx", "0032", "Boris Salvatore");
   //la diiiiiirrrr////
 
+  // EDIFICIOS HARDCODEADOS//
+
+  Edificio * ed1 = new Edificio("itsedificio1",5,x);
+  Edificio * ed2 = new Edificio("itsedificio2",5,x);
+  Edificio * ed3 = new Edificio("itsedificio3",5,x);
 
   // PROPIEDADES HARDCODEADAS//
 
+//(string codigo, int dormitorios, int ambientes, int banios, bool garage,dtDireccion * direccion, float medif, float metrosTotales, bool disponible)
+  Casa * casita1 = new Casa("itscodigocasa112", 2, 2, 2, true, ladir, x, x*2, x);
+  Casa * casita2 = new Casa("itscodigocasa233", 2, 2, 2, true, ladir, x, x*2, x);
+  Casa * casita3 = new Casa("itscodigocasa322", 2, 2, 2, true, ladir, x, x*2, x);
+  Apartamento * ap1 = new Apartamento("itscodapartamento",2,2,2,true,ladir,2,2,true,ed1);
+  Apartamento * ap2 = new Apartamento("codloco",2,2,2,true,ladir,2,2,true,ed2);
+  Apartamento * ap3 = new Apartamento("codigoouyes",2,2,2,true,ladir,2,2,true,ed3);
+  Conversacion * convo=new Conversacion();
+  Mensaje * mensaje=new Mensaje(lafecha,"hola como andas");
+  convo->AgregarMensaje(mensaje);
+  casita1->setConvo(convo);
+  ap2->setConvo(convo);
 
-  Casa * casita1 = new Casa("casa1", 2, 2, 2, true, ladir, x, x*2, x);
-  Casa * casita2 = new Casa("casa2", 2, 2, 2, true, ladir, x, x*2, x);
-  Casa * casita3 = new Casa("casa3", 2, 2, 2, true, ladir, x, x*2, x);
-
-//        Casa(string, int, int, int, bool, dtDireccion , float, float, float);
 
   // ZONAS HARDCODEADAS //
   Zona *ZonaSurSanJose = new Zona("sur1","SanJoseSur");
@@ -73,9 +118,11 @@ int main()
   //ANIADIRLOS//
 
   ZonaSurColonia->setPropiedades(casita1);
-  ZonaNorteSanJose->setPropiedades(casita2);
+  ZonaSurSanJose->setPropiedades(casita2);
   ZonaNorteMontevideo->setPropiedades(casita3);
-
+  ZonaSurMontevideo->setPropiedades(ap1);
+  ZonaSurSanJose->setPropiedades(ap2);
+  ZonaNorteColonia->setPropiedades(ap3);
 
   SanJose->setZona(ZonaNorteSanJose);
   SanJose->setZona(ZonaSurSanJose);
@@ -100,6 +147,28 @@ int main()
   sis->altaUsuario(int1);
   sis->altaUsuario(inm2);
   sis->altaUsuario(int2);
+  //ventasss
+
+  Venta * vent=new Venta(2000);
+  Alquiler * alqui=new Alquiler(20);
+  alqui->setPropiedad(casita1);
+  vent->setPropiedad(ap3);
+  imn1->setAlquileres(alqui);
+  inm2->setVentas(vent);
+
+// FIN DEL HARDCODEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADO
+//
+//
+
+
+
+
+
+
+
+
+//
+//
   // ENTRAR AL SISTEMA
   while (in)
   {
@@ -437,3 +506,5 @@ int main()
 
   return 0;
 }
+
+//FINAL DEL MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIN

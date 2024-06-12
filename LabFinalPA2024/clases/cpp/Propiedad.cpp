@@ -1,7 +1,7 @@
 #include "../h/Propiedad.h"
 
 // Default constructor
-Propiedad::Propiedad() : codigo(""), dormitorios(0), ambientes(0), banios(0), garage(false), direccion(nullptr), medif(0.0f), MetrosTotales(0.0f) {}
+Propiedad::Propiedad() : codigo(""), dormitorios(0), ambientes(0), banios(0), garage(false), direccion(nullptr), medif(0.0f), MetrosTotales(0.0f),Conversaciones(new List()) {}
 
 // Constructor with parameters
 Propiedad::Propiedad(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion *direccion, float medif, float metrosTotales){
@@ -13,12 +13,14 @@ Propiedad::Propiedad(string codigo, int dormitorios, int ambientes, int banios, 
   this->direccion = direccion;
   this->medif = medif;
   this->MetrosTotales = metrosTotales;
+  this->Conversaciones=new List();
 }
 
-// Destructor (assuming no custom logic needed)
-Propiedad::~Propiedad(){};
+Propiedad::~Propiedad() {}
 
-// Getter and Setter methods
+// Destructor
+
+// Getter and Setter
 string Propiedad::getCodigo() {
   return codigo;
 }
@@ -83,4 +85,9 @@ void Propiedad::setMetrosTotales(float metrosPropiedad) {
   MetrosTotales = metrosPropiedad;
 }
 
-// Implementations for pure virtual methods are left empty as they require specific logic in derived classes
+void Propiedad::setConvo(Conversacion * c){
+
+  Conversaciones->add(c);
+
+}
+

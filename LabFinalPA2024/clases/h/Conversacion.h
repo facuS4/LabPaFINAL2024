@@ -5,20 +5,21 @@
 #include "Usuario.h"
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/interfaces/ICollectible.h"
+#include "../h/Mensaje.h"
 
 class Usuario;
 
 using namespace std;
 
-class Conversacion{
+class Conversacion:public ICollectible{
     private:
         ICollection * mensajes;
-        ICollection * inmobiliarias;
+        //ICollection * inmobiliarias;
     public:
         Conversacion();
         ~Conversacion();
         void eliminarVinculosConversacion();
-        void AgregarMensaje(string);
+        void AgregarMensaje(Mensaje *);
         void CrearMensaje(string, Usuario * u);
 };
 

@@ -1,10 +1,13 @@
 #ifndef PROPIEDADES_H
 #define PROPIEDADES_H
 
+class Venta;
+class Alquiler;
 #include <iostream>
 #include "Usuario.h"
 #include "Venta.h"
 #include "Alquiler.h"
+#include "Conversacion.h"
 #include "../datatypes/h/dtDireccion.h"
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/interfaces/ICollectible.h"
@@ -24,11 +27,13 @@ class Propiedad : public ICollectible{
         dtDireccion* direccion;
         float medif;
         float MetrosTotales;
+        ICollection * Conversaciones;
     public:
         Propiedad();
         Propiedad(string, int, int, int, bool, dtDireccion*, float, float);
-        virtual ~Propiedad();
+        virtual ~Propiedad()=0;
 
+        void setConvo(Conversacion *);
         string getCodigo();
         void setCodigo(string);
 

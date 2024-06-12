@@ -1,12 +1,12 @@
 #include "../h/Conversacion.h"
 
-// Default constructor
-Conversacion::Conversacion() : mensajes(new List()), inmobiliarias(new List()) {}
+// Default
+//Conversacion::Conversacion() : mensajes(new List()), inmobiliarias(new List()) {}
+Conversacion::Conversacion() : mensajes(new List()){}
 
-// Destructor (deallocating dynamic memory)
 Conversacion::~Conversacion() {
   delete mensajes;
-  delete inmobiliarias;
+ // delete inmobiliarias;
 }
 
 // Removes links to other entities
@@ -16,8 +16,8 @@ void Conversacion::eliminarVinculosConversacion() {
 }
 
 // Adds a message to the conversation
-void Conversacion::AgregarMensaje(string mensaje) {
-    cout << mensaje;
+void Conversacion::AgregarMensaje(Mensaje * mensaje) {
+    mensajes->add(mensaje);
 
 }
 

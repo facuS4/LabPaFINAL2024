@@ -1,12 +1,12 @@
 #include "../h/Venta.h"
 
 // Default constructor
-Venta::Venta() : precioVenta(0.0f) {}
+Venta::Venta() : precioVenta(0.0f), p(nullptr) {}
 
 // Constructor with parameter
 Venta::Venta(float precio){
   precioVenta = precio;
-}
+} 
 
 // Destructor (assuming no custom logic needed)
 Venta::~Venta() = default;
@@ -14,6 +14,10 @@ Venta::~Venta() = default;
 // Getter and Setter methods for precioVenta
 float Venta::getPrecioVenta() {
   return precioVenta;
+}
+void Venta::setPropiedad(Propiedad * pp){
+
+  this->p=pp;
 }
 
 void Venta::setPrecioVenta(float nuevoPrecio) {
