@@ -2,7 +2,11 @@
 
 // Default
 //Conversacion::Conversacion() : mensajes(new List()), inmobiliarias(new List()) {}
-Conversacion::Conversacion() : mensajes(new List()){}
+Conversacion::Conversacion(){
+    mensajes = new List();
+    inmobiliaria = nullptr;
+    interesado = nullptr;
+}
 
 Conversacion::~Conversacion() {
   delete mensajes;

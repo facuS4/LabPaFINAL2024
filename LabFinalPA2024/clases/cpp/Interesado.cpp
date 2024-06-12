@@ -4,14 +4,12 @@ Interesado::Interesado() : Usuario() {
   nombre = "";
   edad = 0;
   apellido = "";
-  conversaciones = new List();
 }
 
 Interesado::Interesado(string email, string password, string nombreUsuario, int edadUsuario, string apellidoUsuario) : Usuario(email, password) {
   nombre = nombreUsuario;
   edad = edadUsuario;
   apellido = apellidoUsuario;
-  conversaciones = new List();
 }
 
 // Destructor (assuming no custom logic needed)

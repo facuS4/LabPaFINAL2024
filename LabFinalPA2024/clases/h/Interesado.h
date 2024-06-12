@@ -14,7 +14,6 @@ class Interesado : public Usuario{
         string nombre;
         int edad;
         string apellido;
-        ICollection * conversaciones;
     public:
         Interesado();
 

@@ -14,6 +14,8 @@ using namespace std;
 class Conversacion:public ICollectible{
     private:
         ICollection * mensajes;
+        Interesado * interesado;
+        Inmobiliaria * inmobiliaria;
         //ICollection * inmobiliarias;
     public:
         Conversacion();
@@ -21,6 +23,15 @@ class Conversacion:public ICollectible{
         void eliminarVinculosConversacion();
         void AgregarMensaje(Mensaje *);
         void CrearMensaje(string, Usuario * u);
+
+        ICollection * getMensajes();
+        void setMensajes(ICollection *);
+
+        Interesado * getInteresado();
+        void setInteresado(Interesado *);
+
+        Inmobiliaria * getInmobiliaria();
+        void setInmobiliaria(Inmobiliaria *);
 };
 
 
