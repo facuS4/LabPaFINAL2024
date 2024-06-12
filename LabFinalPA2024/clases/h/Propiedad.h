@@ -21,12 +21,12 @@ class Propiedad : public ICollectible{
         int ambientes;
         int banios;
         bool garage;
-        dtDireccion direccion;
+        dtDireccion* direccion;
         float medif;
         float MetrosTotales;
     public:
         Propiedad();
-        Propiedad(string, int, int, int, bool, dtDireccion, float, float);
+        Propiedad(string, int, int, int, bool, dtDireccion*, float, float);
         virtual ~Propiedad();
 
         string getCodigo();
@@ -44,8 +44,8 @@ class Propiedad : public ICollectible{
         bool getGarage();
         void setGarage(bool);
 
-        dtDireccion getDireccion();
-        void setDireccion(dtDireccion);
+        dtDireccion* getDireccion();
+        void setDireccion(dtDireccion*);
 
         float getMedif();
         void setMedif(float);
@@ -58,9 +58,9 @@ class Propiedad : public ICollectible{
 
         virtual void CrearMensaje(string, Usuario * u)= 0;
 
-        virtual void ListarPropiedadesEdifico()= 0;
-        virtual void Vincular(Venta *v)= 0;
-        virtual void Vincular(Alquiler *a)= 0;
+        virtual void ListarPropiedadesEdificio()= 0;
+        virtual void VincularV(Venta *v)= 0;
+        virtual void VincularA(Alquiler *a)= 0;
 
 };
 

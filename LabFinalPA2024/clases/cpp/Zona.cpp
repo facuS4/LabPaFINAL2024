@@ -32,8 +32,8 @@ void Zona::setCodigo(string codigoZona) {
   codigo = codigoZona;
 }
 
-void Zona::setPropiedades(ICollection * propiedades) {
-  Propiedades = propiedades;
+void Zona::setPropiedades(ICollectible * propiedades) {
+  this->Propiedades->add(propiedades);
 }
 
 ICollection * Zona::getPropiedades() {

@@ -15,7 +15,7 @@ class Casa : public Propiedad{
         float metrosVerdes;
     public:
         Casa();
-        Casa(string, int, int, int, bool, dtDireccion , float, float, float);
+        Casa(string, int, int, int, bool, dtDireccion *, float, float, float);
         ~Casa();
 
         float getMetrosVerdes();
@@ -27,8 +27,8 @@ class Casa : public Propiedad{
         void CrearMensaje(string, Usuario* u);
 
         void ListarPropiedadesEdificio();
-        void Vincular(Venta *v);
-        void Vincular(Alquiler * a);
+        void VincularV(Venta *v);
+        void VincularA(Alquiler * a);
 
 };
 

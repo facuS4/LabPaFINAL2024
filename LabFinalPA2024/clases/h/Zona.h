@@ -32,7 +32,7 @@ class Zona : public ICollectible{
         void setNombre(string);
 
         ICollection * getPropiedades();
-        void setPropiedades(ICollection *);
+        void setPropiedades(ICollectible *);
 
         void EliminarPropiedad(string codigo);
         void SeleccionarZona(string codigo);

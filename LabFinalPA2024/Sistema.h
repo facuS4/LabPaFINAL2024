@@ -8,6 +8,8 @@
 #include "clases/h/Inmobiliaria.h"
 #include "clases/h/Interesado.h"
 #include "clases/h/Edificio.h"
+#include "clases/h/Casa.h"
+#include "clases/h/Apartamento.h"
 
 
 using namespace std;
@@ -24,6 +26,10 @@ class Sistema : public ISistema{
 
     public:
         ~Sistema(); // destructor // ✅
+
+        void setDepartamento(Departamento * u);
+
+        ICollection * getDepartamento();
 
         void AltaEdificio(string nombre, int pisos, int gastosComunes);
 

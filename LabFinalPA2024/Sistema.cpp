@@ -37,6 +37,15 @@ void Sistema::setUsuarioActual(Usuario * u){
     this->usuarioSesion=u;
 }
 
+ICollection * Sistema::getDepartamento(){
+    return this->Departamentos;
+
+}
+
+void Sistema::setDepartamento(Departamento * u){
+    this->getDepartamento()->add(u);
+}
+
 void Sistema::Listarusuarios() {
     IIterator * it;
     for (it = misUsuarios->getIterator(); it->hasCurrent(); it->next()) {

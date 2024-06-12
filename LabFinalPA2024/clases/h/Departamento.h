@@ -19,7 +19,8 @@ class Departamento : public ICollectible{
     public:
         Departamento();
         Departamento(char, string);
-        ~Departamento();
+        ~Departamento();    
+        void setZona(Zona *z);
 
         char getLetradpto();
         void setLetradpto(char);

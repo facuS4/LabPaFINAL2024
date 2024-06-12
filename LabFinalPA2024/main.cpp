@@ -38,10 +38,25 @@ int main()
 
   bool in = true;
   int tipoDeUsuario = -1;
-  /*Usuario::Usuario(string email, string password){
-CorreoElectronico = email;
-Contrasenia = password;
-}*/
+
+
+  dtDireccion *ladir;
+  float x= 10;
+
+  //LA DIRRRR///
+  ladir = new dtDireccion("Bosnia", "Mintx", "0032", "Boris Salvatore");
+  //la diiiiiirrrr////
+
+
+  // PROPIEDADES HARDCODEADAS//
+
+
+  Casa * casita1 = new Casa("casa1", 2, 2, 2, true, ladir, x, x*2, x);
+  Casa * casita2 = new Casa("casa2", 2, 2, 2, true, ladir, x, x*2, x);
+  Casa * casita3 = new Casa("casa3", 2, 2, 2, true, ladir, x, x*2, x);
+
+//        Casa(string, int, int, int, bool, dtDireccion , float, float, float);
+
   // ZONAS HARDCODEADAS //
   Zona *ZonaSurSanJose = new Zona("sur1","SanJoseSur");
   Zona *ZonaNorteSanJose = new Zona("Norte1","SanJoseNorte");
@@ -55,9 +70,26 @@ Contrasenia = password;
   Departamento *Colonia = new Departamento('B', "Colonia");
   Departamento *Montevideo = new Departamento('C', "Montevideo");
 
+  //ANIADIRLOS//
+
+  ZonaSurColonia->setPropiedades(casita1);
+  ZonaNorteSanJose->setPropiedades(casita2);
+  ZonaNorteMontevideo->setPropiedades(casita3);
+
+
+  SanJose->setZona(ZonaNorteSanJose);
+  SanJose->setZona(ZonaSurSanJose);
+  Colonia->setZona(ZonaSurColonia);
+  Colonia->setZona(ZonaNorteColonia);
+  Montevideo->setZona(ZonaNorteMontevideo);
+  Montevideo->setZona(ZonaSurMontevideo);
+
+  sis->setDepartamento(SanJose);
+  sis->setDepartamento(Colonia);
+  sis->setDepartamento(Montevideo);
+
   // USUARIOS HARDCODEDEADOS//
-  dtDireccion *ladir;
-  ladir = new dtDireccion("Bosnia", "Mintx", "0032", "Boris Salvatore");
+  
   Usuario *admin = new Administrador("a@a", "123");
   Inmobiliaria *imn1 = new Inmobiliaria("go@go", "123", "los pepes", ladir);
   Interesado *int1 = new Interesado("pedro@pedro", "123", "pepe", 20, "pepoide");

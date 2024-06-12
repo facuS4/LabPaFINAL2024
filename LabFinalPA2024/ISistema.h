@@ -34,6 +34,9 @@ class ISistema {
 
         virtual void AltaEdificio(string nombre, int pisos, int gastosComunes)=0;
 
+        virtual void setDepartamento(Departamento * u)=0;
+
+        virtual ICollection * getDepartamento()=0;
 
         virtual void setUsuarioActual(Usuario *)=0;
 

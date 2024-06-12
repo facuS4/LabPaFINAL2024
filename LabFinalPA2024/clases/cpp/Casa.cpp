@@ -4,7 +4,7 @@
 Casa::Casa() : Propiedad(), metrosVerdes(0.0f) {}
 
 // Constructor with parameters
-Casa::Casa(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion direccion, float medif, float metrosTotales, float metrosVerdes) : Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales){
+Casa::Casa(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion * direccion, float medif, float metrosTotales, float metrosVerdes) : Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales){
   this->metrosVerdes = metrosVerdes;
 }
 
@@ -14,6 +14,12 @@ Casa::~Casa(){};
 // Getter and Setter for terreno (adjusted name for clarity)
 float Casa::getMetrosVerdes() {
   return metrosVerdes;
+
+}
+
+void Casa::setMetrosVerdes(float metrosverdes){
+
+  this->metrosVerdes=metrosverdes;
 }
 
 
@@ -21,7 +27,10 @@ float Casa::getMetrosVerdes() {
 
 // Override to return an empty set since Casa isn't an Edificio
 void Casa::ListarPropiedadesEdificio(){
+  cout << "placeholder";
 }
+//        virtual void ListarPropiedadesEdifico()= 0;
+
 
 // Implementations for Casa specific methods (replace with your logic)
 void Casa::eliminarVinculosPropiedad(){
@@ -41,12 +50,27 @@ void Casa::CrearMensaje(string mensaje, Usuario *u){
 }
 
 // Implementations for linking with Venta and Alquiler (optional depending on your logic)
-void Casa::Vincular(Venta *v){
+void Casa::VincularV(Venta *v){
   v->~Venta();
   // Implement logic to link this Casa with a Venta object (optional)
 }
 
-void Casa::Vincular(Alquiler *a){
+void Casa::VincularA(Alquiler *a){
   a->~Alquiler();
   // Implement logic to link this Casa with an Alquiler object (optional)
 }
+/*Casa();
+        Casa(string, int, int, int, bool, dtDireccion , float, float, float);
+        ~Casa();
+
+        float getMetrosVerdes();
+        void setMetrosVerdes(float);
+
+        void eliminarVinculosPropiedad();
+        void AgregarMensaje(string);
+
+        void CrearMensaje(string, Usuario* u);
+
+        void ListarPropiedadesEdificio();
+        void VincularV(Venta *v);
+        void VincularA(Alquiler * a);*/

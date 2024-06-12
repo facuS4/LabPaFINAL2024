@@ -27,6 +27,11 @@ void Departamento::setNombre(string nombreDpto) {
   nombre = nombreDpto;
 }
 
+void Departamento::setZona(Zona * z)
+{
+  this->getZonas()->add(z);
+}
+
 ICollection* Departamento::getZonas() {
   return Zonas;
 }

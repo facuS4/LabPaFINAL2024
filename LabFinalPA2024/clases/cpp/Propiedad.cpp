@@ -1,10 +1,10 @@
 #include "../h/Propiedad.h"
 
 // Default constructor
-Propiedad::Propiedad() : codigo(""), dormitorios(0), ambientes(0), banios(0), garage(false), direccion(dtDireccion()), medif(0.0f), MetrosTotales(0.0f) {}
+Propiedad::Propiedad() : codigo(""), dormitorios(0), ambientes(0), banios(0), garage(false), direccion(nullptr), medif(0.0f), MetrosTotales(0.0f) {}
 
 // Constructor with parameters
-Propiedad::Propiedad(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion direccion, float medif, float metrosTotales){
+Propiedad::Propiedad(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion *direccion, float medif, float metrosTotales){
   this->codigo = codigo;
   this->dormitorios = dormitorios;
   this->ambientes = ambientes;
@@ -59,11 +59,11 @@ void Propiedad::setGarage(bool tieneGarage) {
   garage = tieneGarage;
 }
 
-dtDireccion Propiedad::getDireccion() {
+dtDireccion * Propiedad::getDireccion() {
   return direccion;
 }
 
-void Propiedad::setDireccion(dtDireccion dirPropiedad) {
+void Propiedad::setDireccion(dtDireccion * dirPropiedad) {
   direccion = dirPropiedad;
 }
 
