@@ -25,6 +25,7 @@ float Venta::getPrecioVenta() {
 void Venta::setPropiedad(Propiedad * pp){
 
   this->p=pp;
+  //cout << pp->getCodigo();
 }
 
 void Venta::setPrecioVenta(float nuevoPrecio) {

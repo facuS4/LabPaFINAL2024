@@ -53,34 +53,19 @@ void obtenerReporteInmobiliaria(){
   int cantcasas=0;
   int cantaparta=0;
   ICollection * duplicateChecker=new List();
-  menudeprueba();//1
   for(IIterator * it=sis->getUsuarios()->getIterator();it->hasCurrent();it->next()){
     Inmobiliaria * temporal = dynamic_cast<Inmobiliaria*>(it->getCurrent());
-    cantcasas=0;
-    cantaparta=0;
-    //menudeprueba();
+    
     if(temporal!=nullptr)
     {
-      for (IIterator * ventas = temporal->getVentas()->getIterator(); it->hasCurrent() ; it->next())
+      
+      for (IIterator * it = temporal->getVentas()->getIterator(); it->hasCurrent() ; it->next())
       {
-        Venta * v = (Venta *)ventas->getCurrent();
+        Venta * v = dynamic_cast<Venta*>(it->getCurrent());
         Propiedad * prop= v->getPropiedad();
         duplicateChecker->add(prop);
-        Casa * c = (Casa *) prop;
-        if (c==nullptr){
-          cantaparta++;
-        }
-        else{
-          cantcasas++;
-        }
-      //menudeprueba();//2
-      }
-      for (IIterator * alquiler = temporal->getAlquileres()->getIterator(); it->hasCurrent(); it->next())
-      {
-        Alquiler * a = (Alquiler *)alquiler->getCurrent();
-        Propiedad * prop= a->getPropiedad();
         if(!duplicateChecker->member(prop)){
-          Casa * c = (Casa *) prop;
+          Casa * c = dynamic_cast<Casa*>(prop);
           if (c==nullptr){
             cantaparta++;
           }
@@ -88,20 +73,46 @@ void obtenerReporteInmobiliaria(){
             cantcasas++;
           }
         }
-        
       }
-      //menudeprueba();//3
-      cout << "Nombre: "<< temporal->getNombre()<< endl << "Correo: "
-       << temporal->getCorreoElectronico() << endl<<"Ubicacion:" << temporal->getUbicacion()->getPais()
+      for (IIterator * it = temporal->getAlquileres()->getIterator(); it->hasCurrent(); it->next())
+      {
+        Alquiler * a = dynamic_cast<Alquiler*>(it->getCurrent());
+        Propiedad * prop= a->getPropiedad();
+        if(!duplicateChecker->member(prop)){
+          Casa * c = dynamic_cast<Casa*>(prop);
+          if (c==nullptr){
+            cantaparta++;
+          }
+          else{
+            cantcasas++;
+          }
+        } 
+      }
+
+      std::cout << "Casas: " << cantcasas << endl;
+      std::cout << "Apartamentos: " << cantaparta << endl;
+      std::cout << "Nombre: ";
+      if(temporal->getNombre()!=""){
+      std::cout << temporal->getNombre();
+      }
+      std::cout <<endl;
+      std::cout << "Correo: ";
+      if(temporal->getCorreoElectronico()!=""){
+      std::cout << temporal->getCorreoElectronico();
+      }
+      std::cout <<endl;
+      if(temporal->getUbicacion()!=nullptr){
+      std::cout <<"Ubicacion:" << temporal->getUbicacion()->getPais()
        << " " << temporal->getUbicacion()->getCiudad() << temporal->getUbicacion()->getCalle() 
        << temporal->getUbicacion()->getNumero() <<endl;
-      cout << "Casas: " << cantcasas << endl;
-      cout << "Apartamentos: " << cantaparta << endl;
-
+      }
+      cantcasas=0;
+      cantaparta=0;
+      std::cout <<endl;
     }
   }
   delete duplicateChecker;
-  
+  menudeprueba();
 
 }
 
@@ -223,7 +234,8 @@ int main()
   vent->setPropiedad(ap3);
   imn1->setAlquileres(alqui);
   inm2->setVentas(vent);
-
+  Propiedad * p = (Propiedad *)inm2->getVentas()->getIterator()->getCurrent();
+  cout << p->getAmbientes();
 // FIN DEL HARDCODEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADO
 //
 //
