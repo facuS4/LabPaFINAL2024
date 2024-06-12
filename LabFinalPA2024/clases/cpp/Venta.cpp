@@ -6,6 +6,7 @@ Venta::Venta() : precioVenta(0.0f), p(nullptr) {}
 // Constructor with parameter
 Venta::Venta(float precio){
   precioVenta = precio;
+  this->p=nullptr;
 } 
 
 // Destructor (assuming no custom logic needed)

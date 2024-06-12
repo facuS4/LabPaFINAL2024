@@ -234,8 +234,9 @@ int main()
   vent->setPropiedad(ap3);
   imn1->setAlquileres(alqui);
   inm2->setVentas(vent);
-  Propiedad * p = (Propiedad *)inm2->getVentas()->getIterator()->getCurrent();
-  cout << p->getAmbientes();
+  Propiedad * p = dynamic_cast<Apartamento*>(inm2->getVentas()->getIterator()->getCurrent());
+  if(p!=nullptr)
+    cout << p->getGarage();
 // FIN DEL HARDCODEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADO
 //
 //
