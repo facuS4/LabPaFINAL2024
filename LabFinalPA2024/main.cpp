@@ -64,7 +64,6 @@ void obtenerReporteInmobiliaria(){
         Venta * v = dynamic_cast<Venta*>(it->getCurrent());
         Propiedad * prop= v->getPropiedad();
         duplicateChecker->add(prop);
-        if(!duplicateChecker->member(prop)){
           Casa * c = dynamic_cast<Casa*>(prop);
           if (c==nullptr){
             cantaparta++;
@@ -72,7 +71,6 @@ void obtenerReporteInmobiliaria(){
           else{
             cantcasas++;
           }
-        }
       }
       for (IIterator * it = temporal->getAlquileres()->getIterator(); it->hasCurrent(); it->next())
       {

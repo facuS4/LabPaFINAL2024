@@ -12,9 +12,6 @@ class Alquiler;
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/interfaces/ICollectible.h"
 
-
-
-
 using namespace std;
 
 class Propiedad : public ICollectible{
