@@ -319,7 +319,7 @@ void Sistema::AltaInteresado(string email,string nombre, string apellido, int ed
 }
 
 void Sistema::altaPropiedad(){
-    Inmobiliaria * u;
+    Inmobiliaria * i = dynamic_cast<Inmobiliaria *>(this->usuarioSesion);
     Sistema::listarDepartamentos();
     char letra; //Falta cout de indique la Letra
     cin>>letra;
@@ -364,10 +364,10 @@ void Sistema::altaPropiedad(){
     cout << "¿Esta propiedad cuenta con Garaje?" << endl;
     getline(cin, garajesino);
     if(garajesino == "si"){
-        garaje == true;
+        garaje = true;
     }
     else {
-        garaje == false;
+        garaje = false;
         cout << "No se si me pusiste que no o una boludez, pero por gracioso ya no hay garaje para ti. Besos" <<endl;
     }
 
@@ -400,9 +400,9 @@ void Sistema::altaPropiedad(){
         cout << "Su casa esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
         cin >> opcion;
         if(opcion == 1){
-            u->getAlquileres()->add(c);
+            i->getAlquileres()->add(c);
         }else if(opcion == 2){
-            u->getVentas()->add(c);
+            i->getVentas()->add(c);
         }
 
         z->getPropiedades()->add(c); //-> Agregar luego de esto, la casa a la coleccion de propiedades de la zona z.
@@ -425,9 +425,9 @@ void Sistema::altaPropiedad(){
             cout << "Su apartamento esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
             cin >> opcion3;
             if(opcion3 == 1){
-                u->getAlquileres()->add(a);
+                i->getAlquileres()->add(a);
             }else if(opcion3 == 2){
-                u->getVentas()->add(a);
+                i->getVentas()->add(a);
             }
         }else if(opcion2 == 2){
             string nombreEdificio;
@@ -445,9 +445,9 @@ void Sistema::altaPropiedad(){
             cout << "Su apartamento esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
             cin >> opcion3;
             if(opcion3 == 1){
-                u->getAlquileres()->add(a);
+                i->getAlquileres()->add(a);
             }else if(opcion3 == 2){
-                u->getVentas()->add(a);
+                i->getVentas()->add(a);
             }
         }
     } 
