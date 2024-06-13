@@ -23,6 +23,7 @@
 
 #include "./clases/h/Propiedad.h"
 #include "./clases/h/Departamento.h"
+#include "./clases/h/Edificio.h"
 
 
 using namespace std;
@@ -92,6 +93,8 @@ class ISistema {
         virtual void AltaDepartamento(char, string) = 0;
 
         virtual void altaPropiedad() = 0;
+
+        virtual Edificio * SeleccionarEdificio(string nombre) = 0;
 };
 
 

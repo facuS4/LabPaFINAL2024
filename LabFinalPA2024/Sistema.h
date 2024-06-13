@@ -100,6 +100,9 @@ class Sistema : public ISistema{
 
         void altaPropiedad();
 
+        Edificio * SeleccionarEdificio(string nombre);
+
+
 };
 
 

@@ -319,6 +319,7 @@ void Sistema::AltaInteresado(string email,string nombre, string apellido, int ed
 }
 
 void Sistema::altaPropiedad(){
+    Inmobiliaria * u;
     Sistema::listarDepartamentos();
     char letra; //Falta cout de indique la Letra
     cin>>letra;
@@ -333,7 +334,7 @@ void Sistema::altaPropiedad(){
     int ambientes, cuartos, banios;
     bool garaje;
     string pais, ciudad, numero, calle, garajesino, codigop;
-    float mtEdifi, mtEspacioverd;
+    float mtEdifi, mtEspacioverd, mtTotales;
     
     cout << "Elija 1 si quiere crear una casa o 2 para crear un apartamento" << endl;
     getline(cin, casa);
@@ -385,17 +386,70 @@ void Sistema::altaPropiedad(){
     dtDireccion * dir = new dtDireccion(pais, ciudad, numero, calle);   
 
     cout << "Por favor, ingrese la cantidad de metros edificados" << endl;
-    cin >> mtEdifi;     
+    cin >> mtEdifi;
+
+    cout << "Por favor, ingrese la cantidad de metros totales" << endl;
+    cin >> mtTotales;    
     
     if(casa=="1"){ //crear la casa
+        int opcion;
         cout << "Por favor, ingrese la cantidad de metros con espacios verdes" << endl;
         cin >> mtEspacioverd; 
-        //Casa * c = new Casa(); //-> Agregar luego de esto, la casa a la coleccion de propiedades de la zona z.
-    }
+        Casa * c = new Casa(codigop,cuartos,ambientes,banios,garaje,dir,mtEdifi,mtTotales,mtEspacioverd);
+
+        cout << "Su casa esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
+        cin >> opcion;
+        if(opcion == 1){
+            u->getAlquileres()->add(c);
+        }else if(opcion == 2){
+            u->getVentas()->add(c);
+        }
+
+        z->getPropiedades()->add(c); //-> Agregar luego de esto, la casa a la coleccion de propiedades de la zona z.
+    }   
     else if(casa=="2"){ //crear apartamento
-        Sistema::ListarEdificio();
-
-
+        int opcion2, opcion3;
+        string nombre;
+        cout << "Desea elegir un edificio ya existente o crear uno nuevo? Ingrese 1 para elegir uno existente o 2 para crear uno nuevo" << endl;
+        cin >> opcion2;
+        if(opcion2 == 1){
+            Sistema::ListarEdificio();
+            cout << "Por favor, ingrese el nombre del edificio" << endl;
+            Edificio * e = SeleccionarEdificio("nombre"); //Falta cout de indique el nombre
+            if(e==nullptr){
+                cout << "No se encontro el edificio" << endl;
+                return;
+            }
+            Apartamento * a = new Apartamento(codigop,cuartos,ambientes,banios,garaje,dir,mtEdifi,mtTotales,true,e);
+            z->getPropiedades()->add(a); //-> Agregar luego de esto, el apartamento a la coleccion de propiedades de la zona z.
+            cout << "Su apartamento esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
+            cin >> opcion3;
+            if(opcion3 == 1){
+                u->getAlquileres()->add(a);
+            }else if(opcion3 == 2){
+                u->getVentas()->add(a);
+            }
+        }else if(opcion2 == 2){
+            string nombreEdificio;
+            cout << "Por favor, ingrese el nombre del edificio" << endl;
+            getline(cin, nombreEdificio);
+            cout << "Por favor, ingrese la cantidad de pisos" << endl;
+            int pisos;
+            cin >> pisos;
+            cout << "Por favor, ingrese los gastos comunes" << endl;
+            int gastosComunes;
+            cin >> gastosComunes;
+            Edificio * e = new Edificio(nombreEdificio,pisos,gastosComunes);
+            Apartamento * a = new Apartamento(codigop,cuartos,ambientes,banios,garaje,dir,mtEdifi,mtTotales,true,e);
+            z->getPropiedades()->add(a); //-> Agregar luego de esto, el apartamento a la coleccion de propiedades de la zona z.
+            cout << "Su apartamento esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
+            cin >> opcion3;
+            if(opcion3 == 1){
+                u->getAlquileres()->add(a);
+            }else if(opcion3 == 2){
+                u->getVentas()->add(a);
+            }
+        }
     } 
     else{
         cout << "No ha ingresado un valor correcto " << endl;
@@ -403,6 +457,17 @@ void Sistema::altaPropiedad(){
     }
 
 
+}
+
+Edificio * Sistema::SeleccionarEdificio(string nombre){
+    IIterator * it;
+    for(it = Edificios->getIterator();it->hasCurrent();it->next()){
+        Edificio * e = (Edificio *) it->getCurrent();
+        if(e!=nullptr && e->getNombre()==nombre){
+            return e;
+        }
+    }
+    return nullptr;
 }
 
 
