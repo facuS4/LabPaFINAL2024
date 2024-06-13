@@ -66,3 +66,13 @@ void Departamento::BuscarZona(string codigo) {
   // This might involve iterating through zonas and checking their codigo
   // You might need to include Zona.h for zona access
 }
+
+void Departamento::listarZonas(){
+  IIterator * it;
+  for(it=Zonas->getIterator();it->hasCurrent();it->next()){
+    Zona * z = dynamic_cast<Zona*>(it->getCurrent());
+    cout << "El codigo de la zona es " << z->getCodigo() << endl;
+    cout << "El nombre de la zona es " << z->getNombre() << endl;
+  }
+
+}

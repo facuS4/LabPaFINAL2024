@@ -90,6 +90,8 @@ class ISistema {
         virtual void seleccionarVenta(int valor, Propiedad *p) = 0;
 
         virtual void AltaDepartamento(char, string) = 0;
+
+        virtual void altaPropiedad() = 0;
 };
 
 

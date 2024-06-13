@@ -98,6 +98,8 @@ class Sistema : public ISistema{
 
         void AltaDepartamento(char, string);
 
+        void altaPropiedad();
+
 };
 
 

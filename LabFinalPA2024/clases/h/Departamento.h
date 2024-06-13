@@ -36,7 +36,7 @@ class Departamento : public ICollectible{
         void SeleccionarZona(string codigo);
 
         void BuscarZona(string codigo);
-       
+        void listarZonas();
 };
 
 

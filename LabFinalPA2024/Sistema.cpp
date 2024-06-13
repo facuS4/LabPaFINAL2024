@@ -244,6 +244,11 @@ bool Sistema::boolSeleccionarZona(string codigo) {
 }
 
 void Sistema::ListarEdificio() {
+    IIterator * it;
+    for(it=Edificios->getIterator();it->hasCurrent();it->next()){
+        Edificio * e = dynamic_cast<Edificio *>(it->getCurrent()); 
+        cout << "Nombre del Edificio: " << e->getNombre() << endl;
+    }
 }
 
 void Sistema::altaApartamento(int ambientes) {
@@ -311,6 +316,93 @@ void Sistema::AltaInteresado(string email,string nombre, string apellido, int ed
     Usuario* nuevoInteresado = new Interesado(email, "" , nombre, edad, apellido); 
     misUsuarios->add(nuevoInteresado);
     cout << "Interesado '" << nombre << " " << apellido << "' dado de alta exitosamente. Con email" << email << endl;
+}
+
+void Sistema::altaPropiedad(){
+    Sistema::listarDepartamentos();
+    char letra; //Falta cout de indique la Letra
+    cin>>letra;
+    Departamento * d = seleccionarDepartamento(letra);
+    if (d==nullptr)
+        return;
+    d->listarZonas();
+    string codigoz; ////Falta cout de indique el codigo
+    getline(cin, codigoz);
+    Zona * z = SelecionarZona(codigoz, d);
+    string casa;
+    int ambientes, cuartos, banios;
+    bool garaje;
+    string pais, ciudad, numero, calle, garajesino, codigop;
+    float mtEdifi, mtEspacioverd;
+    
+    cout << "Elija 1 si quiere crear una casa o 2 para crear un apartamento" << endl;
+    getline(cin, casa);
+
+    cout << "Por favor, ingrese el codigo" << endl;
+    cin >> codigop;
+
+    IIterator * it;
+    for (it = z ->getPropiedades()->getIterator();it->hasCurrent(); it->next()){
+        Propiedad * p = (Propiedad * ) it->getCurrent();
+        
+        if (p->getCodigo() == codigop ){
+            cout << "Ya existe dicho codigo de propiedad" << endl;
+            return;
+         }
+    }
+
+    cout << "Por favor, ingrese la cantidad de ambientes" << endl;
+    cin >> ambientes;
+
+    cout << "Por favor, ingrese la cantidad de cuartos" << endl;
+    cin >> cuartos;
+
+    cout << "Por favor, ingrese la cantidad de banios" << endl;
+    cin >> banios;
+
+    cout << "¿Esta propiedad cuenta con Garaje?" << endl;
+    getline(cin, garajesino);
+    if(garajesino == "si"){
+        garaje == true;
+    }
+    else {
+        garaje == false;
+        cout << "No se si me pusiste que no o una boludez, pero por gracioso ya no hay garaje para ti. Besos" <<endl;
+    }
+
+    cout << "Por favor, ingrese el pais" << endl;
+    getline(cin, pais);
+
+    cout << "Por favor, ingrese la ciudad" << endl;
+    getline(cin, ciudad);
+
+    cout << "Por favor, ingrese el numero" << endl;
+    getline(cin, numero);
+
+    cout << "Por favor, ingrese la calle" << endl;
+    getline(cin, calle);
+
+    dtDireccion * dir = new dtDireccion(pais, ciudad, numero, calle);   
+
+    cout << "Por favor, ingrese la cantidad de metros edificados" << endl;
+    cin >> mtEdifi;     
+    
+    if(casa=="1"){ //crear la casa
+        cout << "Por favor, ingrese la cantidad de metros con espacios verdes" << endl;
+        cin >> mtEspacioverd; 
+        //Casa * c = new Casa(); //-> Agregar luego de esto, la casa a la coleccion de propiedades de la zona z.
+    }
+    else if(casa=="2"){ //crear apartamento
+        Sistema::ListarEdificio();
+
+
+    } 
+    else{
+        cout << "No ha ingresado un valor correcto " << endl;
+        return;
+    }
+
+
 }
 
 
