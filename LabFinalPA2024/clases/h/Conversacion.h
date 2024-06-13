@@ -8,6 +8,8 @@
 #include "../h/Mensaje.h"
 
 class Usuario;
+class Interesado;
+class Inmobiliaria;
 
 using namespace std;
 

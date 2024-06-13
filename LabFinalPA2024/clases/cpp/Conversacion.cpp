@@ -30,3 +30,29 @@ void Conversacion::CrearMensaje(string mensaje, Usuario *u) {
     cout << mensaje;
     u->~Usuario();
 }
+
+Interesado * Conversacion::getInteresado() {
+    return interesado;
+}
+
+void Conversacion::setInteresado(Interesado * interesado) {
+    this->interesado = interesado;
+}
+
+Inmobiliaria * Conversacion::getInmobiliaria() {
+    return inmobiliaria;
+}
+
+void Conversacion::setInmobiliaria(Inmobiliaria * inmobiliaria) {
+    this->inmobiliaria = inmobiliaria;
+}
+
+ICollection * Conversacion::getMensajes() {
+    return mensajes;
+}
+
+void Conversacion::setMensajes(ICollection * mensajes) {
+    this->mensajes = mensajes;
+}
+
+
