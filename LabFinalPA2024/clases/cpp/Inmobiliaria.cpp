@@ -34,15 +34,15 @@ dtDireccion* Inmobiliaria::getUbicacion() {
 }
 
 void Inmobiliaria::setUbicacion(dtDireccion* nuevaUbicacion) {
-  ubicacion = nuevaUbicacion; // Set the new ubicacion
+  ubicacion = nuevaUbicacion;
 }
 
 void Inmobiliaria::setVentas(ICollectible* nuevasVentas) {
-  ventas->add(nuevasVentas); // Set the new ventas
+  ventas->add(nuevasVentas);
 }
 
 void Inmobiliaria::setAlquileres(ICollectible* nuevosAlquileres) {
-  alquileres->add(nuevosAlquileres); // Set the new alquileres
+  alquileres->add(nuevosAlquileres); 
 }
 
 void Inmobiliaria::eliminarAlquiler(Alquiler * alqui){
@@ -107,4 +107,13 @@ void Inmobiliaria::SeleccionarVenta(int idVenta) {
   cout << idVenta;
   // Implement logic to select the venta with the given id (optional)
   // This might involve storing a reference to the selected venta for further actions
+}
+void Inmobiliaria::IcolAlquileres(ICollection * alquileres){
+  //delete this->alquileres;
+  this->alquileres=alquileres;
+}
+void Inmobiliaria::IcolVentas(ICollection * ventas){
+  //delete this->ventas;
+  this->ventas=ventas;
+
 }

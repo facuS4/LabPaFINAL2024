@@ -188,21 +188,37 @@ void Sistema::EliminarPropiedad(string codigo) {
             for(IIterator * it2=i->getVentas()->getIterator();it2->hasCurrent();it2->next()){
                 Venta * vents2 = dynamic_cast<Venta*>(it2->getCurrent());
                 if(vents2->getPropiedad()->getCodigo()==codigo){
-                    //i->eliminarVenta(vents2);
-                    cout << "no termine" << endl;
-                    return;
-                    //delete vents2;
+                    
+                    ICollection * nuevo = new List();
+                    for(IIterator * it3=i->getVentas()->getIterator();it3->hasCurrent();it3->next()){
+                        Venta * ventas3=dynamic_cast<Venta*>(it3->getCurrent());
+                        if (ventas3->getPropiedad()->getCodigo()!=vents2->getPropiedad()->getCodigo())
+                        {
+                            nuevo->add(ventas3);
+                        }
+                        
+                    }
+                    i->IcolVentas(nuevo);
+                    //cout << "no termine" << endl;
+                    delete vents2;
                 }
             }
             for(IIterator * it2=i->getAlquileres()->getIterator();it2->hasCurrent();it2->next()){
                 Alquiler * alquiler2 = dynamic_cast<Alquiler*>(it2->getCurrent());
                 if(alquiler2->getPropiedad()->getCodigo()==codigo){
-                    //string lol;
-                    //getline(cin,lol);
-                    //i->eliminarAlquiler(alquiler2);
-                    //falta esto
-                    cout << "no termine" << endl;
-                    return;
+                    
+                    ICollection * nuevo = new List();
+                    for(IIterator * it3=i->getAlquileres()->getIterator();it3->hasCurrent();it3->next()){
+                        Alquiler * alquiler3=dynamic_cast<Alquiler*>(it3->getCurrent());
+                        if (alquiler3->getPropiedad()->getCodigo()!=alquiler2->getPropiedad()->getCodigo())
+                        {
+                            nuevo->add(alquiler3);
+                        }
+                        
+                    }
+                    i->IcolAlquileres(nuevo);
+                    //cout << "no termine" << endl;
+                    delete alquiler2;
                 }
             }
         }

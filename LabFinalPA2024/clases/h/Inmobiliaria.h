@@ -47,6 +47,8 @@ class Inmobiliaria : public Usuario{
         void vincularInmobiliaria(Propiedad*);
         void SeleccionarAlquiler(int);
         void SeleccionarVenta(int);
+        void IcolAlquileres(ICollection *);
+        void IcolVentas(ICollection *);
 
 };
 
