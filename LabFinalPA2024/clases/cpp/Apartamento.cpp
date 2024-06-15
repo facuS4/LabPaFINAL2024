@@ -26,6 +26,12 @@ void Apartamento::ListarPropiedadesEdificio(){
 }
 
 void Apartamento::eliminarVinculosPropiedad(){
+  for (IIterator * it1= this->getConvo()->getIterator(); it1->hasCurrent();it1->next()){
+        Conversacion * convo = dynamic_cast<Conversacion*>(it1->getCurrent());
+        if(convo!=nullptr)
+            delete convo;
+    }
+    
 }
 
 //ESTO ES UN DUMMY

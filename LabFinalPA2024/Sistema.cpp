@@ -138,7 +138,82 @@ void Sistema::AltaInmobiliaria(string email, string nombre) {
 
 
 void Sistema::EliminarPropiedad(string codigo) {
-    cout << codigo;
+    
+    //ENCUENTRA LA PROPIEDAD
+    Zona * zone = nullptr;
+    Propiedad * propi =nullptr;
+    bool out=false;
+    for (IIterator * it1= Departamentos->getIterator(); it1->hasCurrent() && !out ;it1->next()){
+        Departamento * dep = dynamic_cast<Departamento*>(it1->getCurrent());
+        for(IIterator * it2= dep->getZonas()->getIterator(); it2->hasCurrent() && !out;it2->next()){
+            zone = dynamic_cast<Zona*>(it2->getCurrent());
+            for (IIterator * it3= zone->getPropiedades()->getIterator(); it3->hasCurrent() && !out;it3->next()){
+                propi = dynamic_cast<Propiedad*>(it3->getCurrent());
+                if(propi->getCodigo()==codigo)
+                    out=true;
+                else
+                    propi=nullptr;
+            }
+        }
+    }
+    // CORTA SI NO ENCUENTRA NADA
+    if(propi==nullptr){
+        cout << "error para encontrar propiedad"<<endl;
+        return;
+    }
+        
+    // BUSCA EN VENTAS Y ALQUILER
+    bool encontrado = false;
+    if (this->getUsuarioActual()!=nullptr){
+        Inmobiliaria * i = dynamic_cast<Inmobiliaria*>(this->getUsuarioActual());
+        for(IIterator * it1 = i->getVentas()->getIterator();it1->hasCurrent() && !encontrado;it1->next()){
+            Venta * vents = dynamic_cast<Venta *>(it1->getCurrent());
+            if (vents->getPropiedad()->getCodigo()==codigo){
+                encontrado=true;
+            }
+        }
+        for(IIterator * it1 = i->getAlquileres()->getIterator();it1->hasCurrent() && !encontrado;it1->next()){
+            Alquiler * alqui = dynamic_cast<Alquiler *>(it1->getCurrent());
+            if (alqui->getPropiedad()->getCodigo()==codigo){
+                encontrado=true;
+            }
+        }
+        if (!encontrado){
+            cout << "LA PROPIEDAD NO ES TUYA"<< endl;
+            return;
+        }
+    for(IIterator * it1=this->getUsuarios()->getIterator();it1->hasCurrent();it1->next()){
+        Inmobiliaria * i = dynamic_cast<Inmobiliaria*>(it1->getCurrent());
+        if (i!=nullptr){
+            for(IIterator * it2=i->getVentas()->getIterator();it2->hasCurrent();it2->next()){
+                Venta * vents2 = dynamic_cast<Venta*>(it2->getCurrent());
+                if(vents2->getPropiedad()->getCodigo()==codigo){
+                    //i->eliminarVenta(vents2);
+                    cout << "no termine" << endl;
+                    return;
+                    //delete vents2;
+                }
+            }
+            for(IIterator * it2=i->getAlquileres()->getIterator();it2->hasCurrent();it2->next()){
+                Alquiler * alquiler2 = dynamic_cast<Alquiler*>(it2->getCurrent());
+                if(alquiler2->getPropiedad()->getCodigo()==codigo){
+                    //string lol;
+                    //getline(cin,lol);
+                    //i->eliminarAlquiler(alquiler2);
+                    //falta esto
+                    cout << "no termine" << endl;
+                    return;
+                }
+            }
+        }
+    }
+        //ELIMINA CONVERSACIONES
+    propi->eliminarVinculosPropiedad();
+    zone->EliminarPropiedad(propi);
+    delete propi;
+    cout << "eliminado" << endl;
+    }
+    return;
 }
 
 void Sistema::IngresarEmail(string email) {
@@ -630,3 +705,8 @@ void Sistema::modificarPropiedad(){
     cout << "La propiedad ha sido modificada exitosamente." << endl;
 
 }
+
+// ELIMINAR PROPIEDAD
+// PRIMERO VOY A VER SI LA INMOBILIARIA TIENE LA PROPIEDAD
+// SEGUNDO LA BUSCA PROPIEDAD Y LA DESVINCULA DE TODO
+

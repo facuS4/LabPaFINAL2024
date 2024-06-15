@@ -1,16 +1,14 @@
 
 #include "../h/Alquiler.h"
 
-// Default constructor
 Alquiler::Alquiler() : precioAlquiler(0.0f), p(nullptr) {}
 
-// Constructor with parameter (assuming price is passed)
 Alquiler::Alquiler(float precio) : precioAlquiler(precio) {}
 
-// Destructor (assuming no custom logic needed)
-Alquiler::~Alquiler() {};
+Alquiler::~Alquiler() {
+  this->p = nullptr;
+};
 
-// Getter and Setter methods for precioAlquiler
 float Alquiler::getPrecioAlquiler() {
   return precioAlquiler;
 }
@@ -24,7 +22,6 @@ void Alquiler::setPropiedad(Propiedad * pp){
   this->p=pp;
 
 }
-  //Propiedad * getPropiedad();
 
 Propiedad * Alquiler::getPropiedad(){
 

@@ -34,7 +34,7 @@ class Zona : public ICollectible{
         ICollection * getPropiedades();
         void setPropiedades(ICollectible *);
 
-        void EliminarPropiedad(string codigo);
+        void EliminarPropiedad(Propiedad *);
         void SeleccionarZona(string codigo);
         Propiedad * SeleccionarPropiedad(string codigo, string nombreus);
 

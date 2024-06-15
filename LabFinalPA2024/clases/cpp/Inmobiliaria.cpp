@@ -45,6 +45,17 @@ void Inmobiliaria::setAlquileres(ICollectible* nuevosAlquileres) {
   alquileres->add(nuevosAlquileres); // Set the new alquileres
 }
 
+void Inmobiliaria::eliminarAlquiler(Alquiler * alqui){
+
+  this->alquileres->remove(alqui);
+
+}
+void Inmobiliaria::eliminarVenta(Venta * venta){
+
+  this->ventas->remove(venta);
+
+}
+
 ICollection* Inmobiliaria::getVentas() {
   return ventas;
 }

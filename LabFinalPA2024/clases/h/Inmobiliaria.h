@@ -26,6 +26,8 @@ class Inmobiliaria : public Usuario{
 
         string getNombre();
         dtDireccion * getUbicacion();
+        void eliminarAlquiler(Alquiler *);
+        void eliminarVenta(Venta *);
 
         ICollection * getVentas();
         ICollection * getAlquileres();

@@ -232,9 +232,9 @@ int main()
   vent->setPropiedad(ap3);
   imn1->setAlquileres(alqui);
   inm2->setVentas(vent);
-  Propiedad * p = dynamic_cast<Apartamento*>(inm2->getVentas()->getIterator()->getCurrent());
-  if(p!=nullptr)
-    cout << p->getGarage();
+  //Propiedad * p = dynamic_cast<Apartamento*>(inm2->getVentas()->getIterator()->getCurrent());
+  //if(p!=nullptr)
+    //cout << p->getGarage();
 // FIN DEL HARDCODEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADO
 //
 //
@@ -549,7 +549,12 @@ int main()
             cout << "placeholder" << endl;
             break;
           case 7:
-            cout << "placeholder" << endl;
+            {
+            string cod;
+            cout << "Introduzca el codigo de la propiedad" << endl;
+            getline(cin,cod);
+            sis->EliminarPropiedad(cod);
+            }
             break;
           case 8:
             cout << "placeholder" << endl;

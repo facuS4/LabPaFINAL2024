@@ -50,11 +50,8 @@ void Zona::setNombre(string nombreZona) {
 }
 
 // Method to remove a Propiedad by codigo
-void Zona::EliminarPropiedad(string codigoPropiedad) {
-  cout << codigoPropiedad;
-  // Implement logic to remove Propiedad from Propiedades collection
-  // This might involve iterating through the collection and removing the matching propiedad
-  // You'll likely need to include Propiedad.h for propiedad access
+void Zona::EliminarPropiedad(Propiedad * prop) {
+  this->Propiedades->remove(prop);
 }
 
 

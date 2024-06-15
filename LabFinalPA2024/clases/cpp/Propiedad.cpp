@@ -19,6 +19,11 @@ Propiedad::Propiedad(string codigo, int dormitorios, int ambientes, int banios, 
 Propiedad::~Propiedad() {}
 
 // Destructor
+ICollection * Propiedad::getConvo(){
+
+  return this->Conversaciones;
+
+}
 
 // Getter and Setter
 string Propiedad::getCodigo() {
@@ -91,3 +96,4 @@ void Propiedad::setConvo(Conversacion * c){
 
 }
 
+//

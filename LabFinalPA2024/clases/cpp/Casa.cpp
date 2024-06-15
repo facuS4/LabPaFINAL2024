@@ -34,8 +34,11 @@ void Casa::ListarPropiedadesEdificio(){
 
 // Implementations for Casa specific methods (replace with your logic)
 void Casa::eliminarVinculosPropiedad(){
-  // Implement logic to remove any linked ventas or alquileres for this Casa
-  // This might involve iterating through linked collections and removing references
+  for (IIterator * it1= this->getConvo()->getIterator(); it1->hasCurrent();it1->next()){  
+        Conversacion * convo = dynamic_cast<Conversacion*>(it1->getCurrent());
+        if(convo!=nullptr)
+            delete convo;
+    }
 }
 
 void Casa::AgregarMensaje(string mensaje){
