@@ -531,7 +531,9 @@ int main()
             break;
           case 5:
             {
-              sis->listarDepartamentos();
+              sis->altaPropiedad();
+              break;
+              /*sis->listarDepartamentos();
               string seldep;
               cout << "Ingresar letra de dpto: "<<endl;
               getline(cin,seldep);
@@ -542,7 +544,7 @@ int main()
               getline(cin,seldep);
               Zona * tempzona = sis->SelecionarZona(seldep,temp);
               if (tempzona==nullptr)
-                break;
+                break;*/
             }
             break;
           case 6:

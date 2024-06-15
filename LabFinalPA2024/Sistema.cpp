@@ -412,9 +412,9 @@ void Sistema::AltaInteresado(string email,string nombre, string apellido, int ed
 void Sistema::altaPropiedad(){
     Inmobiliaria * i = dynamic_cast<Inmobiliaria *>(this->usuarioSesion);
     Sistema::listarDepartamentos();
-    char letra; //Falta cout de indique la Letra
-    cin>>letra;
-    Departamento * d = seleccionarDepartamento(letra);
+    string letra; //Falta cout de indique la Letra
+    getline(cin,letra);
+    Departamento * d = seleccionarDepartamento(letra[0]);
     if (d==nullptr)
         return;
     d->listarZonas();
@@ -431,7 +431,7 @@ void Sistema::altaPropiedad(){
     getline(cin, casa);
 
     cout << "Por favor, ingrese el codigo" << endl;
-    cin >> codigop;
+    getline(cin, codigop);
 
     IIterator * it;
     for (it = z ->getPropiedades()->getIterator();it->hasCurrent(); it->next()){
@@ -444,22 +444,36 @@ void Sistema::altaPropiedad(){
     }
 
     cout << "Por favor, ingrese la cantidad de ambientes" << endl;
-    cin >> ambientes;
+    string sstring;
+    getline(cin, sstring);
+    if(sstring[0]<48 || sstring[0]>57){
+        cout << "bruh" << endl;
+    }
+    ambientes=stoi(sstring);
+
 
     cout << "Por favor, ingrese la cantidad de cuartos" << endl;
-    cin >> cuartos;
+    getline(cin, sstring);
+    if(sstring[0]<48 || sstring[0]>57){
+        cout << "bruh" << endl;
+    }
+    cuartos=stoi(sstring);
 
     cout << "Por favor, ingrese la cantidad de banios" << endl;
-    cin >> banios;
+    getline(cin, sstring);
+    if(sstring[0]<48 || sstring[0]>57){
+        cout << "bruh" << endl;
+    }
+    banios=stoi(sstring);
 
     cout << "¿Esta propiedad cuenta con Garaje?" << endl;
     getline(cin, garajesino);
-    if(garajesino == "si"){
+    if(garajesino == "SI" || garajesino == "si"){
         garaje = true;
     }
     else {
         garaje = false;
-        cout << "No se si me pusiste que no o una boludez, pero por gracioso ya no hay garaje para ti. Besos" <<endl;
+        cout << "No hay garaje para ti. Besos" <<endl;
     }
 
     cout << "Por favor, ingrese el pais" << endl;
@@ -477,10 +491,20 @@ void Sistema::altaPropiedad(){
     dtDireccion * dir = new dtDireccion(pais, ciudad, numero, calle);   
 
     cout << "Por favor, ingrese la cantidad de metros edificados" << endl;
-    cin >> mtEdifi;
+    getline(cin, sstring);
+    if(sstring[0]<48 || sstring[0]>57){
+        cout << "bruh" << endl;
+    }
+    mtEdifi=stoi(sstring);
 
     cout << "Por favor, ingrese la cantidad de metros totales" << endl;
-    cin >> mtTotales;    
+    getline(cin, sstring);
+    if(sstring[0]<48 || sstring[0]>57){
+        cout << "bruh" << endl;
+    }
+    mtTotales=stoi(sstring);
+
+    //HASTA ACA FUE MI REVISION DE ESTA FUNCION -- FIRMA JANO
     
     if(casa=="1"){ //crear la casa
         int opcion;
