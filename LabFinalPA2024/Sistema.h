@@ -102,6 +102,7 @@ class Sistema : public ISistema{
 
         Edificio * SeleccionarEdificio(string nombre);
 
+        void modificarPropiedad();
 
 };
 

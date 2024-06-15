@@ -95,6 +95,8 @@ class ISistema {
         virtual void altaPropiedad() = 0;
 
         virtual Edificio * SeleccionarEdificio(string nombre) = 0;
+
+        virtual void modificarPropiedad() = 0;
 };
 
 

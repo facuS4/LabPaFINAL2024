@@ -470,8 +470,6 @@ Edificio * Sistema::SeleccionarEdificio(string nombre){
     return nullptr;
 }
 
-
-
     /*void Sistema::altaEstudiante(string _ci, string _nombre, string _apellido, date _fnac, string _telefono, int _creditos){
     IKey * k = new String(_ci.c_str());
 
@@ -506,3 +504,129 @@ Edificio * Sistema::SeleccionarEdificio(string nombre){
 }*/
 
 
+void Sistema::modificarPropiedad(){
+    Inmobiliaria* i = dynamic_cast<Inmobiliaria*>(this->usuarioSesion);
+    if (i == nullptr) {
+        cout << "Error: No ha iniciado sesión como usuario inmobiliaria." << endl;
+        return;
+    }
+    Sistema::listarDepartamentos();
+    char letra;
+    cout << "Por favor, ingrese la letra del Departamento" << endl;
+    cin>>letra;
+    Departamento * d = seleccionarDepartamento(letra);
+    if (d==nullptr)
+        return;
+    d->listarZonas();
+    string codigoz;
+    cout << "Por favor, ingrese el codigo de la Zona" << endl;
+    getline(cin, codigoz);
+    Zona * z = SelecionarZona(codigoz, d);
+    
+    int ambientes, cuartos, banios;
+    bool garaje;
+    string pais, ciudad, numero, calle, garajesino, codigop;
+    float mtEdifi, mtEspacioverd, mtTotales;
+    Propiedad* propiedad = nullptr;
+    
+    cout << "Por favor, ingrese el codigo" << endl;
+    cin >> codigop;
+
+    IIterator * it;
+    for (it = z ->getPropiedades()->getIterator();it->hasCurrent(); it->next()){
+        Propiedad * p = (Propiedad * ) it->getCurrent();
+        
+        if (p->getCodigo() == codigop ){
+            propiedad = p;
+            break;
+         } 
+        
+    }
+    if (propiedad == nullptr){
+        cout << "No existe dicha propiedad"<< endl;
+        return;
+    }
+
+    cout << "Por favor, ingrese la nueva cantidad de ambientes" << endl;
+    cin >> ambientes;
+    propiedad->setAmbientes(ambientes);
+
+    cout << "Por favor, ingrese la nueva cantidad de cuartos" << endl;
+    cin >> cuartos;
+    propiedad->setDormitorios(cuartos);
+
+    cout << "Por favor, ingrese la nueva cantidad de banios" << endl;
+    cin >> banios;
+    propiedad->setBanios(banios);
+
+    cout << "¿Esta propiedad cuenta con Garaje? (si/no)" << endl;
+    cin >> garajesino;
+    garaje = (garajesino == "si");
+    propiedad->setGarage(garaje);
+
+    cout << "Por favor, ingrese el nuevo pais" << endl;
+    cin.ignore(); // Limpiar el buffer
+    getline(cin, pais);
+
+    cout << "Por favor, ingrese la nueva ciudad" << endl;
+    getline(cin, ciudad);
+
+    cout << "Por favor, ingrese el nuevo numero" << endl;
+    getline(cin, numero);
+
+    cout << "Por favor, ingrese la nueva calle" << endl;
+    getline(cin, calle);
+
+    dtDireccion* nuevaDir = new dtDireccion(pais, ciudad, numero, calle);
+    propiedad->setDireccion(nuevaDir);
+
+    cout << "Por favor, ingrese la nueva cantidad de metros edificados" << endl;
+    cin >> mtEdifi;
+    propiedad->setMedif(mtEdifi);
+
+    cout << "Por favor, ingrese la nueva cantidad de metros totales" << endl;
+    cin >> mtTotales;
+    propiedad->setMetrosTotales(mtTotales);
+
+    cout << "La propiedad está en alquiler o en venta, ponga 1 si está en alquiler, ponga 2 si está en venta" << endl;
+    int opcion;
+    cin >> opcion;
+
+    if(opcion == 1  || opcion == 2){
+
+        // Quitar la propiedad de la colección actual
+        if (i->getAlquileres()->member(propiedad)) {
+            i->getAlquileres()->remove(propiedad);
+        } else if (i->getVentas()->member(propiedad)) {
+            i->getVentas()->remove(propiedad);
+        }
+
+        // Agregar la propiedad a la nueva colección según la opción seleccionada
+        if (opcion == 1) {
+            i->getAlquileres()->add(propiedad);
+        } 
+        else if (opcion == 2) {
+            i->getVentas()->add(propiedad);
+        }
+
+    }
+    else{
+        cout << "No ingreso una opcion correcta, queda en la misma situacion" << endl;
+    }
+
+    Casa * casa = dynamic_cast<Casa*>(propiedad);
+    if (casa != nullptr) {
+        cout << "Por favor, ingrese la nueva cantidad de metros con espacios verdes" << endl;
+        cin >> mtEspacioverd;
+        casa->setMetrosVerdes(mtEspacioverd);
+    }
+    else {
+        Apartamento* apartamento = dynamic_cast<Apartamento*>(propiedad);
+        if (apartamento != nullptr) {
+            // Debo agregar lo correspondiente a Apartamento: disponibilidad y ver tema de Edificio.
+        }
+    }
+
+    cout << "La propiedad ha sido modificada exitosamente." << endl;
+
+}
