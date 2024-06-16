@@ -636,6 +636,7 @@ int main()
       system("clear");
       cout << " Has cerrado la sesion " << endl;
       menudeprueba();
+      system("clear");
       
     }
     if (inputmenu == "TURNOFF")
@@ -650,6 +651,7 @@ int main()
       else{
         cout<< "Ok"<< endl;
         menudeprueba();
+        system("clear");
       }
       
     }
