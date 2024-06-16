@@ -58,6 +58,8 @@ class Sistema : public ISistema{
 
         ICollection * getUsuarios();
 
+        Propiedad * PropiedadChecker(string codigo);
+
         static Sistema * getInstancia(); // devuelve el controlador Sistema (Singleton) // ✅
 
         void AltaInmobiliaria(string email, string nombre);

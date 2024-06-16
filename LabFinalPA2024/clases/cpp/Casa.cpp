@@ -4,7 +4,7 @@
 Casa::Casa() : Propiedad(), metrosVerdes(0.0f) {}
 
 // Constructor with parameters
-Casa::Casa(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion * direccion, float medif, float metrosTotales, float metrosVerdes) : Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales){
+Casa::Casa(string codigo, int dormitorios, int ambientes, int banios, bool garage, dtDireccion * direccion, float medif, float metrosTotales, float metrosVerdes, Zona * zona) : Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales, zona){
   this->metrosVerdes = metrosVerdes;
 }
 

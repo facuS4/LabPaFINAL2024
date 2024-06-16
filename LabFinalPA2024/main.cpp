@@ -166,17 +166,7 @@ int main()
   // PROPIEDADES HARDCODEADAS//
 
 //(string codigo, int dormitorios, int ambientes, int banios, bool garage,dtDireccion * direccion, float medif, float metrosTotales, bool disponible)
-  Casa * casita1 = new Casa("itscodigocasa112", 2, 2, 2, true, ladir, x, x*2, x);
-  Casa * casita2 = new Casa("itscodigocasa233", 2, 2, 2, true, ladir, x, x*2, x);
-  Casa * casita3 = new Casa("itscodigocasa322", 2, 2, 2, true, ladir, x, x*2, x);
-  Apartamento * ap1 = new Apartamento("itscodapartamento",2,2,2,true,ladir,2,2,true,ed1);
-  Apartamento * ap2 = new Apartamento("codloco",2,2,2,true,ladir,2,2,true,ed2);
-  Apartamento * ap3 = new Apartamento("codigoouyes",2,2,2,true,ladir,2,2,false,ed3);
-  Conversacion * convo=new Conversacion();
-  Mensaje * mensaje=new Mensaje(lafecha,"hola como andas");
-  convo->AgregarMensaje(mensaje);
-  casita1->setConvo(convo);
-  ap2->setConvo(convo);
+  
 
 
   // ZONAS HARDCODEADAS //
@@ -187,6 +177,18 @@ int main()
   Zona *ZonaSurMontevideo = new Zona("Sur3","MontevideoSur");
   Zona *ZonaNorteMontevideo = new Zona("Norte3","MontevideoNorte");
 
+
+  Casa * casita1 = new Casa("itscodigocasa112", 2, 2, 2, true, ladir, x, x*2, x,ZonaSurColonia);
+  Casa * casita2 = new Casa("itscodigocasa233", 2, 2, 2, true, ladir, x, x*2, x,ZonaSurSanJose);
+  Casa * casita3 = new Casa("itscodigocasa322", 2, 2, 2, true, ladir, x, x*2, x,ZonaNorteMontevideo);
+  Apartamento * ap1 = new Apartamento("itscodapartamento",2,2,2,true,ladir,2,2,true,ed1,ZonaSurMontevideo);
+  Apartamento * ap2 = new Apartamento("codloco",2,2,2,true,ladir,2,2,true,ed2,ZonaSurSanJose);
+  Apartamento * ap3 = new Apartamento("codigoouyes",2,2,2,true,ladir,2,2,false,ed3,ZonaNorteColonia);
+  Conversacion * convo=new Conversacion();
+  Mensaje * mensaje=new Mensaje(lafecha,"hola como andas");
+  convo->AgregarMensaje(mensaje);
+  casita1->setConvo(convo);
+  ap2->setConvo(convo);
   // DEPARTAMENTOS HARDCODEADOS //
   Departamento *SanJose = new Departamento('A', "San Jose");
   Departamento *Colonia = new Departamento('B', "Colonia");

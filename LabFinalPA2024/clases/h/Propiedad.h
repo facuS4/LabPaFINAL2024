@@ -3,11 +3,13 @@
 
 class Venta;
 class Alquiler;
+class Zona;
 #include <iostream>
 #include "Usuario.h"
 #include "Venta.h"
 #include "Alquiler.h"
 #include "Conversacion.h"
+#include "Zona.h"
 #include "../datatypes/h/dtDireccion.h"
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/interfaces/ICollectible.h"
@@ -25,9 +27,10 @@ class Propiedad : public ICollectible{
         float medif;
         float MetrosTotales;
         ICollection * Conversaciones;
+        Zona * mizona;
     public:
         Propiedad();
-        Propiedad(string, int, int, int, bool, dtDireccion*, float, float);
+        Propiedad(string, int, int, int, bool, dtDireccion*, float, float, Zona *);
         virtual ~Propiedad()=0;
         ICollection * getConvo();
 
@@ -46,6 +49,8 @@ class Propiedad : public ICollectible{
 
         bool getGarage();
         void setGarage(bool);
+
+        Zona * getZona();
 
         dtDireccion* getDireccion();
         void setDireccion(dtDireccion*);

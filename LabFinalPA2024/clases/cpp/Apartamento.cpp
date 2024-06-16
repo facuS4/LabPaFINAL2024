@@ -4,7 +4,7 @@
 Apartamento::Apartamento() : Propiedad(), disponible(true), edificio(nullptr) {}
 
 // Constructor with parameters
-Apartamento::Apartamento(string codigo, int dormitorios, int ambientes, int banios, bool garage,dtDireccion * direccion, float medif, float metrosTotales, bool disponible, Edificio * edificio): Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales){
+Apartamento::Apartamento(string codigo, int dormitorios, int ambientes, int banios, bool garage,dtDireccion * direccion, float medif, float metrosTotales, bool disponible, Edificio * edificio, Zona * zon): Propiedad(codigo, dormitorios, ambientes, banios, garage, direccion, medif, metrosTotales, zon){
   this->disponible = disponible;
   this->edificio = edificio;
 }

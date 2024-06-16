@@ -17,7 +17,7 @@ class Apartamento : public Propiedad{
         Edificio * edificio;
     public:
         Apartamento();
-        Apartamento(string, int, int, int, bool, dtDireccion* , float, float, bool, Edificio *);
+        Apartamento(string, int, int, int, bool, dtDireccion* , float, float, bool, Edificio *, Zona *);
         ~Apartamento();
 
         float getMetrosTotales();
