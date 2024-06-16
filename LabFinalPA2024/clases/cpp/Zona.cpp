@@ -51,7 +51,25 @@ void Zona::setNombre(string nombreZona) {
 
 // Method to remove a Propiedad by codigo
 void Zona::EliminarPropiedad(Propiedad * prop) {
-  this->Propiedades->remove(prop);
+  ICollection * nuevo=new List();
+  if(prop==nullptr){
+    cout << "error";
+    return;
+    
+  }
+  for(IIterator * it=this->Propiedades->getIterator();it->hasCurrent();it->next()){
+    Propiedad * pr = dynamic_cast<Propiedad*>(it->getCurrent());
+    if(pr!=nullptr && prop!=nullptr && pr->getCodigo()!=prop->getCodigo()){
+      nuevo->add(pr);
+    }
+    
+  }
+  this->Propiedades=nuevo;
+
+    if (prop == nullptr)
+        return;
+    this->Propiedades->remove(prop);
+
 }
 
 

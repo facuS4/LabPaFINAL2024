@@ -58,7 +58,7 @@ class Sistema : public ISistema{
 
         ICollection * getUsuarios();
 
-        Propiedad * PropiedadChecker(string codigo);
+        bool PropiedadChecker(string codigo);
 
         static Sistema * getInstancia(); // devuelve el controlador Sistema (Singleton) // ✅
 

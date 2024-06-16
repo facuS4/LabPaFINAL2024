@@ -183,41 +183,48 @@ void Sistema::AltaInmobiliaria(string email, string nombre)
     cout << "Inmobiliaria '" << nombre << "' dada de alta exitosamente." << endl;
 }
 
-Propiedad *Sistema::PropiedadChecker(string codigo)
+bool Sistema::PropiedadChecker(string codigo)
 {
-
     Zona *zone = nullptr;
     Propiedad *propi = nullptr;
     for (IIterator *it1 = Departamentos->getIterator(); it1->hasCurrent(); it1->next())
     {
         Departamento *dep = dynamic_cast<Departamento *>(it1->getCurrent());
+        if (dep == nullptr)
+            continue;
+            
         for (IIterator *it2 = dep->getZonas()->getIterator(); it2->hasCurrent(); it2->next())
         {
             zone = dynamic_cast<Zona *>(it2->getCurrent());
+            if (zone == nullptr)
+                continue;
+
             for (IIterator *it3 = zone->getPropiedades()->getIterator(); it3->hasCurrent(); it3->next())
             {
                 propi = dynamic_cast<Propiedad *>(it3->getCurrent());
+                if (propi == nullptr)
+                    continue;
+                    
                 if (propi->getCodigo() == codigo)
                 {
-                    return propi;
+                    return true;
                 }
             }
         }
     }
-    return nullptr;
+    return false;
 }
+
 
 void Sistema::EliminarPropiedad(string codigo)
 {
 
     // ENCUENTRA LA PROPIEDAD
-    /*MIGRANDO*/
-    Propiedad *propi = Sistema::PropiedadChecker(codigo);
-    /*MIGRANDO*/
-    // CORTA SI NO ENCUENTRA NADA
-    if (propi == nullptr)
+    bool propi = Sistema::PropiedadChecker(codigo);
+    
+    if (!propi)
     {
-        cout << "error para encontrar propiedad" << endl;
+        cout << "ERROR 404" << endl;
         return;
     }
 
@@ -226,78 +233,30 @@ void Sistema::EliminarPropiedad(string codigo)
     if (this->getUsuarioActual() != nullptr)
     {
         Inmobiliaria *i = dynamic_cast<Inmobiliaria *>(this->getUsuarioActual());
-        for (IIterator *it1 = i->getVentas()->getIterator(); it1->hasCurrent() && !encontrado; it1->next())
+        if (i != nullptr)
         {
-            Venta *vents = dynamic_cast<Venta *>(it1->getCurrent());
-            if (vents->getPropiedad()->getCodigo() == codigo)
-            {
-                encontrado = true;
-            }
+            encontrado=i->PerteneceAinmobiliaria(codigo);
         }
-        for (IIterator *it1 = i->getAlquileres()->getIterator(); it1->hasCurrent() && !encontrado; it1->next())
-        {
-            Alquiler *alqui = dynamic_cast<Alquiler *>(it1->getCurrent());
-            if (alqui->getPropiedad()->getCodigo() == codigo)
-            {
-                encontrado = true;
-            }
+        else{
+            cout<<"Segmentation fault.......jajajajajjjaja te la creiste"<<endl;
         }
         if (!encontrado)
         {
             cout << "LA PROPIEDAD NO ES TUYA" << endl;
             return;
         }
+        // SI LA PROPIEDAD ES TUYA SIGUE
+
         for (IIterator *it1 = this->getUsuarios()->getIterator(); it1->hasCurrent(); it1->next())
         {
             Inmobiliaria *i = dynamic_cast<Inmobiliaria *>(it1->getCurrent());
             if (i != nullptr)
             {
-                for (IIterator *it2 = i->getVentas()->getIterator(); it2->hasCurrent(); it2->next())
-                {
-                    Venta *vents2 = dynamic_cast<Venta *>(it2->getCurrent());
-                    if (vents2->getPropiedad()->getCodigo() == codigo)
-                    {
-
-                        ICollection *nuevo = new List();
-                        for (IIterator *it3 = i->getVentas()->getIterator(); it3->hasCurrent(); it3->next())
-                        {
-                            Venta *ventas3 = dynamic_cast<Venta *>(it3->getCurrent());
-                            if (ventas3->getPropiedad()->getCodigo() != vents2->getPropiedad()->getCodigo())
-                            {
-                                nuevo->add(ventas3);
-                            }
-                        }
-                        i->IcolVentas(nuevo);
-                        // cout << "no termine" << endl;
-                        delete vents2;
-                    }
-                }
-                for (IIterator *it2 = i->getAlquileres()->getIterator(); it2->hasCurrent(); it2->next())
-                {
-                    Alquiler *alquiler2 = dynamic_cast<Alquiler *>(it2->getCurrent());
-                    if (alquiler2->getPropiedad()->getCodigo() == codigo)
-                    {
-
-                        ICollection *nuevo = new List();
-                        for (IIterator *it3 = i->getAlquileres()->getIterator(); it3->hasCurrent(); it3->next())
-                        {
-                            Alquiler *alquiler3 = dynamic_cast<Alquiler *>(it3->getCurrent());
-                            if (alquiler3->getPropiedad()->getCodigo() != alquiler2->getPropiedad()->getCodigo())
-                            {
-                                nuevo->add(alquiler3);
-                            }
-                        }
-                        i->IcolAlquileres(nuevo);
-                        // cout << "no termine" << endl;
-                        delete alquiler2;
-                    }
-                }
+                i->EliminarPropiedad(codigo);
             }
         }
         // ELIMINA CONVERSACIONES
-        propi->eliminarVinculosPropiedad();
-        propi->getZona()->EliminarPropiedad(propi);
-        delete propi;
+        
         cout << "eliminado" << endl;
     }
     return;
@@ -537,8 +496,8 @@ void Sistema::altaPropiedad()
 
     cout << "Por favor, ingrese el codigo" << endl;
     getline(cin, codigop);
-    Propiedad *checker = Sistema::PropiedadChecker(codigop);
-    if (checker != nullptr)
+    bool checker = Sistema::PropiedadChecker(codigop);
+    if (checker)
     {
         cout << "Ya existe una propiedad con ese codigo" << endl;
         return;

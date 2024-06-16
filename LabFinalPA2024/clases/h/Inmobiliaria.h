@@ -19,6 +19,7 @@ class Inmobiliaria : public Usuario{
         dtDireccion * ubicacion;
         ICollection * ventas;
         ICollection * alquileres;
+        Propiedad * propiedadtemp=nullptr;
     public:
         Inmobiliaria();
         Inmobiliaria(string, string, string, dtDireccion *);
@@ -40,15 +41,16 @@ class Inmobiliaria : public Usuario{
 
         void Asociar(Conversacion* c);
         void DesvincularInmobiliaria(Conversacion *c);
-
+        bool PerteneceAinmobiliaria(string codigo);
         void desvincularAlquiler(int);
         void desvincularVenta(int);
-
+        void EliminarPropiedad(string codigo);
         void vincularInmobiliaria(Propiedad*);
         void SeleccionarAlquiler(int);
         void SeleccionarVenta(int);
         void IcolAlquileres(ICollection *);
         void IcolVentas(ICollection *);
+        void menuprueba();
 
 };
 
