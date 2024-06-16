@@ -590,13 +590,11 @@ int main()
       {
         if (inputmenu == "LOGOUT")
         {
-          cout << "placeholder" << endl;
           sis->setUsuarioActual(nullptr);
           break;
         }
         if (inputmenu == "TURNOFF")
         {
-
           return 0;
         }
       } // FINAL DEL MENU

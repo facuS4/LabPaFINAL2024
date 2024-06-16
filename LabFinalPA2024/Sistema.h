@@ -38,6 +38,8 @@ class Sistema : public ISistema{
 
         void setDepartamento(Departamento * u);
 
+        void menudedebugging();
+
         ICollection * getDepartamento();
         
         void mostrarPropiedades(string, Zona *);

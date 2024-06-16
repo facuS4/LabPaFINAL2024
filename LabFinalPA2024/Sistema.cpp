@@ -7,6 +7,12 @@ Sistema::Sistema() {
     usuarioSesion = nullptr;
 }
 
+void Sistema::menudedebugging(){
+    string charchar;
+    cout << "Todavia sin error" << endl;
+    getline(cin,charchar);
+}
+
 Sistema::~Sistema() {
 }
 
@@ -120,13 +126,13 @@ void Sistema::AltaInmobiliaria(string email, string nombre) {
     string pais, ciudad, numero, calle;
     cout << "Ingrese la direccion de la inmobiliaria:" << endl;
     cout << "Pais: ";
-    cin >> pais;
+    getline(cin,pais);
     cout << "Ciudad: ";
-    cin >> ciudad;
+    getline(cin,ciudad);
     cout << "Numero: ";
-    cin >> numero;
+    getline(cin,numero);
     cout << "Calle: ";
-    cin >> calle;
+    getline(cin,calle);
 
     // Crear la dirección
     dtDireccion * dir = new dtDireccion(pais, ciudad, numero, calle);
@@ -411,8 +417,10 @@ void Sistema::AltaInteresado(string email,string nombre, string apellido, int ed
 
 void Sistema::altaPropiedad(){
     Inmobiliaria * i = dynamic_cast<Inmobiliaria *>(this->usuarioSesion);
+    if(i==nullptr)
+        return;
     Sistema::listarDepartamentos();
-    string letra; //Falta cout de indique la Letra
+    string letra="2"; //Falta cout de indique la Letra
     getline(cin,letra);
     Departamento * d = seleccionarDepartamento(letra[0]);
     if (d==nullptr)
@@ -421,14 +429,15 @@ void Sistema::altaPropiedad(){
     string codigoz; ////Falta cout de indique el codigo
     getline(cin, codigoz);
     Zona * z = SelecionarZona(codigoz, d);
-    string casa;
+    string casa="poliester";
     int ambientes, cuartos, banios;
     bool garaje;
     string pais, ciudad, numero, calle, garajesino, codigop;
     float mtEdifi, mtEspacioverd, mtTotales;
-    
+    while(casa[0]!='1' && casa[0]!='2'){
     cout << "Elija 1 si quiere crear una casa o 2 para crear un apartamento" << endl;
     getline(cin, casa);
+    }
 
     cout << "Por favor, ingrese el codigo" << endl;
     getline(cin, codigop);
@@ -493,34 +502,89 @@ void Sistema::altaPropiedad(){
     cout << "Por favor, ingrese la cantidad de metros edificados" << endl;
     getline(cin, sstring);
     if(sstring[0]<48 || sstring[0]>57){
-        cout << "bruh" << endl;
+        cout << "bruh me queres romper el lab" << endl;
     }
     mtEdifi=stoi(sstring);
 
     cout << "Por favor, ingrese la cantidad de metros totales" << endl;
     getline(cin, sstring);
     if(sstring[0]<48 || sstring[0]>57){
-        cout << "bruh" << endl;
+        cout << "bruh no se puede" << endl;
     }
     mtTotales=stoi(sstring);
 
     //HASTA ACA FUE MI REVISION DE ESTA FUNCION -- FIRMA JANO
     
     if(casa=="1"){ //crear la casa
-        int opcion;
+        string opcion;
+        
         cout << "Por favor, ingrese la cantidad de metros con espacios verdes" << endl;
-        cin >> mtEspacioverd; 
-        Casa * c = new Casa(codigop,cuartos,ambientes,banios,garaje,dir,mtEdifi,mtTotales,mtEspacioverd);
+        string input="googoogaagaa";
+        getline(cin,input);
+        while(input[0]>57 && input[0]<48){
+            cout << "Intente de nuevo:"<<endl;
+            getline(cin,input);
+        }
+        mtEspacioverd=stoi(input);
 
+        Casa * c = new Casa(codigop,cuartos,ambientes,banios,garaje,dir,mtEdifi,mtTotales,mtEspacioverd);
+        while(true){
         cout << "Su casa esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
-        cin >> opcion;
-        if(opcion == 1){
-            i->getAlquileres()->add(c);
-        }else if(opcion == 2){
-            i->getVentas()->add(c);
+        getline(cin,opcion);
+        ///ESTO NO SE PUEDE HACER FACUNDO
+        //if(opcion == 1){
+        //    i->getAlquileres()->add(c);
+        //}else if(opcion == 2){
+        //    i->getVentas()->add(c);
+        //}
+        //string basura;
+        //getline(cin,basura);
+        if (opcion=="1"){
+            string input="pppp";
+            float value;
+            Alquiler * alquii;
+            do{
+            cout << "Introduzca el valor del alquiler:"<<endl;
+            getline(cin,input);
+            }while(input[0]>57 && input[0]<48);
+            value=stoi(input);
+            alquii = new Alquiler(value);
+            alquii->setPropiedad(c);
+            i->setAlquileres(alquii);
+            //TEST
+            /*IIterator * it= i->getAlquileres()->getIterator();
+            while(!it->hasCurrent()){
+                Alquiler * al = dynamic_cast<Alquiler*>(it->getCurrent());
+                if(al){
+                    cout << al->getPrecioAlquiler() << endl;
+                }
+                it->next();
+            }*/
+            //GET OUT!!!
+            //agregar a zona
+            z->setPropiedades(c);
+            return;
+
+        }if(opcion=="2"){
+            string input="pppp";
+            float value;
+            Venta * ventaa;
+            do{
+            cout << "Introduzca el valor de la venta:"<<endl;
+            getline(cin,input);
+            }while(input[0]>57 && input[0]<48);
+            value=stoi(input);
+            ventaa = new Venta(value);
+            ventaa->setPropiedad(c);
+            i->setVentas(ventaa);
+            //GET OUT!!!
+            //agregar a zona
+            z->setPropiedades(c);  
+            return;
         }
 
-        z->getPropiedades()->add(c); //-> Agregar luego de esto, la casa a la coleccion de propiedades de la zona z.
+        }
+
     }   
     else if(casa=="2"){ //crear apartamento
         int opcion2, opcion3;
