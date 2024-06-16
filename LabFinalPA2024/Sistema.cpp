@@ -83,12 +83,35 @@ void Sistema::setDepartamento(Departamento *u)
 
 void Sistema::Listarusuarios()
 {
+    int count = 0;
+    int tipoDeUsuario=0;
     IIterator *it;
     for (it = misUsuarios->getIterator(); it->hasCurrent(); it->next())
-    {
+    {   
+        count++;
         Usuario *u = (Usuario *)it->getCurrent();
-        cout << "Correo: " << u->getCorreoElectronico() << endl;
-    }
+        Usuario *checker = dynamic_cast<Administrador *>(it->getCurrent());
+        if (checker == nullptr)
+        {
+        Usuario *checker = dynamic_cast<Inmobiliaria *>(it->getCurrent());
+        if (checker == nullptr)
+            tipoDeUsuario = 2;
+        else
+            tipoDeUsuario = 1;
+        }
+        else
+        {
+        tipoDeUsuario = 0;
+        }
+        string var;
+        if(tipoDeUsuario==2)
+            var= "Interesado ";
+        if(tipoDeUsuario==1)
+            var= "Inmobiliaria ";
+        if(tipoDeUsuario==0)
+            var= "Administrador ";
+        cout << "   -( "<< count << " ) " <<var << "-" << endl<<"           - " << u->getCorreoElectronico()<<" -"<< endl<< endl;
+    }   
 }
 
 void Sistema::altaUsuario(Usuario *u)
