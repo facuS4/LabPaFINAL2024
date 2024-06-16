@@ -505,7 +505,7 @@ void Sistema::altaPropiedad()
     int ambientes, cuartos, banios;
     bool garaje;
     string pais, ciudad, numero, calle, garajesino, codigop;
-    float mtEdifi, mtEspacioverd, mtTotales;
+    float mtEdifi, mtEspacioverd;
     while (casa[0] != '1' && casa[0] != '2')
     {
         cout << "Elija 1 si quiere crear una casa o 2 para crear un apartamento" << endl;
@@ -594,7 +594,7 @@ void Sistema::altaPropiedad()
     }
     mtEdifi = stoi(sstring);
 
-    cout << "Por favor, ingrese la cantidad de metros totales" << endl;
+    /*cout << "Por favor, ingrese la cantidad de metros totales" << endl;
     getline(cin, sstring);
     while (sstring[0] < 48 || sstring[0] > 57)
     {
@@ -602,7 +602,7 @@ void Sistema::altaPropiedad()
 
         getline(cin, sstring);
     }
-    mtTotales = stoi(sstring);
+    mtTotales = stoi(sstring);*/
 
     // HASTA ACA FUE MI REVISION DE ESTA FUNCION -- FIRMA JANO
 
@@ -620,7 +620,7 @@ void Sistema::altaPropiedad()
         }
         mtEspacioverd = stoi(input);
 
-        Casa *c = new Casa(codigop, cuartos, ambientes, banios, garaje, dir, mtEdifi, mtTotales, mtEspacioverd, z);
+        Casa *c = new Casa(codigop, cuartos, ambientes, banios, garaje, dir, mtEdifi, mtEdifi+mtEspacioverd, mtEspacioverd, z);
         while (true)
         {
             cout << "Su casa esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
@@ -690,7 +690,7 @@ void Sistema::altaPropiedad()
                 cout << "No se encontro el edificio o no hay edificios" << endl;
                 return;
             }
-            Apartamento *a = new Apartamento(codigop, cuartos, ambientes, banios, garaje, dir, mtEdifi, mtTotales, true, e, z);
+            Apartamento *a = new Apartamento(codigop, cuartos, ambientes, banios, garaje, dir, mtEdifi, mtEdifi, true, e, z);
             z->setPropiedades(a);
             cout << "Su apartamento esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
             getline(cin, opcion3);
@@ -699,6 +699,7 @@ void Sistema::altaPropiedad()
                 string input = "pppp";
                 float value;
                 Alquiler *alquii;
+                // getline(cin, input);
                 do
                 {
                     cout << "Introduzca el valor del alquiler:" << endl;
@@ -715,6 +716,7 @@ void Sistema::altaPropiedad()
                 string input = "pppp";
                 float value;
                 Venta *ventaa;
+                // getline(cin, input);
                 do
                 {
                     cout << "Introduzca el valor de la venta:" << endl;
@@ -730,19 +732,51 @@ void Sistema::altaPropiedad()
         else if (opcion2 == "2")
         {
             string nombreEdificio;
-            cout << "Por favor, ingrese el nombre del edificio" << endl;
+            string pisos;
+            string gastosComunes;
+            cout << "nombre del edificio:" << endl;
+
             getline(cin, nombreEdificio);
-            cout << "Por favor, ingrese la cantidad de pisos" << endl;
-            int pisos;
-            cin >> pisos;
-            cout << "Por favor, ingrese los gastos comunes" << endl;
-            int gastosComunes;
-            cin >> gastosComunes;
-            Edificio *e = new Edificio(nombreEdificio, pisos, gastosComunes);
-            Apartamento *a = new Apartamento(codigop, cuartos, ambientes, banios, garaje, dir, mtEdifi, mtTotales, true, e, z);
+
+            cout << "pisos" << endl;
+
+            while (pisos.empty() || !isdigit(pisos[0]))
+            {
+                cout << "Ingrese la cantidad de pisos: ";
+                getline(cin, pisos);
+                if (pisos.empty() || !isdigit(pisos[0]))
+                {
+                    cout << "No valido." << endl;
+                }
+            }
+
+            int pisosin = stoi(pisos);
+            cout << "gastos comunes" << endl;
+
+            while (gastosComunes.empty() || !isdigit(gastosComunes[0]))
+            {
+                cout << "Ingrese el valor: ";
+                getline(cin, gastosComunes);
+                if (gastosComunes.empty() || !isdigit(gastosComunes[0]))
+                {
+                    cout << "No valido." << endl;
+                }
+            }
+
+            int gastosin = stoi(gastosComunes);
+
+            this->AltaEdificio(nombreEdificio, pisosin, gastosin);
+
+            Edificio *e = SeleccionarEdificio(nombreEdificio); // Falta cout de indique el nombre
+            if (e == nullptr)
+            {
+                cout << "No se encontro el edificio o no hay edificios" << endl;
+                return;
+            }
+            Apartamento *a = new Apartamento(codigop, cuartos, ambientes, banios, garaje, dir, mtEdifi, mtEdifi, true, e, z);
             z->setPropiedades(a);
             cout << "Su apartamento esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
-            cin >> opcion3;
+            getline(cin,opcion3);
             if (opcion3 == "1")
             {
                 string input = "pppp";
