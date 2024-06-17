@@ -72,6 +72,20 @@ void Zona::EliminarPropiedad(Propiedad * prop) {
 
 }
 
+bool Zona::ListarPropiedades(){
+  IIterator * it;
+  IIterator * it2;
+  for (it = Propiedades->getIterator(); it->hasCurrent(); it->next()){
+    it2 = it;
+    Propiedad * p = (Propiedad *)it->getCurrent(); 
+    cout << "Codigo de propiedad:  " << p->getCodigo() << endl;
+  }
+  if(it2 == nullptr){
+      cout << "No hay propiedades para mostrar" << endl;
+      return false;
+  }
+  return true;
+}
 
 Propiedad * Zona::SeleccionarPropiedad(string codigoPropiedad, string nombreUsuario) {
   cout<<nombreUsuario<<codigoPropiedad;

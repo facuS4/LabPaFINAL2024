@@ -38,6 +38,7 @@ class Zona : public ICollectible{
         void SeleccionarZona(string codigo);
         Propiedad * SeleccionarPropiedad(string codigo, string nombreus);
 
+        bool ListarPropiedades();
         void ListarEdificios();
 
         bool altaApartamento(int, int, int, bool, dtDireccion , int);

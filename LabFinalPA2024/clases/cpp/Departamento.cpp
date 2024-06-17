@@ -69,10 +69,15 @@ void Departamento::BuscarZona(string codigo) {
 
 void Departamento::listarZonas(){
   IIterator * it;
+  IIterator * it2;
   for(it=Zonas->getIterator();it->hasCurrent();it->next()){
+    it2=it;
     Zona * z = dynamic_cast<Zona*>(it->getCurrent());
     cout << "El codigo de la zona es " << z->getCodigo() << endl;
     cout << "El nombre de la zona es " << z->getNombre() << endl;
+  }
+  if(it2 == nullptr){
+      cout << "No hay zonas para mostrar" << endl;
   }
 
 }

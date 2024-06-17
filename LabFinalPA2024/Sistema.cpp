@@ -362,7 +362,7 @@ Zona *Sistema::SelecionarZona(string codigo, Departamento *depto)
 {
 
     IIterator *it;
-    IIterator *it3;
+    IIterator *it3 = nullptr;
     for (it = depto->getZonas()->getIterator(); it->hasCurrent(); it->next())
     {
         Zona *z = (Zona *)it->getCurrent();
@@ -376,6 +376,9 @@ Zona *Sistema::SelecionarZona(string codigo, Departamento *depto)
             delete it;
             delete it3;
             return z;
+        }
+        else if (z==nullptr){
+            cout << "No se encontro la Zona deseada" << endl;
         }
     }
     return nullptr;
@@ -881,7 +884,7 @@ cout << color_green << "El Estudiante " << _nombre << " fue agregado correctamen
 
 void Sistema::modificarPropiedad()
 {
-    Inmobiliaria *i = dynamic_cast<Inmobiliaria *>(this->usuarioSesion);
+    Inmobiliaria * i = dynamic_cast<Inmobiliaria *>(this->usuarioSesion);
     if (i == nullptr)
     {
         cout << "Error: No ha iniciado sesión como usuario inmobiliaria." << endl;
@@ -892,27 +895,37 @@ void Sistema::modificarPropiedad()
     cout << "Por favor, ingrese la letra del Departamento" << endl;
     cin >> letra;
     Departamento *d = seleccionarDepartamento(letra);
-    if (d == nullptr)
+    if (d == nullptr){
         return;
+    }
     d->listarZonas();
     string codigoz;
     cout << "Por favor, ingrese el codigo de la Zona" << endl;
-    getline(cin, codigoz);
-    Zona *z = SelecionarZona(codigoz, d);
-
+    //getline(cin, codigoz);
+    cin >> codigoz;
+    Zona * z = SelecionarZona(codigoz, d);
+    if (z == nullptr){
+        cout << "Codigo de Zona incorrecto"<< endl;
+        return;
+    }
     int ambientes, cuartos, banios;
     bool garaje, disponible;
     string pais, ciudad, numero, calle, garajesino, codigop, disponiblesino;
     float mtEdifi, mtEspacioverd, mtTotales;
-    Propiedad *propiedad = nullptr;
+    Propiedad * propiedad = nullptr;
 
-    cout << "Por favor, ingrese el codigo" << endl;
+    system("clear");
+    bool haypropiedades;
+    haypropiedades = z->ListarPropiedades();
+    if(haypropiedades != true){
+        return;
+    }
+    cout << "Por favor, ingrese el codigo de la propiedad" << endl;
     cin >> codigop;
 
-    IIterator *it;
-    for (it = z->getPropiedades()->getIterator(); it->hasCurrent(); it->next())
-    {
-        Propiedad *p = (Propiedad *)it->getCurrent();
+    IIterator * it;
+    for (it = z->getPropiedades()->getIterator(); it->hasCurrent(); it->next()){
+        Propiedad * p = (Propiedad *)it->getCurrent();
 
         if (p->getCodigo() == codigop)
         {
@@ -930,21 +943,28 @@ void Sistema::modificarPropiedad()
     cin >> ambientes;
     propiedad->setAmbientes(ambientes);
 
+    system("clear");
+
     cout << "Por favor, ingrese la nueva cantidad de cuartos" << endl;
     cin >> cuartos;
     propiedad->setDormitorios(cuartos);
+
+    system("clear");
 
     cout << "Por favor, ingrese la nueva cantidad de banios" << endl;
     cin >> banios;
     propiedad->setBanios(banios);
 
+    system("clear");
+
     cout << "¿Esta propiedad cuenta con Garaje? (si/no)" << endl;
-    getline(cin, garajesino);
+    cin >> garajesino;
     garaje = (garajesino == "si");
     propiedad->setGarage(garaje);
     if(garajesino != "si"){
         cout << "La propiedad no cuenta con garaje" << endl;
     }
+
 
     cout << "Por favor, ingrese el nuevo pais" << endl;
     cin.ignore(); // Limpiar el buffer
@@ -957,10 +977,14 @@ void Sistema::modificarPropiedad()
     getline(cin, numero);
 
     cout << "Por favor, ingrese la nueva calle" << endl;
+    cin.ignore(); // Limpiar el buffer
     getline(cin, calle);
 
     dtDireccion *nuevaDir = new dtDireccion(pais, ciudad, numero, calle);
     propiedad->setDireccion(nuevaDir);
+
+    system("clear");
+    //cin.ignore(); // Limpiar el buffer
 
     cout << "Por favor, ingrese la nueva cantidad de metros edificados" << endl;
     cin >> mtEdifi;
@@ -996,6 +1020,7 @@ void Sistema::modificarPropiedad()
             do
             {
                 cout << "Introduzca el valor del alquiler:" << endl;
+                cin.ignore(); // Limpiar el buffer
                 getline(cin, input);
             } while (input[0] > 57 && input[0] < 48);
 
@@ -1007,12 +1032,13 @@ void Sistema::modificarPropiedad()
         else if (opcion == 2)
         {
             //i->getVentas()->add(propiedad);
-            string input = "pppp";
+            string input = "ppp";
             float value;
             Venta * ventaa;
             do
             {
                 cout << "Introduzca el valor de la venta:" << endl;
+                cin.ignore(); // Limpiar el buffer
                 getline(cin, input);
             } while (input[0] > 57 && input[0] < 48);
             value = stoi(input);
@@ -1033,13 +1059,16 @@ void Sistema::modificarPropiedad()
         cout << "Por favor, ingrese la nueva cantidad de metros con espacios verdes" << endl;
         cin >> mtEspacioverd;
         casa->setMetrosVerdes(mtEspacioverd);
+
+        system("clear");
     }
     else
     {
         Apartamento * apartamento = dynamic_cast<Apartamento *>(propiedad);
         if (apartamento != nullptr){
             cout << "¿Este apartamento se encuentra disponible? (si/no)" << endl;
-            getline(cin, disponiblesino);
+            cin >> disponiblesino;
+            system("clear");
             disponible = (disponiblesino == "si");
             apartamento->setDisponible(disponible);
             if(disponiblesino != "si"){
