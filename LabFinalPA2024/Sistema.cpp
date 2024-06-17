@@ -310,112 +310,132 @@ void Sistema::Ultimo5Mensajes()
 }
 
 void Sistema::EnviarMensajeInmobiliaria() {
-    // Verificar si el usuario actual es un Inmobiliaria
+    // Verificar si el usuario actual es una Inmobiliaria
     Inmobiliaria* inmobiliaria = dynamic_cast<Inmobiliaria*>(this->usuarioSesion);
     if (!inmobiliaria) {
         cout << "Error: Solo los usuarios inmobiliaria pueden enviar mensajes." << endl;
         return;
     }
 
-    ICollection * conversacionesAlquiler = new List();
-    ICollection * conversacionesVenta = new List();
+    ICollection *conversacionesAlquiler = new List();
+    ICollection *conversacionesVenta = new List();
 
-    // Listar conversaciones
+    // Listar conversaciones de alquiler
     cout << "Conversaciones Alquiler:" << endl;
     IIterator *it;
     int index = 1;
-    for(it = inmobiliaria->getAlquileres()->getIterator(); it->hasCurrent(); it->next()) {
+    for (it = inmobiliaria->getAlquileres()->getIterator(); it->hasCurrent(); it->next()) {
         Alquiler *a = (Alquiler *)it->getCurrent();
         IIterator *it2;
         for (it2 = a->getPropiedad()->getConversaciones()->getIterator(); it2->hasCurrent(); it2->next()) {
             Conversacion *c = (Conversacion *)it2->getCurrent();
-            if(c != nullptr) {
+            if (c != nullptr) {
                 conversacionesAlquiler->add(c);
+                IIterator *it3;
+                for (it3 = c->getMensajes()->getIterator(); it3->hasCurrent(); it3->next()) {
+                    Mensaje *m = (Mensaje *)it3->getCurrent();
+                    cout << "  Mensaje: " << m->getFecha()->getAnio() << "/" << m->getFecha()->getMes() << "/" << m->getFecha()->getDia() << endl;
+                }
+                index++;
+            } else {
+                cout << "No se encontro la conversacion deseada." << endl;
             }
-            IIterator * it3;
-            for(it3 = c->getMensajes()->getIterator(); it3->hasCurrent(); it3->next()) {
-                Mensaje *m = (Mensaje *)it3->getCurrent();
-                cout << "Mensaje  " << m->getFecha()->getAnio() << "/" << m->getFecha()->getMes() << "/" << m->getFecha()->getDia() <<endl;
-            }
-            index++;
         }
     }
 
+    // Listar conversaciones de venta
     cout << "Conversaciones Venta:" << endl;
     IIterator *it4;
-    for(it4 = inmobiliaria->getVentas()->getIterator(); it4->hasCurrent(); it4->next()) {
-        Venta * v= (Venta *)it4->getCurrent();
+    for (it4 = inmobiliaria->getVentas()->getIterator(); it4->hasCurrent(); it4->next()) {
+        Venta *v = (Venta *)it4->getCurrent();
         IIterator *it5;
         for (it5 = v->getPropiedad()->getConversaciones()->getIterator(); it5->hasCurrent(); it5->next()) {
-            Conversacion *c2= (Conversacion *)it5->getCurrent();
-            if(c2 != nullptr) {
-                if(conversacionesAlquiler->member(c2)){
+            Conversacion *c2 = (Conversacion *)it5->getCurrent();
+            if (c2 != nullptr) {
+                if (conversacionesAlquiler->member(c2)) {
                     continue;
                 }
                 conversacionesVenta->add(c2);
-            } 
-            IIterator * it6;
-            for(it6 = c2->getMensajes()->getIterator(); it6->hasCurrent(); it6->next()) {
-                Mensaje *m2 = (Mensaje *)it6->getCurrent();
-                cout << "Mensaje  " << m2->getFecha()->getAnio() << "/" << m2->getFecha()->getMes() << "/" << m2->getFecha()->getDia() <<endl;
+                cout << "Conversacion " << index << " Inmobiliaria: " << c2->getInmobiliaria() << endl;
+                IIterator *it6;
+                for (it6 = c2->getMensajes()->getIterator(); it6->hasCurrent(); it6->next()) {
+                    Mensaje *m2 = (Mensaje *)it6->getCurrent();
+                    cout << "  Mensaje: " << m2->getFecha()->getAnio() << "/" << m2->getFecha()->getMes() << "/" << m2->getFecha()->getDia() << endl;
+                }
+                index++;
+            } else {
+                cout << "No se encontro la conversacion deseada." << endl;
             }
-            index++;
         }
+    }
+
+    // Verificar si existen conversaciones
+    if (conversacionesAlquiler->isEmpty() && conversacionesVenta->isEmpty()) {
+        cout << "No hay conversaciones disponibles." << endl;
+        return;
     }
 
     // Seleccionar una conversacion
     string opcion;
-    cout << " Desea elegir una conversacion de alquiler o de venta? Ingrese 1 para alquiler o 2 para venta" << endl;
+    cout << "Desea elegir una conversacion de alquiler o de venta? Ingrese 1 para alquiler o 2 para venta: ";
 
-    while (opcion[0] != '1' && opcion[0] != '2')
-    {
-        cout << "Elija 1 si quiere ver las conversaciones de alquiler o 2 para ver las de venta" << endl;
+    while (opcion[0] != '1' && opcion[0] != '2') {
+        cout << "Elija 1 si quiere ver las conversaciones de alquiler o 2 para ver las de venta: ";
         getline(cin, opcion);
     }
 
     ICollection* conversacionesSeleccionadas = (opcion[0] == '1') ? conversacionesAlquiler : conversacionesVenta;
 
-    cout << "Conversaciones Disponibles" << endl;
-    IIterator *it7;
-    for(it7 = conversacionesSeleccionadas->getIterator(); it7->hasCurrent(); it7->next()) {
+    if (conversacionesSeleccionadas->isEmpty()) {
+        cout << "No hay conversaciones de " << (opcion[0] == '1' ? "alquiler" : "venta") << " disponibles." << endl;
+        return;
+    }
+
+    cout << "Conversaciones Disponibles:" << endl;
+    int currentIndex = 1;
+    for (IIterator *it7 = conversacionesSeleccionadas->getIterator(); it7->hasCurrent(); it7->next(), currentIndex++) {
         Conversacion *c3 = (Conversacion *)it7->getCurrent();
+        if (c3 == nullptr) {
+            cout << "No se encontro la conversacion deseada." << endl;
+            return;
+        }
+        cout << "Conversacion " << currentIndex << endl;
         IIterator *it10;
-        for(it10 = c3->getMensajes()->getIterator(); it10->hasCurrent(); it10->next()) {
+        for (it10 = c3->getMensajes()->getIterator(); it10->hasCurrent(); it10->next()) {
             Mensaje *m4 = (Mensaje *)it10->getCurrent();
-            cout << "Conversacion " << m4->getFecha()->getAnio() << "/" << m4->getFecha()->getMes() << "/" << m4->getFecha()->getDia() << " " << " Indice " << index << endl;
+            cout << "  Mensaje: " << m4->getFecha()->getAnio() << "/" << m4->getFecha()->getMes() << "/" << m4->getFecha()->getDia() << endl;
         }
     }
 
     string opcion2;
     int seleccion = -1;
-    while (seleccion < 1 || seleccion >= index) {
+    while (seleccion < 1 || seleccion >= currentIndex) {
         cout << "Seleccione una conversacion ingresando el numero correspondiente: ";
         getline(cin, opcion2);
         try {
-            seleccion = stoi(opcion);
+            seleccion = stoi(opcion2);
         } catch (const std::exception&) {
             seleccion = -1;
         }
-        if (seleccion < 1 || seleccion >= index) {
-            cout << "Opcion invalida. Ingrese un número valido." << endl;
+        if (seleccion < 1 || seleccion >= currentIndex) {
+            cout << "Opcion invalida. Ingrese un numero valido." << endl;
         }
     }
 
     Conversacion* conversacionSeleccionada = nullptr;
 
     // Buscar la conversación seleccionada por el índice
-    int current = 1;
-    for (IIterator* it7 = conversacionesSeleccionadas->getIterator(); it7->hasCurrent(); it7->next()) {
+    currentIndex = 1;
+    for (IIterator* it7 = conversacionesSeleccionadas->getIterator(); it7->hasCurrent(); it7->next(), currentIndex++) {
         Conversacion* c = (Conversacion*)it7->getCurrent();
-        if (current == seleccion) {
+        if (currentIndex == seleccion) {
             conversacionSeleccionada = c;
             break;
         }
-        current++;
     }
 
     if (conversacionSeleccionada == nullptr) {
-        cout << "No se pudo encontrar la conversacion seleccionada." << endl;
+        cout << "No se pudo encontrar la conversación seleccionada." << endl;
         return;
     }
 
@@ -430,6 +450,7 @@ void Sistema::EnviarMensajeInmobiliaria() {
         count++;
     }
 
+    // Ingresar un nuevo mensaje
     string mensajeNuevo;
     cout << "Ingrese su mensaje para la conversacion seleccionada (o presione Enter para omitir): ";
     getline(cin, mensajeNuevo);
@@ -438,10 +459,12 @@ void Sistema::EnviarMensajeInmobiliaria() {
         // Crear un nuevo mensaje y agregarlo a la conversación seleccionada
         dtFecha* fechaActual = new dtFecha(); // Suponiendo que tienes una clase Fecha
         Mensaje* nuevoMensaje = new Mensaje(fechaActual, mensajeNuevo);
-        conversacionSeleccionada->AgregarMensaje(nuevoMensaje); // Suponiendo un método agregarMensaje en Conversacion
+        conversacionSeleccionada->AgregarMensaje(nuevoMensaje); // Suponiendo un método AgregarMensaje en Conversacion
         cout << "Mensaje enviado correctamente." << endl;
     }
 }
+
+
 
 
 void Sistema::AgregarMensaje(string mensaje)
