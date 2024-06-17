@@ -11,7 +11,7 @@ Sistema::Sistema()
 void Sistema::menudedebugging()
 {
     string charchar;
-    cout << "Todavia sin error" << endl;
+    cout << "Ingrese EXIT" << endl;
     getline(cin, charchar);
 }
 
@@ -1022,6 +1022,11 @@ void Sistema::modificarPropiedad()
 
         if (p->getCodigo() == codigop)
         {
+            if (!i->PerteneceAinmobiliaria(codigop)){
+                cout << endl << "Esta propiedad no es tuya" << endl;
+                //Sistema::menudedebugging();
+                return;
+            }
             propiedad = p;
             break;
         }

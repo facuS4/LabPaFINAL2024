@@ -587,10 +587,14 @@ int main()
       break;
       case 6:
         // ACA VA FUNCION DE LUCAS
+        {
         sis->modificarPropiedad();
+        string basura;
+        getline(cin,basura);
         menudeprueba();
         system("clear");
         break;
+        }
       case 7:
       {
         string cod;
