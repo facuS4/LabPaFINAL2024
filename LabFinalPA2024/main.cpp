@@ -605,6 +605,7 @@ int main()
       case 8:
         // ACA VA FUNCION FACU
         cout << "placeholder" << endl;
+        sis->EnviarMensajeInmobiliaria();
         menudeprueba();
         system("clear");
         

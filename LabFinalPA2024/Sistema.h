@@ -15,11 +15,8 @@
 #include "clases/h/Conversacion.h"
 #include "clases/h/Alquiler.h"
 #include "clases/h/Venta.h"
-
-
-
-
-
+#include "clases/h/Mensaje.h"
+#include "clases/h/Conversacion.h"
 
 using namespace std;
 

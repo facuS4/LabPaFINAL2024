@@ -20,6 +20,8 @@
 #include "ICollection/String.h"
 #include "clases/h/Usuario.h"
 #include "clases/h/Zona.h"
+#include "clases/h/Mensaje.h"
+#include "clases/h/Conversacion.h"
 
 #include "./clases/h/Propiedad.h"
 #include "./clases/h/Departamento.h"
