@@ -379,7 +379,7 @@ void Sistema::EnviarMensajeInmobiliaria() {
         IIterator *it10;
         for(it10 = c3->getMensajes()->getIterator(); it10->hasCurrent(); it10->next()) {
             Mensaje *m4 = (Mensaje *)it10->getCurrent();
-            cout << "Conversacion " << m4->getFecha()->getAnio() << " " << index << endl;
+            cout << "Conversacion " << m4->getFecha()->getAnio() << "/" << m4->getFecha()->getMes() << "/" << m4->getFecha()->getDia() << " " << " Indice " << index << endl;
         }
     }
 
@@ -425,6 +425,18 @@ void Sistema::EnviarMensajeInmobiliaria() {
         cout << "Mensaje: " << m->getTexto() << endl;
         itMensajes->next();
         count++;
+    }
+
+    string mensajeNuevo;
+    cout << "Ingrese su mensaje para la conversacion seleccionada (o presione Enter para omitir): ";
+    getline(cin, mensajeNuevo);
+
+    if (!mensajeNuevo.empty()) {
+        // Crear un nuevo mensaje y agregarlo a la conversación seleccionada
+        dtFecha* fechaActual = new dtFecha(); // Suponiendo que tienes una clase Fecha
+        Mensaje* nuevoMensaje = new Mensaje(fechaActual, mensajeNuevo);
+        conversacionSeleccionada->AgregarMensaje(nuevoMensaje); // Suponiendo un método agregarMensaje en Conversacion
+        cout << "Mensaje enviado correctamente." << endl;
     }
 }
 
