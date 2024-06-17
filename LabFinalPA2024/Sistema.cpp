@@ -349,6 +349,9 @@ void Sistema::EnviarMensajeInmobiliaria() {
         for (it5 = v->getPropiedad()->getConversaciones()->getIterator(); it5->hasCurrent(); it5->next()) {
             Conversacion *c2= (Conversacion *)it5->getCurrent();
             if(c2 != nullptr) {
+                if(conversacionesAlquiler->member(c2)){
+                    continue;
+                }
                 conversacionesVenta->add(c2);
             } 
             IIterator * it6;

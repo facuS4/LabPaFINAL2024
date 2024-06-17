@@ -397,7 +397,7 @@ int main()
 
   float x = 10;
   // LA FECHA//
-  dtFecha *lafecha = new dtFecha(1, 2, 3);
+  dtFecha *lafecha = new dtFecha(27, 5, 2024);
   // LA DIRRRR///
   ladir = new dtDireccion("Bosnia", "Mintx", "0032", "Boris Salvatore");
   // la diiiiiirrrr////
@@ -608,7 +608,6 @@ int main()
       break;
       case 8:
         // ACA VA FUNCION FACU
-        cout << "placeholder" << endl;
         sis->EnviarMensajeInmobiliaria();
         menudeprueba();
         system("clear");
