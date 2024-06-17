@@ -429,8 +429,8 @@ int main()
   Conversacion *convo = new Conversacion();
   Mensaje *mensaje = new Mensaje(lafecha, "hola como andas");
   convo->AgregarMensaje(mensaje);
-  casita1->setConvo(convo);
-  ap2->setConvo(convo);
+  casita1->setConversaciones(convo);
+  ap2->setConversaciones(convo);
   // DEPARTAMENTOS HARDCODEADOS //
   Departamento *SanJose = new Departamento('A', "San Jose");
   Departamento *Colonia = new Departamento('B', "Colonia");
@@ -587,10 +587,9 @@ int main()
       break;
       case 6:
         // ACA VA FUNCION DE LUCAS
-        cout << "placeholder" << endl;
-        
-        
-
+        sis->modificarPropiedad();
+        menudeprueba();
+        system("clear");
         break;
       case 7:
       {

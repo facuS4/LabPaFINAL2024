@@ -22,6 +22,7 @@ class Apartamento : public Propiedad{
 
         float getMetrosTotales();
         void setMetrosTotales(float);
+        void setDisponible(bool);
 
         void eliminarVinculosPropiedad();
         void AgregarMensaje(string);

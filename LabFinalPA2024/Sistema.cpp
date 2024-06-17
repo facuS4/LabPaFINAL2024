@@ -813,7 +813,7 @@ void Sistema::altaPropiedad()
             {
                 string input = "pppp";
                 float value;
-                Venta *ventaa;
+                Venta * ventaa;
                 do
                 {
                     cout << "Introduzca el valor de la venta:" << endl;
@@ -901,8 +901,8 @@ void Sistema::modificarPropiedad()
     Zona *z = SelecionarZona(codigoz, d);
 
     int ambientes, cuartos, banios;
-    bool garaje;
-    string pais, ciudad, numero, calle, garajesino, codigop;
+    bool garaje, disponible;
+    string pais, ciudad, numero, calle, garajesino, codigop, disponiblesino;
     float mtEdifi, mtEspacioverd, mtTotales;
     Propiedad *propiedad = nullptr;
 
@@ -939,9 +939,12 @@ void Sistema::modificarPropiedad()
     propiedad->setBanios(banios);
 
     cout << "¿Esta propiedad cuenta con Garaje? (si/no)" << endl;
-    cin >> garajesino;
+    getline(cin, garajesino);
     garaje = (garajesino == "si");
     propiedad->setGarage(garaje);
+    if(garajesino != "si"){
+        cout << "La propiedad no cuenta con garaje" << endl;
+    }
 
     cout << "Por favor, ingrese el nuevo pais" << endl;
     cin.ignore(); // Limpiar el buffer
@@ -985,13 +988,38 @@ void Sistema::modificarPropiedad()
         }
 
         // Agregar la propiedad a la nueva colección según la opción seleccionada
-        if (opcion == 1)
-        {
-            i->getAlquileres()->add(propiedad);
+        if (opcion == 1){
+            //i->getAlquileres()->add(propiedad);
+            string input = "pppp";
+            float value;
+            Alquiler * alquii;
+            do
+            {
+                cout << "Introduzca el valor del alquiler:" << endl;
+                getline(cin, input);
+            } while (input[0] > 57 && input[0] < 48);
+
+            value = stoi(input);
+            alquii = new Alquiler(value);
+            alquii->setPropiedad(propiedad);
+            i->setAlquileres(alquii);
         }
         else if (opcion == 2)
         {
-            i->getVentas()->add(propiedad);
+            //i->getVentas()->add(propiedad);
+            string input = "pppp";
+            float value;
+            Venta * ventaa;
+            do
+            {
+                cout << "Introduzca el valor de la venta:" << endl;
+                getline(cin, input);
+            } while (input[0] > 57 && input[0] < 48);
+            value = stoi(input);
+            ventaa = new Venta(value);
+            ventaa->setPropiedad(propiedad);
+            i->setVentas(ventaa);
+            return;            
         }
     }
     else
@@ -999,7 +1027,7 @@ void Sistema::modificarPropiedad()
         cout << "No ingreso una opcion correcta, queda en la misma situacion" << endl;
     }
 
-    Casa *casa = dynamic_cast<Casa *>(propiedad);
+    Casa * casa = dynamic_cast<Casa *>(propiedad);
     if (casa != nullptr)
     {
         cout << "Por favor, ingrese la nueva cantidad de metros con espacios verdes" << endl;
@@ -1008,14 +1036,19 @@ void Sistema::modificarPropiedad()
     }
     else
     {
-        Apartamento *apartamento = dynamic_cast<Apartamento *>(propiedad);
-        if (apartamento != nullptr)
-        {
-            // Debo agregar lo correspondiente a Apartamento: disponibilidad y ver tema de Edificio.
+        Apartamento * apartamento = dynamic_cast<Apartamento *>(propiedad);
+        if (apartamento != nullptr){
+            cout << "¿Este apartamento se encuentra disponible? (si/no)" << endl;
+            getline(cin, disponiblesino);
+            disponible = (disponiblesino == "si");
+            apartamento->setDisponible(disponible);
+            if(disponiblesino != "si"){
+                cout << "El apartamento no se encuentra disponible" << endl;
+            }
         }
     }
 
-    cout << "La propiedad ha sido modificada exitosamente." << endl;
+    cout << endl << "La propiedad ha sido modificada exitosamente." << endl;
 }
 
 // ELIMINAR PROPIEDAD

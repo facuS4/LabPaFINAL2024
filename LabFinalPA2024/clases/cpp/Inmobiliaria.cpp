@@ -163,9 +163,9 @@ void Inmobiliaria::EliminarPropiedad(string codigo)
 
     this->propiedadtemp->eliminarVinculosPropiedad();
     this->propiedadtemp->getZona()->EliminarPropiedad(this->propiedadtemp);
-    if (this->propiedadtemp->getConvo() != nullptr)
+    if (this->propiedadtemp->getConversaciones() != nullptr)
     {
-      delete this->propiedadtemp->getConvo();
+      delete this->propiedadtemp->getConversaciones();
     }
     delete this->propiedadtemp;
     delete ventaAEliminar;
@@ -198,9 +198,9 @@ void Inmobiliaria::EliminarPropiedad(string codigo)
 
     this->propiedadtemp->eliminarVinculosPropiedad();
     this->propiedadtemp->getZona()->EliminarPropiedad(this->propiedadtemp);
-    if (this->propiedadtemp->getConvo() != nullptr)
+    if (this->propiedadtemp->getConversaciones() != nullptr)
     {
-      delete this->propiedadtemp->getConvo();
+      delete this->propiedadtemp->getConversaciones();
     }
     delete this->propiedadtemp;
     delete alquilerAEliminar;
