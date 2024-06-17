@@ -977,7 +977,7 @@ void Sistema::modificarPropiedad()
     getline(cin, numero);
 
     cout << "Por favor, ingrese la nueva calle" << endl;
-    cin.ignore(); // Limpiar el buffer
+    //cin.ignore(); // Limpiar el buffer
     getline(cin, calle);
 
     dtDireccion *nuevaDir = new dtDireccion(pais, ciudad, numero, calle);
@@ -1032,7 +1032,7 @@ void Sistema::modificarPropiedad()
         else if (opcion == 2)
         {
             //i->getVentas()->add(propiedad);
-            string input = "ppp";
+            string input = "pppp";
             float value;
             Venta * ventaa;
             do
@@ -1044,8 +1044,7 @@ void Sistema::modificarPropiedad()
             value = stoi(input);
             ventaa = new Venta(value);
             ventaa->setPropiedad(propiedad);
-            i->setVentas(ventaa);
-            return;            
+            i->setVentas(ventaa);            
         }
     }
     else
