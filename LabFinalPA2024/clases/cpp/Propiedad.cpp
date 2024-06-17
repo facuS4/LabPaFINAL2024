@@ -20,8 +20,7 @@ Propiedad::Propiedad(string codigo, int dormitorios, int ambientes, int banios, 
 Propiedad::~Propiedad() {}
 
 // Destructor
-ICollection * Propiedad::getConvo(){
-
+ICollection * Propiedad::getConversaciones(){
   return this->Conversaciones;
 
 }
@@ -96,7 +95,7 @@ void Propiedad::setMetrosTotales(float metrosPropiedad) {
   MetrosTotales = metrosPropiedad;
 }
 
-void Propiedad::setConvo(Conversacion * c){
+void Propiedad::setConversaciones(Conversacion * c){
 
   Conversaciones->add(c);
 

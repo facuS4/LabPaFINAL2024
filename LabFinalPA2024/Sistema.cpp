@@ -309,10 +309,44 @@ void Sistema::Ultimo5Mensajes()
 {
 }
 
-void Sistema::EnviarMensaje(string mensaje)
-{
-    cout << mensaje;
+void Sistema::EnviarMensajeInmobiliaria() {
+    // Verificar si el usuario actual es un Inmobiliaria
+    Inmobiliaria* inmobiliaria = dynamic_cast<Inmobiliaria*>(this->usuarioSesion);
+    if (!inmobiliaria) {
+        cout << "Error: Solo los usuarios inmobiliaria pueden enviar mensajes." << endl;
+        return;
+    }
+
+    // Listar conversaciones
+    IIterator *it;
+    for(it = inmobiliaria->getAlquileres()->getIterator(); it->hasCurrent(); it->next()) {
+        Propiedad *p = (Propiedad *)it->getCurrent();
+        IIterator *it2;
+        for(it2 = p->getConversaciones()->getIterator(); it2->hasCurrent(); it2->next()) {
+            Conversacion *c = (Conversacion *)it2->getCurrent();
+            IIterator * it3;
+            for(it3 = c->getMensajes()->getIterator(); it3->hasCurrent(); it3->next()) {
+                Mensaje *m = (Mensaje *)it3->getCurrent();
+                cout << "Mensaje: " << m->getFecha() << endl;
+            }
+        }
+    }
+
+    IIterator *it4;
+    for(it4 = inmobiliaria->getVentas()->getIterator(); it->hasCurrent(); it->next()) {
+        Propiedad *p = (Propiedad *)it4->getCurrent();
+        IIterator *it5;
+        for(it5 = p->getConversaciones()->getIterator(); it5->hasCurrent(); it5->next()) {
+            Conversacion *c = (Conversacion *)it5->getCurrent();
+            IIterator * it6;
+            for(it6 = c->getMensajes()->getIterator(); it6->hasCurrent(); it6->next()) {
+                Mensaje *m = (Mensaje *)it6->getCurrent();
+                cout << "Mensaje: " << m->getFecha() << endl;
+            }
+        }
+    }
 }
+
 
 void Sistema::AgregarMensaje(string mensaje)
 {

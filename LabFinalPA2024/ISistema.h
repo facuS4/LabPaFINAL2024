@@ -66,7 +66,7 @@ class ISistema {
 
         virtual void Ultimo5Mensajes() = 0;
 
-        virtual void EnviarMensaje(string mensaje) = 0;
+        virtual void EnviarMensajeInmobiliaria() = 0;
 
         virtual void AgregarMensaje(string mensaje) = 0;
 

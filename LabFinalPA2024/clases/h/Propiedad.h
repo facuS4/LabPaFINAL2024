@@ -32,9 +32,9 @@ class Propiedad : public ICollectible{
         Propiedad();
         Propiedad(string, int, int, int, bool, dtDireccion*, float, float, Zona *);
         virtual ~Propiedad()=0;
-        ICollection * getConvo();
+        ICollection * getConversaciones();
 
-        void setConvo(Conversacion *);
+        void setConversaciones(Conversacion *);
         string getCodigo();
         void setCodigo(string);
 
