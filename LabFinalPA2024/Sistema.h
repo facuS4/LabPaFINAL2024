@@ -73,7 +73,9 @@ class Sistema : public ISistema{
 
         void Ultimo5Mensajes();
 
-        void EnviarMensajeInmobiliaria();
+        Conversacion * SeleccionarConversacionInmobiliaria();
+        
+        void enviarMensajeInmobiliaria(Conversacion *);
 
         void AgregarMensaje(string mensaje);
 

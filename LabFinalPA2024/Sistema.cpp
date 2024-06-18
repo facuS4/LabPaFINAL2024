@@ -309,12 +309,12 @@ void Sistema::Ultimo5Mensajes()
 {
 }
 
-void Sistema::EnviarMensajeInmobiliaria() {
+Conversacion * Sistema::SeleccionarConversacionInmobiliaria() {
     // Verificar si el usuario actual es una Inmobiliaria
     Inmobiliaria* inmobiliaria = dynamic_cast<Inmobiliaria*>(this->usuarioSesion);
     if (!inmobiliaria) {
         cout << "Error: Solo los usuarios inmobiliaria pueden enviar mensajes." << endl;
-        return;
+        return nullptr;
     }
 
     ICollection *conversacionesAlquiler = new List();
@@ -372,7 +372,7 @@ void Sistema::EnviarMensajeInmobiliaria() {
     // Verificar si existen conversaciones
     if (conversacionesAlquiler->isEmpty() && conversacionesVenta->isEmpty()) {
         cout << "No hay conversaciones disponibles." << endl;
-        return;
+        return nullptr;
     }
 
     // Seleccionar una conversacion
@@ -388,7 +388,7 @@ void Sistema::EnviarMensajeInmobiliaria() {
 
     if (conversacionesSeleccionadas->isEmpty()) {
         cout << "No hay conversaciones de " << (opcion[0] == '1' ? "alquiler" : "venta") << " disponibles." << endl;
-        return;
+        return nullptr;
     }
 
     cout << "Conversaciones Disponibles:" << endl;
@@ -397,7 +397,7 @@ void Sistema::EnviarMensajeInmobiliaria() {
         Conversacion *c3 = (Conversacion *)it7->getCurrent();
         if (c3 == nullptr) {
             cout << "No se encontro la conversacion deseada." << endl;
-            return;
+            return nullptr;
         }
         cout << "Conversacion " << currentIndex << endl;
         IIterator *it10;
@@ -433,8 +433,12 @@ void Sistema::EnviarMensajeInmobiliaria() {
             break;
         }
     }
+    return conversacionSeleccionada;
+}
 
-    if (conversacionSeleccionada == nullptr) {
+
+void Sistema::enviarMensajeInmobiliaria(Conversacion * conversacionSeleccionada){
+if (conversacionSeleccionada == nullptr) {
         cout << "No se pudo encontrar la conversación seleccionada." << endl;
         return;
     }
@@ -465,8 +469,6 @@ void Sistema::EnviarMensajeInmobiliaria() {
         cout << "Mensaje enviado correctamente." << endl;
     }
 }
-
-
 
 
 void Sistema::AgregarMensaje(string mensaje)

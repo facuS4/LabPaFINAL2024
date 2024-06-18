@@ -614,10 +614,14 @@ int main()
       break;
       case 8:
         // ACA VA FUNCION FACU
-        sis->EnviarMensajeInmobiliaria();
+        {
+        Conversacion * temp=sis->SeleccionarConversacionInmobiliaria();
+        if(temp!=nullptr){
+          sis->enviarMensajeInmobiliaria(temp);
+        }
         menudeprueba();
         system("clear");
-        
+        }
         break;
       case 9:
       {
