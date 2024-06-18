@@ -615,9 +615,9 @@ int main()
       case 8:
         // ACA VA FUNCION FACU
         {
-        Conversacion * temp=sis->SeleccionarConversacionInmobiliaria();
-        if(temp!=nullptr){
-          sis->enviarMensajeInmobiliaria(temp);
+        sis->SeleccionarConversacionInmobiliaria();
+        if(sis->getConversacionActual()!=nullptr){
+          sis->enviarMensajeInmobiliaria();
         }
         menudeprueba();
         system("clear");

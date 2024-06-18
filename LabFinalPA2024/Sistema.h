@@ -28,6 +28,7 @@ class Sistema : public ISistema{
         ICollection * misUsuarios;
         ICollection * Edificios;
         Usuario * usuarioSesion;
+        Conversacion * conversacion=nullptr;
 
 
     public:
@@ -73,13 +74,15 @@ class Sistema : public ISistema{
 
         void Ultimo5Mensajes();
 
-        Conversacion * SeleccionarConversacionInmobiliaria();
+        void SeleccionarConversacionInmobiliaria();
         
-        void enviarMensajeInmobiliaria(Conversacion *);
+        void enviarMensajeInmobiliaria();
 
         void AgregarMensaje(string mensaje);
 
         void CrearMensaje(string mensaje);
+
+        Conversacion * getConversacionActual();
 
         Zona * SelecionarZona(string codigo,Departamento * depto);
 

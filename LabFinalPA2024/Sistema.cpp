@@ -84,34 +84,36 @@ void Sistema::setDepartamento(Departamento *u)
 void Sistema::Listarusuarios()
 {
     int count = 0;
-    int tipoDeUsuario=0;
+    int tipoDeUsuario = 0;
     IIterator *it;
     for (it = misUsuarios->getIterator(); it->hasCurrent(); it->next())
-    {   
+    {
         count++;
         Usuario *u = (Usuario *)it->getCurrent();
         Usuario *checker = dynamic_cast<Administrador *>(it->getCurrent());
         if (checker == nullptr)
         {
-        Usuario *checker = dynamic_cast<Inmobiliaria *>(it->getCurrent());
-        if (checker == nullptr)
-            tipoDeUsuario = 2;
-        else
-            tipoDeUsuario = 1;
+            Usuario *checker = dynamic_cast<Inmobiliaria *>(it->getCurrent());
+            if (checker == nullptr)
+                tipoDeUsuario = 2;
+            else
+                tipoDeUsuario = 1;
         }
         else
         {
-        tipoDeUsuario = 0;
+            tipoDeUsuario = 0;
         }
         string var;
-        if(tipoDeUsuario==2)
-            var= "Interesado ";
-        if(tipoDeUsuario==1)
-            var= "Inmobiliaria ";
-        if(tipoDeUsuario==0)
-            var= "Administrador ";
-        cout << "   -( "<< count << " ) " <<var << "-" << endl<<"           - " << u->getCorreoElectronico()<<" -"<< endl<< endl;
-    }   
+        if (tipoDeUsuario == 2)
+            var = "Interesado ";
+        if (tipoDeUsuario == 1)
+            var = "Inmobiliaria ";
+        if (tipoDeUsuario == 0)
+            var = "Administrador ";
+        cout << "   -( " << count << " ) " << var << "-" << endl
+             << "           - " << u->getCorreoElectronico() << " -" << endl
+             << endl;
+    }
 }
 
 void Sistema::altaUsuario(Usuario *u)
@@ -192,7 +194,7 @@ bool Sistema::PropiedadChecker(string codigo)
         Departamento *dep = dynamic_cast<Departamento *>(it1->getCurrent());
         if (dep == nullptr)
             continue;
-            
+
         for (IIterator *it2 = dep->getZonas()->getIterator(); it2->hasCurrent(); it2->next())
         {
             zone = dynamic_cast<Zona *>(it2->getCurrent());
@@ -204,7 +206,7 @@ bool Sistema::PropiedadChecker(string codigo)
                 propi = dynamic_cast<Propiedad *>(it3->getCurrent());
                 if (propi == nullptr)
                     continue;
-                    
+
                 if (propi->getCodigo() == codigo)
                 {
                     return true;
@@ -215,13 +217,12 @@ bool Sistema::PropiedadChecker(string codigo)
     return false;
 }
 
-
 void Sistema::EliminarPropiedad(string codigo)
 {
 
     // ENCUENTRA LA PROPIEDAD
     bool propi = Sistema::PropiedadChecker(codigo);
-    
+
     if (!propi)
     {
         cout << "ERROR 404" << endl;
@@ -235,10 +236,11 @@ void Sistema::EliminarPropiedad(string codigo)
         Inmobiliaria *i = dynamic_cast<Inmobiliaria *>(this->getUsuarioActual());
         if (i != nullptr)
         {
-            encontrado=i->PerteneceAinmobiliaria(codigo);
+            encontrado = i->PerteneceAinmobiliaria(codigo);
         }
-        else{
-            cout<<"Segmentation fault.......jajajajajjjaja te la creiste"<<endl;
+        else
+        {
+            cout << "Segmentation fault.......jajajajajjjaja te la creiste" << endl;
         }
         if (!encontrado)
         {
@@ -256,7 +258,7 @@ void Sistema::EliminarPropiedad(string codigo)
             }
         }
         // ELIMINA CONVERSACIONES
-        
+
         cout << "eliminado" << endl;
     }
     return;
@@ -309,12 +311,14 @@ void Sistema::Ultimo5Mensajes()
 {
 }
 
-Conversacion * Sistema::SeleccionarConversacionInmobiliaria() {
+void Sistema::SeleccionarConversacionInmobiliaria()
+{
     // Verificar si el usuario actual es una Inmobiliaria
-    Inmobiliaria* inmobiliaria = dynamic_cast<Inmobiliaria*>(this->usuarioSesion);
-    if (!inmobiliaria) {
+    Inmobiliaria *inmobiliaria = dynamic_cast<Inmobiliaria *>(this->usuarioSesion);
+    if (!inmobiliaria)
+    {
         cout << "Error: Solo los usuarios inmobiliaria pueden enviar mensajes." << endl;
-        return nullptr;
+        return;
     }
 
     ICollection *conversacionesAlquiler = new List();
@@ -324,20 +328,26 @@ Conversacion * Sistema::SeleccionarConversacionInmobiliaria() {
     cout << "Conversaciones Alquiler:" << endl;
     IIterator *it;
     int index = 1;
-    for (it = inmobiliaria->getAlquileres()->getIterator(); it->hasCurrent(); it->next()) {
+    for (it = inmobiliaria->getAlquileres()->getIterator(); it->hasCurrent(); it->next())
+    {
         Alquiler *a = (Alquiler *)it->getCurrent();
         IIterator *it2;
-        for (it2 = a->getPropiedad()->getConversaciones()->getIterator(); it2->hasCurrent(); it2->next()) {
+        for (it2 = a->getPropiedad()->getConversaciones()->getIterator(); it2->hasCurrent(); it2->next())
+        {
             Conversacion *c = (Conversacion *)it2->getCurrent();
-            if (c != nullptr) {
+            if (c != nullptr)
+            {
                 conversacionesAlquiler->add(c);
                 IIterator *it3;
-                for (it3 = c->getMensajes()->getIterator(); it3->hasCurrent(); it3->next()) {
+                for (it3 = c->getMensajes()->getIterator(); it3->hasCurrent(); it3->next())
+                {
                     Mensaje *m = (Mensaje *)it3->getCurrent();
                     cout << "  Mensaje: " << m->getFecha()->getAnio() << "/" << m->getFecha()->getMes() << "/" << m->getFecha()->getDia() << endl;
                 }
                 index++;
-            } else {
+            }
+            else
+            {
                 cout << "No se encontro la conversacion deseada." << endl;
             }
         }
@@ -346,62 +356,75 @@ Conversacion * Sistema::SeleccionarConversacionInmobiliaria() {
     // Listar conversaciones de venta
     cout << "Conversaciones Venta:" << endl;
     IIterator *it4;
-    for (it4 = inmobiliaria->getVentas()->getIterator(); it4->hasCurrent(); it4->next()) {
+    for (it4 = inmobiliaria->getVentas()->getIterator(); it4->hasCurrent(); it4->next())
+    {
         Venta *v = (Venta *)it4->getCurrent();
         IIterator *it5;
-        for (it5 = v->getPropiedad()->getConversaciones()->getIterator(); it5->hasCurrent(); it5->next()) {
+        for (it5 = v->getPropiedad()->getConversaciones()->getIterator(); it5->hasCurrent(); it5->next())
+        {
             Conversacion *c2 = (Conversacion *)it5->getCurrent();
-            if (c2 != nullptr) {
-                if (conversacionesAlquiler->member(c2)) {
+            if (c2 != nullptr)
+            {
+                if (conversacionesAlquiler->member(c2))
+                {
                     continue;
                 }
                 conversacionesVenta->add(c2);
                 cout << "Conversacion " << index << " Inmobiliaria: " << c2->getInmobiliaria() << endl;
                 IIterator *it6;
-                for (it6 = c2->getMensajes()->getIterator(); it6->hasCurrent(); it6->next()) {
+                for (it6 = c2->getMensajes()->getIterator(); it6->hasCurrent(); it6->next())
+                {
                     Mensaje *m2 = (Mensaje *)it6->getCurrent();
                     cout << "  Mensaje: " << m2->getFecha()->getAnio() << "/" << m2->getFecha()->getMes() << "/" << m2->getFecha()->getDia() << endl;
                 }
                 index++;
-            } else {
+            }
+            else
+            {
                 cout << "No se encontro la conversacion deseada." << endl;
             }
         }
     }
 
     // Verificar si existen conversaciones
-    if (conversacionesAlquiler->isEmpty() && conversacionesVenta->isEmpty()) {
+    if (conversacionesAlquiler->isEmpty() && conversacionesVenta->isEmpty())
+    {
         cout << "No hay conversaciones disponibles." << endl;
-        return nullptr;
+        return;
     }
 
     // Seleccionar una conversacion
     string opcion;
     cout << "Desea elegir una conversacion de alquiler o de venta? Ingrese 1 para alquiler o 2 para venta: ";
 
-    while (opcion[0] != '1' && opcion[0] != '2') {
+    while (opcion[0] != '1' && opcion[0] != '2')
+    {
         cout << "Elija 1 si quiere ver las conversaciones de alquiler o 2 para ver las de venta: ";
         getline(cin, opcion);
     }
 
-    ICollection* conversacionesSeleccionadas = (opcion[0] == '1') ? conversacionesAlquiler : conversacionesVenta;
+    ICollection *conversacionesSeleccionadas = (opcion[0] == '1') ? conversacionesAlquiler : conversacionesVenta;
 
-    if (conversacionesSeleccionadas->isEmpty()) {
+    if (conversacionesSeleccionadas->isEmpty())
+    {
         cout << "No hay conversaciones de " << (opcion[0] == '1' ? "alquiler" : "venta") << " disponibles." << endl;
-        return nullptr;
+        return;
     }
 
     cout << "Conversaciones Disponibles:" << endl;
     int currentIndex = 1;
-    for (IIterator *it7 = conversacionesSeleccionadas->getIterator(); it7->hasCurrent(); it7->next(), currentIndex++) {
+    for (IIterator *it7 = conversacionesSeleccionadas->getIterator(); it7->hasCurrent(); it7->next(), currentIndex++)
+    {
         Conversacion *c3 = (Conversacion *)it7->getCurrent();
-        if (c3 == nullptr) {
+        if (c3 == nullptr)
+        {
             cout << "No se encontro la conversacion deseada." << endl;
-            return nullptr;
+            return;
         }
         cout << "Conversacion " << currentIndex << endl;
         IIterator *it10;
-        for (it10 = c3->getMensajes()->getIterator(); it10->hasCurrent(); it10->next()) {
+        for (it10 = c3->getMensajes()->getIterator(); it10->hasCurrent(); it10->next())
+        {
             Mensaje *m4 = (Mensaje *)it10->getCurrent();
             cout << "  Mensaje: " << m4->getFecha()->getAnio() << "/" << m4->getFecha()->getMes() << "/" << m4->getFecha()->getDia() << endl;
         }
@@ -409,49 +432,70 @@ Conversacion * Sistema::SeleccionarConversacionInmobiliaria() {
 
     string opcion2;
     int seleccion = -1;
-    while (seleccion < 1 || seleccion >= currentIndex) {
+    while (seleccion < 1 || seleccion >= currentIndex)
+    {
         cout << "Seleccione una conversacion ingresando el numero correspondiente: ";
         getline(cin, opcion2);
-        try {
+        try
+        {
             seleccion = stoi(opcion2);
-        } catch (const std::exception&) {
+        }
+        catch (const std::exception &)
+        {
             seleccion = -1;
         }
-        if (seleccion < 1 || seleccion >= currentIndex) {
+        if (seleccion < 1 || seleccion >= currentIndex)
+        {
             cout << "Opcion invalida. Ingrese un numero valido." << endl;
         }
     }
 
-    Conversacion* conversacionSeleccionada = nullptr;
+    Conversacion *conversacionSeleccionada = nullptr;
 
     // Buscar la conversación seleccionada por el índice
     currentIndex = 1;
-    for (IIterator* it7 = conversacionesSeleccionadas->getIterator(); it7->hasCurrent(); it7->next(), currentIndex++) {
-        Conversacion* c = (Conversacion*)it7->getCurrent();
-        if (currentIndex == seleccion) {
+    for (IIterator *it7 = conversacionesSeleccionadas->getIterator(); it7->hasCurrent(); it7->next(), currentIndex++)
+    {
+        Conversacion *c = (Conversacion *)it7->getCurrent();
+        if (currentIndex == seleccion)
+        {
             conversacionSeleccionada = c;
             break;
         }
     }
-    return conversacionSeleccionada;
+    this->conversacion = conversacionSeleccionada;
 }
 
+void Sistema::enviarMensajeInmobiliaria()
+{
 
-void Sistema::enviarMensajeInmobiliaria(Conversacion * conversacionSeleccionada){
-if (conversacionSeleccionada == nullptr) {
+    Conversacion *conversacionSeleccionada = this->conversacion;
+    if (conversacionSeleccionada == nullptr)
+    {
         cout << "No se pudo encontrar la conversación seleccionada." << endl;
+        this->conversacion = nullptr;
+
         return;
     }
 
     // Listar los últimos 5 mensajes de la conversación seleccionada
     cout << "Ultimos 5 mensajes de la conversacion seleccionada:" << endl;
-    IIterator* itMensajes = conversacionSeleccionada->getMensajes()->getIterator();
+    IIterator *itMensajes = conversacionSeleccionada->getMensajes()->getIterator();
     int count = 0;
-    while (itMensajes->hasCurrent() && count < 5) {
-        Mensaje* m = (Mensaje*)itMensajes->getCurrent();
-        cout << "Mensaje: " << m->getTexto() << endl;
+    int offset = conversacionSeleccionada->getMensajes()->getSize();
+    while (itMensajes->hasCurrent() && count < 5)
+    {
+        if (offset > 5)
+        {
+            offset--;
+        }
+        else
+        {
+            Mensaje *m = (Mensaje *)itMensajes->getCurrent();
+            cout << "Mensaje: " << m->getTexto() << endl;
+            count++;
+        }
         itMensajes->next();
-        count++;
     }
 
     // Ingresar un nuevo mensaje
@@ -459,17 +503,19 @@ if (conversacionSeleccionada == nullptr) {
     cout << "Ingrese su mensaje para la conversacion seleccionada (o presione Enter para omitir): ";
     getline(cin, mensajeNuevo);
 
-    if (!mensajeNuevo.empty()) {
+    if (!mensajeNuevo.empty())
+    {
         // Crear un nuevo mensaje y agregarlo a la conversación seleccionada
-        dtFecha* fechaActual = new dtFecha(); // Suponiendo que tienes una clase Fecha
-        if(usuarioSesion!=nullptr)
-            mensajeNuevo= "(-Inmobiliaria: " + usuarioSesion->getCorreoElectronico() + "-) " + mensajeNuevo;
-        Mensaje* nuevoMensaje = new Mensaje(fechaActual, mensajeNuevo);
+        dtFecha *fechaActual = new dtFecha(); // Suponiendo que tienes una clase Fecha
+        if (usuarioSesion != nullptr)
+            mensajeNuevo = "(-Inmobiliaria: " + usuarioSesion->getCorreoElectronico() + "-) " + mensajeNuevo;
+        Mensaje *nuevoMensaje = new Mensaje(fechaActual, mensajeNuevo);
         conversacionSeleccionada->AgregarMensaje(nuevoMensaje); // Suponiendo un método AgregarMensaje en Conversacion
         cout << "Mensaje enviado correctamente." << endl;
+        this->conversacion = nullptr;
     }
+    this->conversacion = nullptr;
 }
-
 
 void Sistema::AgregarMensaje(string mensaje)
 {
@@ -500,7 +546,8 @@ Zona *Sistema::SelecionarZona(string codigo, Departamento *depto)
             delete it3;
             return z;
         }
-        else if (z==nullptr){
+        else if (z == nullptr)
+        {
             cout << "No se encontro la Zona deseada" << endl;
         }
     }
@@ -762,7 +809,7 @@ void Sistema::altaPropiedad()
         }
         mtEspacioverd = stoi(input);
 
-        Casa *c = new Casa(codigop, cuartos, ambientes, banios, garaje, dir, mtEdifi, mtEdifi+mtEspacioverd, mtEspacioverd, z);
+        Casa *c = new Casa(codigop, cuartos, ambientes, banios, garaje, dir, mtEdifi, mtEdifi + mtEspacioverd, mtEspacioverd, z);
         while (true)
         {
             cout << "Su casa esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
@@ -918,7 +965,7 @@ void Sistema::altaPropiedad()
             Apartamento *a = new Apartamento(codigop, cuartos, ambientes, banios, garaje, dir, mtEdifi, mtEdifi, true, e, z);
             z->setPropiedades(a);
             cout << "Su apartamento esta en alquiler o en venta, ponga 1 si esta en alquiler, ponga 2 si esta en venta" << endl;
-            getline(cin,opcion3);
+            getline(cin, opcion3);
             if (opcion3 == "1")
             {
                 string input = "pppp";
@@ -939,7 +986,7 @@ void Sistema::altaPropiedad()
             {
                 string input = "pppp";
                 float value;
-                Venta * ventaa;
+                Venta *ventaa;
                 do
                 {
                     cout << "Introduzca el valor de la venta:" << endl;
@@ -1005,9 +1052,14 @@ cout << color_green << "El Estudiante " << _nombre << " fue agregado correctamen
  }
 }*/
 
+Conversacion *Sistema::getConversacionActual()
+{
+    return this->conversacion;
+}
+
 void Sistema::modificarPropiedad()
 {
-    Inmobiliaria * i = dynamic_cast<Inmobiliaria *>(this->usuarioSesion);
+    Inmobiliaria *i = dynamic_cast<Inmobiliaria *>(this->usuarioSesion);
     if (i == nullptr)
     {
         cout << "Error: No ha iniciado sesión como usuario inmobiliaria." << endl;
@@ -1018,43 +1070,49 @@ void Sistema::modificarPropiedad()
     cout << "Por favor, ingrese la letra del Departamento" << endl;
     cin >> letra;
     Departamento *d = seleccionarDepartamento(letra);
-    if (d == nullptr){
+    if (d == nullptr)
+    {
         return;
     }
     d->listarZonas();
     string codigoz;
     cout << "Por favor, ingrese el codigo de la Zona" << endl;
-    //getline(cin, codigoz);
+    // getline(cin, codigoz);
     cin >> codigoz;
-    Zona * z = SelecionarZona(codigoz, d);
-    if (z == nullptr){
-        cout << "Codigo de Zona incorrecto"<< endl;
+    Zona *z = SelecionarZona(codigoz, d);
+    if (z == nullptr)
+    {
+        cout << "Codigo de Zona incorrecto" << endl;
         return;
     }
     int ambientes, cuartos, banios;
     bool garaje, disponible;
     string pais, ciudad, numero, calle, garajesino, codigop, disponiblesino;
     float mtEdifi, mtEspacioverd, mtTotales;
-    Propiedad * propiedad = nullptr;
+    Propiedad *propiedad = nullptr;
 
     system("clear");
     bool haypropiedades;
     haypropiedades = z->ListarPropiedades();
-    if(haypropiedades != true){
+    if (haypropiedades != true)
+    {
         return;
     }
     cout << "Por favor, ingrese el codigo de la propiedad" << endl;
     cin >> codigop;
 
-    IIterator * it;
-    for (it = z->getPropiedades()->getIterator(); it->hasCurrent(); it->next()){
-        Propiedad * p = (Propiedad *)it->getCurrent();
+    IIterator *it;
+    for (it = z->getPropiedades()->getIterator(); it->hasCurrent(); it->next())
+    {
+        Propiedad *p = (Propiedad *)it->getCurrent();
 
         if (p->getCodigo() == codigop)
         {
-            if (!i->PerteneceAinmobiliaria(codigop)){
-                cout << endl << "Esta propiedad no es tuya" << endl;
-                //Sistema::menudedebugging();
+            if (!i->PerteneceAinmobiliaria(codigop))
+            {
+                cout << endl
+                     << "Esta propiedad no es tuya" << endl;
+                // Sistema::menudedebugging();
                 return;
             }
             propiedad = p;
@@ -1089,10 +1147,10 @@ void Sistema::modificarPropiedad()
     cin >> garajesino;
     garaje = (garajesino == "si");
     propiedad->setGarage(garaje);
-    if(garajesino != "si"){
+    if (garajesino != "si")
+    {
         cout << "La propiedad no cuenta con garaje" << endl;
     }
-
 
     cout << "Por favor, ingrese el nuevo pais" << endl;
     cin.ignore(); // Limpiar el buffer
@@ -1105,14 +1163,14 @@ void Sistema::modificarPropiedad()
     getline(cin, numero);
 
     cout << "Por favor, ingrese la nueva calle" << endl;
-    //cin.ignore(); // Limpiar el buffer
+    // cin.ignore(); // Limpiar el buffer
     getline(cin, calle);
 
     dtDireccion *nuevaDir = new dtDireccion(pais, ciudad, numero, calle);
     propiedad->setDireccion(nuevaDir);
 
     system("clear");
-    //cin.ignore(); // Limpiar el buffer
+    // cin.ignore(); // Limpiar el buffer
 
     cout << "Por favor, ingrese la nueva cantidad de metros edificados" << endl;
     cin >> mtEdifi;
@@ -1140,11 +1198,12 @@ void Sistema::modificarPropiedad()
         }
 
         // Agregar la propiedad a la nueva colección según la opción seleccionada
-        if (opcion == 1){
-            //i->getAlquileres()->add(propiedad);
+        if (opcion == 1)
+        {
+            // i->getAlquileres()->add(propiedad);
             string input = "pppp";
             float value;
-            Alquiler * alquii;
+            Alquiler *alquii;
             do
             {
                 cout << "Introduzca el valor del alquiler:" << endl;
@@ -1159,10 +1218,10 @@ void Sistema::modificarPropiedad()
         }
         else if (opcion == 2)
         {
-            //i->getVentas()->add(propiedad);
+            // i->getVentas()->add(propiedad);
             string input = "pppp";
             float value;
-            Venta * ventaa;
+            Venta *ventaa;
             do
             {
                 cout << "Introduzca el valor de la venta:" << endl;
@@ -1172,7 +1231,7 @@ void Sistema::modificarPropiedad()
             value = stoi(input);
             ventaa = new Venta(value);
             ventaa->setPropiedad(propiedad);
-            i->setVentas(ventaa);            
+            i->setVentas(ventaa);
         }
     }
     else
@@ -1180,7 +1239,7 @@ void Sistema::modificarPropiedad()
         cout << "No ingreso una opcion correcta, queda en la misma situacion" << endl;
     }
 
-    Casa * casa = dynamic_cast<Casa *>(propiedad);
+    Casa *casa = dynamic_cast<Casa *>(propiedad);
     if (casa != nullptr)
     {
         cout << "Por favor, ingrese la nueva cantidad de metros con espacios verdes" << endl;
@@ -1191,20 +1250,23 @@ void Sistema::modificarPropiedad()
     }
     else
     {
-        Apartamento * apartamento = dynamic_cast<Apartamento *>(propiedad);
-        if (apartamento != nullptr){
+        Apartamento *apartamento = dynamic_cast<Apartamento *>(propiedad);
+        if (apartamento != nullptr)
+        {
             cout << "¿Este apartamento se encuentra disponible? (si/no)" << endl;
             cin >> disponiblesino;
             system("clear");
             disponible = (disponiblesino == "si");
             apartamento->setDisponible(disponible);
-            if(disponiblesino != "si"){
+            if (disponiblesino != "si")
+            {
                 cout << "El apartamento no se encuentra disponible" << endl;
             }
         }
     }
 
-    cout << endl << "La propiedad ha sido modificada exitosamente." << endl;
+    cout << endl
+         << "La propiedad ha sido modificada exitosamente." << endl;
 }
 
 // ELIMINAR PROPIEDAD

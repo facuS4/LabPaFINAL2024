@@ -51,6 +51,7 @@ class ISistema {
         virtual ICollection * getUsuarios()=0;
 
         virtual Usuario * getUsuarioActual()=0;
+        virtual Conversacion * getConversacionActual()=0;
 
         virtual void altaUsuario(Usuario *)=0;
 
@@ -68,9 +69,9 @@ class ISistema {
 
         virtual void Ultimo5Mensajes() = 0;
 
-        virtual Conversacion * SeleccionarConversacionInmobiliaria() = 0;
+        virtual void SeleccionarConversacionInmobiliaria() = 0;
         
-        virtual void enviarMensajeInmobiliaria(Conversacion *) = 0;
+        virtual void enviarMensajeInmobiliaria() = 0;
 
         virtual void AgregarMensaje(string mensaje) = 0;
 
