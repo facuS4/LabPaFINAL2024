@@ -73,6 +73,8 @@ class ISistema {
         
         virtual void enviarMensajeInmobiliaria() = 0;
 
+        virtual void EnviarMensajeInteresado() = 0;
+
         virtual void AgregarMensaje(string mensaje) = 0;
 
         virtual void CrearMensaje(string mensaje) = 0;

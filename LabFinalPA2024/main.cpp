@@ -414,7 +414,7 @@ int main()
   // PROPIEDADES HARDCODEADAS//
 
   //(string codigo, int dormitorios, int ambientes, int banios, bool garage,dtDireccion * direccion, float medif, float metrosTotales, bool disponible)
-
+  
   // ZONAS HARDCODEADAS //
   Zona *ZonaSurSanJose = new Zona("sur1", "SanJoseSur");
   Zona *ZonaNorteSanJose = new Zona("Norte1", "SanJoseNorte");
@@ -544,9 +544,10 @@ int main()
       {
       case 0:
         // ACA VA FUNCION RENZO
-        cout << "placeholder" << endl;
-        
-        
+        cout << "Enviar Mensaje Interesado" << endl;{
+          sis->EnviarMensajeInteresado();
+          break;
+        }
         break;
       case 1:
         cout << "Alta inmobiliaria" << endl;{

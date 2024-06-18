@@ -545,14 +545,13 @@ void Sistema::EnviarMensajeInteresado(){
     string codigop;
     cout << "Por favor, selecciona una propiedad:";
     cin >> codigop;
-    IIterator *it;
     IIterator* itPropiedades = z->getPropiedades()->getIterator();
     Propiedad* p = nullptr;
     while (itPropiedades->hasCurrent()) {
         p = dynamic_cast<Propiedad*>(itPropiedades->getCurrent());
         if (p && p->getCodigo() == codigop) {
-            cout << "Código: " << p->getCodigo() << endl;
-            cout << "Dirección: " << p->getDireccion() << endl;
+            cout << "Codigo: " << p->getCodigo() << endl;
+            cout << "Direccion: " << p->getDireccion() << endl;
           
             break;
         }
@@ -585,6 +584,7 @@ void Sistema::EnviarMensajeInteresado(){
     IIterator* itMensajes = conversacionSeleccionada->getMensajes()->getIterator();
     int totalMensajes = conversacionSeleccionada->getMensajes()->getSize();
     int count = 0;
+    cout << "Cantidad de Mensajes: " << totalMensajes << endl;
 
     cout << "Ultimos 5 mensajes de la conversacion seleccionada:" << endl;
     // Mostrar los últimos 5 mensajes
