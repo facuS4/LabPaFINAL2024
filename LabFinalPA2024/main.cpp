@@ -343,9 +343,12 @@ void menuMain(int tipoDeUsuario)
 {
   cout << "-------------------Menu-------------------"
        << endl;
+  if(sis->getUsuarioActual()!=nullptr){
+    cout << "Sesion de "<< sis->getUsuarioActual()->getCorreoElectronico() <<endl;
+  }
   if (tipoDeUsuario == 0)
   {
-    cout << "                       <-Admin->"
+    cout << "                           <-Admin->"
          << endl;
     cout << " (1)-Alta inmobiliaria-" << endl; // ADMINISTRADOR
     cout << " (2)-Alta interesado-" << endl;   // ADMINISTRADOR
@@ -355,7 +358,7 @@ void menuMain(int tipoDeUsuario)
   if (tipoDeUsuario == 1)
   {
 
-    cout << "                       <|-Inmobiliaria Opciones-|>"
+    cout << "                       <|-Inmobiliaria-|>"
          << endl;
     cout << " (4)-Alta edificio-" << endl;                  // INMOBILIARIA
     cout << " (5)-Alta propiedad-" << endl;                 // INMOBILIARIA
@@ -367,7 +370,7 @@ void menuMain(int tipoDeUsuario)
   }
   if (tipoDeUsuario == 2)
   {
-    cout << "                       <-Interesado Opciones->"
+    cout << "                       <-Interesado->"
          << endl;
     cout << " (9)-Consultar propiedad-" << endl;          // INMOBILIARIA O INTERESADO
     cout << " (0)-Enviar mensaje de interesado-" << endl; // INTERESADO
@@ -376,7 +379,7 @@ void menuMain(int tipoDeUsuario)
        << endl;
   cout << "(LOGOUT)-Salir de la sesion-" << endl;
   cout << "(TURNOFF)-Apagar-" << endl;
-  cout << "---------------Input de Usuario---------------"
+  cout << "-------------Input de Usuario-------------"
        << endl;
        return;
   
@@ -427,7 +430,7 @@ int main()
   Apartamento *ap2 = new Apartamento("codloco", 2, 2, 2, true, ladir, 2, 2, true, ed2, ZonaSurSanJose);
   Apartamento *ap3 = new Apartamento("codigoouyes", 2, 2, 2, true, ladir, 2, 2, false, ed3, ZonaNorteColonia);
   Conversacion *convo = new Conversacion();
-  Mensaje *mensaje = new Mensaje(lafecha, "hola como andas");
+  Mensaje *mensaje = new Mensaje(lafecha, "(-Interesado: pedro@pedro-) hola como andas");
   convo->AgregarMensaje(mensaje);
   casita1->setConversaciones(convo);
   ap2->setConversaciones(convo);
@@ -435,7 +438,7 @@ int main()
   Departamento *SanJose = new Departamento('A', "San Jose");
   Departamento *Colonia = new Departamento('B', "Colonia");
   Departamento *Montevideo = new Departamento('C', "Montevideo");
-
+  casita1->setConversaciones(convo);
   // ANIADIRLOS//
 
   ZonaSurColonia->setPropiedades(casita1);
@@ -468,6 +471,9 @@ int main()
   sis->altaUsuario(int1);
   sis->altaUsuario(inm2);
   sis->altaUsuario(int2);
+  convo->setInteresado(int1);
+  convo->setInmobiliaria(imn1);
+
   // ventasss
 
   Venta *vent = new Venta(2000);

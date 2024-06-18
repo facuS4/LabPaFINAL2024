@@ -458,6 +458,8 @@ void Sistema::EnviarMensajeInmobiliaria() {
     if (!mensajeNuevo.empty()) {
         // Crear un nuevo mensaje y agregarlo a la conversación seleccionada
         dtFecha* fechaActual = new dtFecha(); // Suponiendo que tienes una clase Fecha
+        if(usuarioSesion!=nullptr)
+            mensajeNuevo= "(-Inmobiliaria: " + usuarioSesion->getCorreoElectronico() + "-) " + mensajeNuevo;
         Mensaje* nuevoMensaje = new Mensaje(fechaActual, mensajeNuevo);
         conversacionSeleccionada->AgregarMensaje(nuevoMensaje); // Suponiendo un método AgregarMensaje en Conversacion
         cout << "Mensaje enviado correctamente." << endl;
