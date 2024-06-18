@@ -517,6 +517,115 @@ void Sistema::enviarMensajeInmobiliaria()
     this->conversacion = nullptr;
 }
 
+int contarMensajes();
+
+void Sistema::EnviarMensajeInteresado(){
+    Interesado* interesado = dynamic_cast<Interesado*>(this->usuarioSesion);
+    if (!interesado) {
+        cout << "Error: Solo los usuarios inmobiliaria pueden enviar mensajes." << endl;
+        return;
+    }
+    listarDepartamentos();
+    char letra;
+    cout << "Por favor, ingrese la letra del Departamento" << endl;
+    cin >> letra;
+    Departamento *d = seleccionarDepartamento(letra);
+    if (d == nullptr){
+        cout << "letra de Departamento incorrecto" << endl;
+        return;
+    }
+    string codigoz;
+    cout << "Por favor, ingrese el codigo de la Zona" << endl;
+    cin >> codigoz;
+    Zona * z = SelecionarZona(codigoz, d);
+    if (z == nullptr){
+        cout << "Codigo de Zona incorrecto"<< endl;
+        return;
+    }
+    string codigop;
+    cout << "Por favor, selecciona una propiedad:";
+    cin >> codigop;
+    IIterator *it;
+    IIterator* itPropiedades = z->getPropiedades()->getIterator();
+    Propiedad* p = nullptr;
+    while (itPropiedades->hasCurrent()) {
+        p = dynamic_cast<Propiedad*>(itPropiedades->getCurrent());
+        if (p && p->getCodigo() == codigop) {
+            cout << "Código: " << p->getCodigo() << endl;
+            cout << "Dirección: " << p->getDireccion() << endl;
+          
+            break;
+        }
+        itPropiedades->next();
+    }
+    if (p == nullptr) {
+        cout << "Propiedad no encontrada." << endl;
+        return;
+    }
+  // Encontrar la conversación entre el usuario interesado y la propiedad
+    Conversacion* conversacionSeleccionada = nullptr;
+    IIterator* itConversaciones = p->getConversaciones()->getIterator();
+
+    while (itConversaciones->hasCurrent()) {
+        Conversacion* conversacion = dynamic_cast<Conversacion*>(itConversaciones->getCurrent());
+        if (conversacion->getInteresado() == interesado) {
+            conversacionSeleccionada = conversacion;
+            break;
+        }
+        itConversaciones->next();
+    }
+    /*
+    if (conversacionSeleccionada == nullptr) {
+        cout << "No se encontró una conversación entre el usuario interesado y esta propiedad." << endl;
+        return;
+    }
+    */
+    // Obtener los últimos 5 mensajes de la conversación seleccionada
+    
+    IIterator* itMensajes = conversacionSeleccionada->getMensajes()->getIterator();
+    int totalMensajes = conversacionSeleccionada->getMensajes()->getSize();
+    int count = 0;
+
+    cout << "Ultimos 5 mensajes de la conversacion seleccionada:" << endl;
+    // Mostrar los últimos 5 mensajes
+    while (itMensajes->hasCurrent() && count < 5) {
+        Mensaje* m = dynamic_cast<Mensaje*>(itMensajes->getCurrent());
+        if (m) {
+            cout << "Mensaje: " << m->getTexto() << endl;
+            count++;
+        }
+        itMensajes->next();
+    }
+
+    // Ingresar un nuevo mensaje
+    string mensajeNuevo;
+    cout << "Ingrese su mensaje para la conversacion seleccionada (o presione Enter para omitir): ";
+    getline(cin, mensajeNuevo);
+
+    if (!mensajeNuevo.empty() && conversacionSeleccionada != nullptr)
+    {
+        // Crear un nuevo mensaje y agregarlo a la conversación seleccionada
+        dtFecha *fechaActual = new dtFecha(); // Suponiendo que tienes una clase Fecha
+        if (usuarioSesion != nullptr)
+            mensajeNuevo = "(-Interesado: " + usuarioSesion->getCorreoElectronico() + "-) " + mensajeNuevo;
+        Mensaje *nuevoMensaje = new Mensaje(fechaActual, mensajeNuevo);
+        conversacionSeleccionada->AgregarMensaje(nuevoMensaje); // Suponiendo un método AgregarMensaje en Conversacion
+        cout << "Mensaje enviado correctamente." << endl;
+        this->conversacion = nullptr;
+    }
+    this->conversacion = nullptr;
+
+    if (!mensajeNuevo.empty() && conversacionSeleccionada == nullptr){
+        Conversacion* conversacion = new Conversacion();
+        dtFecha *fechaActual = new dtFecha();
+        Mensaje *nuevoMensaje = new Mensaje(fechaActual, mensajeNuevo);
+        conversacion->AgregarMensaje(nuevoMensaje);
+        conversacion->setInteresado(interesado);
+        p->setConversaciones(conversacion);
+    }
+
+}
+
 void Sistema::AgregarMensaje(string mensaje)
 {
     cout << mensaje;

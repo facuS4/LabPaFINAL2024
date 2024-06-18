@@ -78,6 +78,8 @@ class Sistema : public ISistema{
         
         void enviarMensajeInmobiliaria();
 
+        void EnviarMensajeInteresado();
+
         void AgregarMensaje(string mensaje);
 
         void CrearMensaje(string mensaje);
