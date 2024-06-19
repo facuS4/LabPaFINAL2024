@@ -547,6 +547,8 @@ int main()
         // ACA VA FUNCION RENZO
         cout << "Enviar Mensaje Interesado" << endl;{
           sis->EnviarMensajeInteresado();
+          menudeprueba();
+          system("clear");
           break;
         }
         break;

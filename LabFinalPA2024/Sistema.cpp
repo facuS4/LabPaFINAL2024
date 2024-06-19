@@ -602,6 +602,7 @@ void Sistema::EnviarMensajeInteresado(){
     string mensajeNuevo;
     cout << "Ingrese su mensaje para la conversacion seleccionada, si no hay ninguna conversacion existente se creara una (o presione Enter para omitir): ";
     getline(cin, mensajeNuevo);
+    mensajeNuevo = "(-Interesado: " + usuarioSesion->getCorreoElectronico() + "-) " + mensajeNuevo;
 
     if (!mensajeNuevo.empty() && conversacionSeleccionada != nullptr)
     {
