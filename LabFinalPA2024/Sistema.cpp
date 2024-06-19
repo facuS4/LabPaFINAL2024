@@ -1,4 +1,6 @@
 #include "Sistema.h"
+#include <iostream>
+#include <limits>
 
 Sistema::Sistema()
 {
@@ -517,7 +519,7 @@ void Sistema::enviarMensajeInmobiliaria()
     this->conversacion = nullptr;
 }
 
-int contarMensajes();
+
 
 void Sistema::EnviarMensajeInteresado(){
     Interesado* interesado = dynamic_cast<Interesado*>(this->usuarioSesion);
@@ -529,6 +531,9 @@ void Sistema::EnviarMensajeInteresado(){
     char letra;
     cout << "Por favor, ingrese la letra del Departamento" << endl;
     cin >> letra;
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     Departamento *d = seleccionarDepartamento(letra);
     if (d == nullptr){
         cout << "letra de Departamento incorrecto" << endl;
@@ -536,7 +541,7 @@ void Sistema::EnviarMensajeInteresado(){
     }
     string codigoz;
     cout << "Por favor, ingrese el codigo de la Zona" << endl;
-    cin >> codigoz;
+    getline(cin, codigoz);
     Zona * z = SelecionarZona(codigoz, d);
     if (z == nullptr){
         cout << "Codigo de Zona incorrecto"<< endl;
@@ -544,15 +549,15 @@ void Sistema::EnviarMensajeInteresado(){
     }
     string codigop;
     cout << "Por favor, selecciona una propiedad:";
-    cin >> codigop;
+    getline(cin, codigop);
     IIterator* itPropiedades = z->getPropiedades()->getIterator();
     Propiedad* p = nullptr;
     while (itPropiedades->hasCurrent()) {
         p = dynamic_cast<Propiedad*>(itPropiedades->getCurrent());
-        if (p && p->getCodigo() == codigop) {
+        if (p != nullptr && p->getCodigo() == codigop) {
+            system("clear");
             cout << "Codigo: " << p->getCodigo() << endl;
-            cout << "Direccion: " << p->getDireccion() << endl;
-          
+            cout << "Direccion: " << p->getDireccion()->getPais()<< ", " << p->getDireccion()->getCiudad() <<", " << p->getDireccion()->getCalle() <<", " << p->getDireccion()->getNumero() << endl;
             break;
         }
         itPropiedades->next();
@@ -564,7 +569,6 @@ void Sistema::EnviarMensajeInteresado(){
   // Encontrar la conversación entre el usuario interesado y la propiedad
     Conversacion* conversacionSeleccionada = nullptr;
     IIterator* itConversaciones = p->getConversaciones()->getIterator();
-
     while (itConversaciones->hasCurrent()) {
         Conversacion* conversacion = dynamic_cast<Conversacion*>(itConversaciones->getCurrent());
         if (conversacion->getInteresado() == interesado) {
@@ -573,33 +577,30 @@ void Sistema::EnviarMensajeInteresado(){
         }
         itConversaciones->next();
     }
-    /*
-    if (conversacionSeleccionada == nullptr) {
-        cout << "No se encontró una conversación entre el usuario interesado y esta propiedad." << endl;
-        return;
-    }
-    */
-    // Obtener los últimos 5 mensajes de la conversación seleccionada
     
-    IIterator* itMensajes = conversacionSeleccionada->getMensajes()->getIterator();
-    int totalMensajes = conversacionSeleccionada->getMensajes()->getSize();
-    int count = 0;
-    cout << "Cantidad de Mensajes: " << totalMensajes << endl;
-
-    cout << "Ultimos 5 mensajes de la conversacion seleccionada:" << endl;
-    // Mostrar los últimos 5 mensajes
-    while (itMensajes->hasCurrent() && count < 5) {
-        Mensaje* m = dynamic_cast<Mensaje*>(itMensajes->getCurrent());
-        if (m) {
-            cout << "Mensaje: " << m->getTexto() << endl;
-            count++;
-        }
-        itMensajes->next();
+    if (conversacionSeleccionada == nullptr) {
+        cout << "No se encontro una conversacion entre el usuario interesado y esta propiedad." << endl;
     }
+    else if(conversacionSeleccionada != nullptr){
+        IIterator* itMensajes = conversacionSeleccionada->getMensajes()->getIterator();
+        int totalMensajes = conversacionSeleccionada->getMensajes()->getSize();
+        int count = 0;
+        cout << "Cantidad de Mensajes: " << totalMensajes << endl;
 
+        cout << "Ultimos 5 mensajes de la conversacion seleccionada:" << endl;
+        // Mostrar los últimos 5 mensajes
+        while (itMensajes->hasCurrent() && count < 5) {
+            Mensaje* m = dynamic_cast<Mensaje*>(itMensajes->getCurrent());
+            if (m) {
+                cout << "Mensaje: " << m->getTexto() << endl;
+                count++;
+            }
+            itMensajes->next();
+        }
+    }
     // Ingresar un nuevo mensaje
     string mensajeNuevo;
-    cout << "Ingrese su mensaje para la conversacion seleccionada (o presione Enter para omitir): ";
+    cout << "Ingrese su mensaje para la conversacion seleccionada, si no hay ninguna conversacion existente se creara una (o presione Enter para omitir): ";
     getline(cin, mensajeNuevo);
 
     if (!mensajeNuevo.empty() && conversacionSeleccionada != nullptr)

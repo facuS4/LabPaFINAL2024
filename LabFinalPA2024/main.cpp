@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <set>
+#include <limits>
 
 #include "SistemaFactory.h"
 #include "Sistema.h"
