@@ -367,12 +367,12 @@ void Sistema::SeleccionarConversacionInmobiliaria()
             Conversacion *c2 = (Conversacion *)it5->getCurrent();
             if (c2 != nullptr)
             {
-                if (conversacionesAlquiler->member(c2))
+                if (conversacionesVenta->member(c2))
                 {
                     continue;
                 }
                 conversacionesVenta->add(c2);
-                cout << "Conversacion " << index << " Inmobiliaria: " << c2->getInmobiliaria() << endl;
+                //cout << "Conversacion " << index << " Inmobiliaria: " << c2->getInmobiliaria() << endl;
                 IIterator *it6;
                 for (it6 = c2->getMensajes()->getIterator(); it6->hasCurrent(); it6->next())
                 {
@@ -602,14 +602,16 @@ void Sistema::EnviarMensajeInteresado(){
     string mensajeNuevo;
     cout << "Ingrese su mensaje para la conversacion seleccionada, si no hay ninguna conversacion existente se creara una (o presione Enter para omitir): ";
     getline(cin, mensajeNuevo);
+    if(mensajeNuevo.empty())
+        return;
     mensajeNuevo = "(-Interesado: " + usuarioSesion->getCorreoElectronico() + "-) " + mensajeNuevo;
 
     if (!mensajeNuevo.empty() && conversacionSeleccionada != nullptr)
     {
         // Crear un nuevo mensaje y agregarlo a la conversación seleccionada
         dtFecha *fechaActual = new dtFecha(); // Suponiendo que tienes una clase Fecha
-        if (usuarioSesion != nullptr)
-            mensajeNuevo = "(-Interesado: " + usuarioSesion->getCorreoElectronico() + "-) " + mensajeNuevo;
+        //if (usuarioSesion != nullptr)
+        //    mensajeNuevo = "(-Interesado: " + usuarioSesion->getCorreoElectronico() + "-) " + mensajeNuevo;
         Mensaje *nuevoMensaje = new Mensaje(fechaActual, mensajeNuevo);
         conversacionSeleccionada->AgregarMensaje(nuevoMensaje); // Suponiendo un método AgregarMensaje en Conversacion
         cout << "Mensaje enviado correctamente." << endl;
@@ -1205,7 +1207,7 @@ void Sistema::modificarPropiedad()
     system("clear");
     bool haypropiedades;
     haypropiedades = z->ListarPropiedades();
-    if (haypropiedades != true)
+    if (!haypropiedades)
     {
         return;
     }
@@ -1299,14 +1301,57 @@ void Sistema::modificarPropiedad()
     {
 
         // Quitar la propiedad de la colección actual
-        if (i->getAlquileres()->member(propiedad))
+        ICollection *nuevaListaVentas = new List();
+        Venta *ventaAEliminar = nullptr;
+        Inmobiliaria *inm = dynamic_cast<Inmobiliaria *>(this->usuarioSesion);
+        for (IIterator *it2 = inm->getVentas()->getIterator(); it2->hasCurrent(); it2->next())
         {
-            i->getAlquileres()->remove(propiedad);
+            Venta *venta = dynamic_cast<Venta *>(it2->getCurrent());
+            if (venta != nullptr && venta->getPropiedad()->getCodigo() == propiedad->getCodigo())
+            {
+            ventaAEliminar = venta;
+            }
+            else
+            {
+            nuevaListaVentas->add(venta);
+            }
         }
-        else if (i->getVentas()->member(propiedad))
+
+        if (ventaAEliminar != nullptr)
         {
-            i->getVentas()->remove(propiedad);
+            inm->IcolVentas(nuevaListaVentas);            
+            delete ventaAEliminar;
         }
+        else
+        {
+            delete nuevaListaVentas;
+        }
+        ICollection *nuevaListaAlquileres = new List();
+        Alquiler *alquilerAEliminar = nullptr;
+
+        for (IIterator *it2 = inm->getAlquileres()->getIterator(); it2->hasCurrent(); it2->next())
+        {
+            Alquiler *alquiler = dynamic_cast<Alquiler *>(it2->getCurrent());
+            if (alquiler != nullptr && alquiler->getPropiedad()->getCodigo() == propiedad->getCodigo())
+            {
+            alquilerAEliminar = alquiler;
+            }
+            else
+            {
+            nuevaListaAlquileres->add(alquiler);
+            }
+        }
+
+        if (alquilerAEliminar != nullptr)
+        {
+            inm->IcolAlquileres(nuevaListaAlquileres);            
+            delete alquilerAEliminar;
+        }
+        else
+        {
+            delete nuevaListaAlquileres;
+        }
+  //FIN
 
         // Agregar la propiedad a la nueva colección según la opción seleccionada
         if (opcion == 1)
@@ -1367,9 +1412,9 @@ void Sistema::modificarPropiedad()
             cout << "¿Este apartamento se encuentra disponible? (si/no)" << endl;
             cin >> disponiblesino;
             system("clear");
-            disponible = (disponiblesino == "si");
+            disponible = (disponiblesino == "SI");
             apartamento->setDisponible(disponible);
-            if (disponiblesino != "si")
+            if (disponiblesino != "SI")
             {
                 cout << "El apartamento no se encuentra disponible" << endl;
             }
