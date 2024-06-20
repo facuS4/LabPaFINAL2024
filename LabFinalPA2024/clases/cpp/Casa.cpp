@@ -17,6 +17,13 @@ float Casa::getMetrosVerdes() {
 
 }
 
+void Casa::imprimirEdificio(){
+  return;
+}
+string Casa::CasaApartamentoDisponible(){
+  return "Casa";
+}
+
 void Casa::setMetrosVerdes(float metrosverdes){
 
   this->metrosVerdes=metrosverdes;

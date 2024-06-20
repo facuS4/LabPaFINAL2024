@@ -30,6 +30,8 @@ class Inmobiliaria : public Usuario{
         void eliminarAlquiler(Alquiler *);
         void eliminarVenta(Venta *);
 
+        void ObtenerReporteInmobiliaria2();
+
         ICollection * getVentas();
         ICollection * getAlquileres();
 

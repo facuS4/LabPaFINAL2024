@@ -14,7 +14,7 @@ Inmobiliaria::Inmobiliaria(string _CorreoElectronico, string _Contrasenia, strin
   _CorreoElectronico = _CorreoElectronico;
   _Contrasenia = _Contrasenia;
   nombre = _nombre;
-  ubicacion = ubicacion;
+  this->ubicacion = ubicacion;
   ventas = new List();
   alquileres = new List();
 }
@@ -231,3 +231,75 @@ bool Inmobiliaria::PerteneceAinmobiliaria(string codigo)
   }
   return false;
 }
+
+void Inmobiliaria::ObtenerReporteInmobiliaria2() {
+    int counter = 0;
+    cout << "-----En Venta-----" << endl;
+
+    if (this->ventas == nullptr) {
+        cout << "Error: ventas is nullptr" << endl;
+        return;
+    }
+
+    auto ventasIterator = this->ventas->getIterator();
+    if (ventasIterator == nullptr) {
+        cout << "Error: ventas->getIterator() = nullptr" << endl;
+        return;
+    }
+
+    for (IIterator *it = ventasIterator; it->hasCurrent(); it->next()) {
+        auto current = it->getCurrent();
+        if (current == nullptr) {
+            cout << "Error: ventasIterator->getCurrent() = nullptr" << endl;
+            continue;
+        }
+
+        Venta *v = dynamic_cast<Venta *>(current);
+        if (v != nullptr) {
+            v->ObtenerReporteInmobiliaria3();
+            counter++;
+        } else {
+            cout << "Error: dynamic_cast<Venta *>" << endl;
+        }
+    }
+    cout << "--------------------------------------"<<endl;
+
+    cout << "CANTIDAD DE PROPIEDADES EN VENTA = " << counter << endl;
+        cout << "--------------------------------------"<<endl;
+
+    counter = 0;
+
+    cout << "-----En Alquiler-----" << endl;
+
+    if (this->alquileres == nullptr) {
+        cout << "Error: alquileres is nullptr" << endl;
+        return;
+    }
+
+    auto alquileresIterator = this->alquileres->getIterator();
+    if (alquileresIterator == nullptr) {
+        cout << "Error: alquileres->getIterator() = nullptr" << endl;
+        return;
+    }
+
+    for (IIterator *it = alquileresIterator; it->hasCurrent(); it->next()) {
+        auto current = it->getCurrent();
+        if (current == nullptr) {
+            cout << "Error: alquileresIterator->getCurrent() = nullptr" << endl;
+            continue;
+        }
+
+        Alquiler *a = dynamic_cast<Alquiler *>(current);
+        if (a != nullptr) {
+            a->ObtenerReporteInmobiliaria4();
+            counter++;
+        } else {
+            cout << "Error: dynamic_cast<Alquiler *> fallo" << endl;
+        }
+    }
+    cout << "--------------------------------------"<<endl;
+    cout << "CANTIDAD DE PROPIEDADES EN ALQUILER = " << counter << endl;
+        cout << "--------------------------------------"<<endl;
+
+}
+

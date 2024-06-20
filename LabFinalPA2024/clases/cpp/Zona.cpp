@@ -9,11 +9,15 @@ Zona::Zona(){
 }
 
 // Constructor with parameters
-Zona::Zona(string codigoZona, string nombreZona){
+Zona::Zona(string codigoZona, string nombreZona, Departamento * dep){
   codigo = codigoZona;
   nombre = nombreZona;
   Propiedades = new List();
-  departamento = nullptr;
+  departamento = dep;
+}
+
+Departamento * Zona::getDepartamento(){
+  return this->departamento;
 }
 
 // Destructor

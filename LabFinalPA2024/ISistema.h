@@ -93,6 +93,8 @@ class ISistema {
 
         virtual void vincularconInmobiliaria(Propiedad *p) = 0;
 
+        virtual void ObtenerReporteInmobiliaria()=0;
+
         virtual void seleccionarAlquiler(int precio) = 0;
 
         virtual void seleccionarVenta(int valor, Propiedad *p) = 0;

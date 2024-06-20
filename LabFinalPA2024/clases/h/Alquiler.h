@@ -3,11 +3,12 @@
 
 class Venta;
 class Propiedad;
-
+class Casa;
+class Apartamento;
 #include <iostream>
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/interfaces/ICollectible.h"
-#include "./Propiedad.h"
+#include "Propiedad.h"
 
 using namespace std;
 
@@ -24,8 +25,7 @@ class Alquiler : public ICollectible{
         void setPrecioAlquiler(float);
         void setPropiedad(Propiedad * pp);
         Propiedad * getPropiedad();
-
-
+        void ObtenerReporteInmobiliaria4();
         void desvincualarAlquiler(string codigo);
        
 };

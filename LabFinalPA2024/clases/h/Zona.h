@@ -22,11 +22,12 @@ class Zona : public ICollectible{
         Departamento * departamento;
     public:
         Zona();
-        Zona(string, string);
+        Zona(string, string, Departamento*);
         ~Zona();
 
         string getCodigo();
         void setCodigo(string);
+        Departamento  * getDepartamento();
 
         string getNombre();
         void setNombre(string);

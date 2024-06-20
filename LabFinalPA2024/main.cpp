@@ -268,75 +268,7 @@ void ConsultarPropiedadMenu()
 void ReporteInmobiliariaMenu()
 {
 
-  int cantcasas = 0;
-  int cantaparta = 0;
-  ICollection *duplicateChecker = new List();
-  for (IIterator *it = sis->getUsuarios()->getIterator(); it->hasCurrent(); it->next())
-  {
-    Inmobiliaria *temporal = dynamic_cast<Inmobiliaria *>(it->getCurrent());
-
-    if (temporal != nullptr)
-    {
-
-      for (IIterator *it = temporal->getVentas()->getIterator(); it->hasCurrent(); it->next())
-      {
-        Venta *v = dynamic_cast<Venta *>(it->getCurrent());
-        Propiedad *prop = v->getPropiedad();
-        duplicateChecker->add(prop);
-        Casa *c = dynamic_cast<Casa *>(prop);
-        if (c == nullptr)
-        {
-          cantaparta++;
-        }
-        else
-        {
-          cantcasas++;
-        }
-      }
-      for (IIterator *it = temporal->getAlquileres()->getIterator(); it->hasCurrent(); it->next())
-      {
-        Alquiler *a = dynamic_cast<Alquiler *>(it->getCurrent());
-        Propiedad *prop = a->getPropiedad();
-        if (!duplicateChecker->member(prop))
-        {
-          Casa *c = dynamic_cast<Casa *>(prop);
-          if (c == nullptr)
-          {
-            cantaparta++;
-          }
-          else
-          {
-            cantcasas++;
-          }
-        }
-      }
-
-      std::cout << "Casas: " << cantcasas << endl;
-      std::cout << "Apartamentos: " << cantaparta << endl;
-      std::cout << "Nombre: ";
-      if (temporal->getNombre() != "")
-      {
-        std::cout << temporal->getNombre();
-      }
-      std::cout << endl;
-      std::cout << "Correo: ";
-      if (temporal->getCorreoElectronico() != "")
-      {
-        std::cout << temporal->getCorreoElectronico();
-      }
-      std::cout << endl;
-      if (temporal->getUbicacion() != nullptr)
-      {
-        std::cout << "Ubicacion:" << temporal->getUbicacion()->getPais()
-                  << " " << temporal->getUbicacion()->getCiudad() << temporal->getUbicacion()->getCalle()
-                  << temporal->getUbicacion()->getNumero() << endl;
-      }
-      cantcasas = 0;
-      cantaparta = 0;
-      std::cout << endl;
-    }
-  }
-  delete duplicateChecker;
+  sis->ObtenerReporteInmobiliaria();
   menudeprueba();
 }
 
@@ -398,12 +330,19 @@ int main()
 
   // PARTE DE HARCODEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADO
   dtDireccion *ladir;
+  dtDireccion *ladir2;
+
 
   float x = 10;
   // LA FECHA//
   dtFecha *lafecha = new dtFecha(27, 5, 2024);
   // LA DIRRRR///
-  ladir = new dtDireccion("Bosnia", "Mintx", "0032", "Boris Salvatore");
+  ladir = new dtDireccion("Uruguay", "Sarajevo", "0032", "Boris Salvatore");
+  ladir2 = new dtDireccion("Uruguay", "Melbourne", "1273", "Rockefeller Street");
+  dtDireccion *ladir3 = new dtDireccion("Uruguay", "Del tacuarenmvo", "2323", "Guniada Street");
+  dtDireccion *ladir4 = new dtDireccion("Uruguay", "Texas", "3332", "Abajo Doctor Mayorca");
+  dtDireccion *ladir5 = new dtDireccion("Uruguay", "Bipilichuf", "1212", "Quetepensasvos");
+
   // la diiiiiirrrr////
 
   // EDIFICIOS HARDCODEADOS//
@@ -417,31 +356,32 @@ int main()
   //(string codigo, int dormitorios, int ambientes, int banios, bool garage,dtDireccion * direccion, float medif, float metrosTotales, bool disponible)
   
   // ZONAS HARDCODEADAS //
-  Zona *ZonaSurSanJose = new Zona("sur1", "SanJoseSur");
-  Zona *ZonaNorteSanJose = new Zona("Norte1", "SanJoseNorte");
-  Zona *ZonaSurColonia = new Zona("sur2", "ColoniaSur");
-  Zona *ZonaNorteColonia = new Zona("Norte2", "ColoniaNorte");
-  Zona *ZonaSurMontevideo = new Zona("Sur3", "MontevideoSur");
-  Zona *ZonaNorteMontevideo = new Zona("Norte3", "MontevideoNorte");
 
-  Casa *casita1 = new Casa("itscodigocasa112", 2, 2, 2, true, ladir, x, x * 2, x, ZonaSurColonia);
-  Casa *casita2 = new Casa("itscodigocasa233", 2, 2, 2, true, ladir, x, x * 2, x, ZonaSurSanJose);
-  Casa *casita3 = new Casa("itscodigocasa322", 2, 2, 2, true, ladir, x, x * 2, x, ZonaNorteMontevideo);
-  Apartamento *ap1 = new Apartamento("itscodapartamento", 2, 2, 2, true, ladir, 2, 2, true, ed1, ZonaSurMontevideo);
-  Apartamento *ap2 = new Apartamento("codloco", 2, 2, 2, true, ladir, 2, 2, true, ed2, ZonaSurSanJose);
-  Apartamento *ap3 = new Apartamento("codigoouyes", 2, 2, 2, true, ladir, 2, 2, false, ed3, ZonaNorteColonia);
-  Conversacion *convo = new Conversacion();
-  Mensaje *mensaje = new Mensaje(lafecha, "(-Interesado: pedro@pedro-) hola como andas");
-  convo->AgregarMensaje(mensaje);
-  casita1->setConversaciones(convo);
-  ap2->setConversaciones(convo);
+
+
   // DEPARTAMENTOS HARDCODEADOS //
   Departamento *SanJose = new Departamento('A', "San Jose");
   Departamento *Colonia = new Departamento('B', "Colonia");
   Departamento *Montevideo = new Departamento('C', "Montevideo");
-  casita1->setConversaciones(convo);
   // ANIADIRLOS//
-
+  Zona *ZonaSurSanJose = new Zona("sur1", "SanJoseSur",SanJose);
+  Zona *ZonaNorteSanJose = new Zona("Norte1", "SanJoseNorte",SanJose);
+  Zona *ZonaSurColonia = new Zona("sur2", "ColoniaSur",Colonia);
+  Zona *ZonaNorteColonia = new Zona("Norte2", "ColoniaNorte",Colonia);
+  Zona *ZonaSurMontevideo = new Zona("Sur3", "MontevideoSur",Montevideo);
+  Zona *ZonaNorteMontevideo = new Zona("Norte3", "MontevideoNorte",Montevideo);
+  Casa *casita1 = new Casa("itscodigocasa112", 2, 2, 2, true, ladir4, x, x * 2, x, ZonaSurColonia);
+  Casa *casita2 = new Casa("itscodigocasa233", 2, 2, 2, true, ladir, x, x * 2, x, ZonaSurSanJose);
+  Casa *casita3 = new Casa("itscodigocasa322", 2, 2, 2, true, ladir3, x, x * 2, x, ZonaNorteMontevideo);
+  Apartamento *ap1 = new Apartamento("itscodapartamento", 2, 2, 2, true, ladir5, 2, 2, true, ed1, ZonaSurMontevideo);
+  Apartamento *ap2 = new Apartamento("codloco", 2, 2, 2, true, ladir, 2, 2, true, ed2, ZonaSurSanJose);
+  Apartamento *ap3 = new Apartamento("codigoouyes", 2, 2, 2, true, ladir2, 2, 2, false, ed3, ZonaNorteColonia);
+  Conversacion *convo = new Conversacion();
+  Mensaje *mensaje = new Mensaje(lafecha, "(-Interesado: pedro@pedro-) hola como andas");
+  convo->AgregarMensaje(mensaje);
+  casita1->setConversaciones(convo);
+  casita1->setConversaciones(convo);
+  ap2->setConversaciones(convo);
   ZonaSurColonia->setPropiedades(casita1);
   ZonaSurSanJose->setPropiedades(casita2);
   ZonaNorteMontevideo->setPropiedades(casita3);
@@ -463,9 +403,9 @@ int main()
   // USUARIOS HARDCODEDEADOS//
 
   Usuario *admin = new Administrador("a@a", "123");
-  Inmobiliaria *imn1 = new Inmobiliaria("go@go", "123", "los pepes", ladir);
+  Inmobiliaria *imn1 = new Inmobiliaria("go@go", "123", "los pepes", ladir4);
   Interesado *int1 = new Interesado("pedro@pedro", "123", "pepe", 20, "pepoide");
-  Inmobiliaria *inm2 = new Inmobiliaria("mo@mo", "", "oepes", ladir);
+  Inmobiliaria *inm2 = new Inmobiliaria("mo@mo", "", "oepes", ladir5);
   Interesado *int2 = new Interesado("ta@ta", "", "pepe2", 21, "pepoide3");
   sis->altaUsuario(admin);
   sis->altaUsuario(imn1);

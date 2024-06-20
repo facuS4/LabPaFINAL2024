@@ -82,6 +82,8 @@ class Sistema : public ISistema{
 
         void AgregarMensaje(string mensaje);
 
+        void ObtenerReporteInmobiliaria();
+
         void CrearMensaje(string mensaje);
 
         Conversacion * getConversacionActual();

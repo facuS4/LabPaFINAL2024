@@ -55,8 +55,11 @@ class Propiedad : public ICollectible{
         dtDireccion* getDireccion();
         void setDireccion(dtDireccion*);
 
+        virtual string CasaApartamentoDisponible()=0;
+        
         float getMedif();
         void setMedif(float);
+        virtual void imprimirEdificio()=0;
 
         float getMetrosTotales();
         void setMetrosTotales(float);

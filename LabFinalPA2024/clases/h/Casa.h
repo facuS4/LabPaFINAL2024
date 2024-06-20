@@ -17,9 +17,10 @@ class Casa : public Propiedad{
         Casa();
         Casa(string, int, int, int, bool, dtDireccion *, float, float, float, Zona *);
         ~Casa();
-
+        void imprimirEdificio();
         float getMetrosVerdes();
         void setMetrosVerdes(float);
+        string CasaApartamentoDisponible();
 
         void eliminarVinculosPropiedad();
         void AgregarMensaje(string);

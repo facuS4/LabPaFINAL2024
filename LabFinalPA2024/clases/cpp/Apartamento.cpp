@@ -17,8 +17,23 @@ float Apartamento::getMetrosTotales(){ // Getter name mismatch in header
   return Propiedad::getMetrosTotales();
 }
 
+string Apartamento::CasaApartamentoDisponible(){
+  if(disponible){
+    return "Apartamento Disponible";
+  }
+  else{
+    return "Apartamento Ocupado";
+  }
+  return "Apartamento";
+}
 void Apartamento::setMetrosTotales(float _metrostotales){
   Propiedad::setMetrosTotales(_metrostotales);
+}
+
+void Apartamento::imprimirEdificio(){
+
+  cout<< "Nombre Edificio: " << edificio->getNombre() << " Cantidad pisos: " << edificio->getCantPisos() << " Gastos Comunes: " << edificio->getGastosComunes()<<endl;
+
 }
 
 void Apartamento::setDisponible(bool disponibilidad){

@@ -666,6 +666,61 @@ Zona *Sistema::SelecionarZona(string codigo, Departamento *depto)
     }
     return nullptr;
 }
+
+void Sistema::ObtenerReporteInmobiliaria() {
+    cout << endl;
+
+    auto usuarios = this->getUsuarios();
+    if (usuarios == nullptr) {
+        cout << "getUsuarios() returned nullptr" << endl;
+        return;
+    }
+    //cout << "getUsuarios() returned valid pointer" << endl;
+
+    auto iterator = usuarios->getIterator();
+    if (iterator == nullptr) {
+        cout << "getIterator() returned nullptr" << endl;
+        return;
+    }
+    //cout << "getIterator() returned valid pointer" << endl;
+
+    for (IIterator *it = iterator; it->hasCurrent(); it->next()) {
+        auto current = it->getCurrent();
+        if (current == nullptr) {
+            cout << "getCurrent() returned nullptr" << endl;
+            continue;
+        }
+        //cout << "getCurrent() returned valid pointer" << endl;
+
+        Inmobiliaria *tempin = dynamic_cast<Inmobiliaria*>(current);
+        if (tempin != nullptr) {
+            //cout << "dynamic_cast<Inmobiliaria*> succeeded" << endl;
+
+            auto ubicacion = tempin->getUbicacion();
+            if (ubicacion == nullptr) {
+                cout << "getUbicacion() returned nullptr" << endl;
+                continue;
+            }
+            //cout << "getUbicacion() returned valid pointer" << endl;
+
+            cout << "BEGIN = CORREO: " << tempin->getCorreoElectronico()
+                 << " NOMBRE: " << tempin->getNombre()
+                 << " DIR: PAIS " << ubicacion->getPais()
+                 << " CIUDAD " << ubicacion->getCiudad()
+                 << " CALLE " << ubicacion->getCalle()
+                 << " NUMERO " << ubicacion->getNumero() << endl;
+
+            tempin->ObtenerReporteInmobiliaria2();
+            cout << "END = CORREO: " << tempin->getCorreoElectronico()
+                 << " NOMBRE: " << tempin->getNombre() << endl << endl;
+        } else {
+            //cout << "dynamic_cast<Inmobiliaria*> fail" << endl;
+        }
+    }
+
+    cout << "ObtenerReporteInmobiliaria finalizado" << endl;
+}
+
 /*void Sistema::SelecionarZona(string codigo) {
     IIterator * it;
     IIterator * it2;

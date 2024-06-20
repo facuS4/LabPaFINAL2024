@@ -3,10 +3,14 @@
 
 class Propiedad;
 class Alquiler;
+class Departamento;
+class Zona;
+
 #include <iostream>
 #include "../../ICollection/collections/List.h"
 #include "../../ICollection/interfaces/ICollectible.h"
 #include "./Propiedad.h"
+#include "./Departamento.h"
 
 
 
@@ -26,6 +30,8 @@ public:
 
   float getPrecioVenta();
   void setPrecioVenta(float);
+
+  void ObtenerReporteInmobiliaria3();
 
   void desvincularVenta(string codigoPropiedad);
 };
